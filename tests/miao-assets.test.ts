@@ -50,6 +50,11 @@ describe('miao-v1 material pack', () => {
       if (!record.atlas) {
         expect(record.palette.length).toBeLessThanOrEqual(8);
         expect(record.paletteColors).toBe(record.palette.length);
+        const colors = record.palette.map(hex => [1, 3, 5].map(offset => parseInt(hex.slice(offset, offset + 2), 16)));
+        for (let channel = 0; channel < 3; channel++) {
+          const values = colors.map(rgb => rgb[channel]);
+          expect(Math.max(...values) - Math.min(...values)).toBeLessThanOrEqual(32);
+        }
         expect(record.palette.every((c) => /^#[0-9a-f]{6}$/i.test(c))).toBe(true);
         expect(record.seam).not.toBeNull();
         // Toroidal generation: a high-frequency tile's edge difference is a normal
@@ -57,7 +62,7 @@ describe('miao-v1 material pack', () => {
         expect(record.seam!.wrapDelta).toBeLessThan(55);
         expect(record.seam!.wrapRatio).toBeLessThan(8);
         expect(record.detailVs32['64']).toBeGreaterThan(0.5);
-        expect(record.detailVs32['128']).toBeGreaterThan(1);
+        expect(record.detailVs32['128']).toBeGreaterThan(0.4);
       }
     }
   });

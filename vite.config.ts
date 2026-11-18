@@ -7,7 +7,7 @@ import { defineConfig, configDefaults } from 'vitest/config';
 const hash=createHash('sha256');
 function fingerprint(dir:string){for(const item of fs.readdirSync(dir).sort()){const p=path.join(dir,item);if(fs.statSync(p).isDirectory())fingerprint(p);else if(!p.endsWith('version.json'))hash.update(p).update(fs.readFileSync(p));}}
 fingerprint('src');fingerprint('public');hash.update(pkg.version);const buildId=hash.digest('hex').slice(0,16);
-const identity={version:pkg.version,buildId,mapRevision:'voxel-halfgrid-v14',materialRevision:8};
+const identity={version:pkg.version,buildId,mapRevision:'voxel-halfgrid-v15',materialRevision:9};
 export default defineConfig({
   define:{__BUILD_ID__:JSON.stringify(buildId)},
   plugins:[{name:'build-identity',configureServer(server){server.middlewares.use('/version.json',(_req,res)=>{res.setHeader('Content-Type','application/json');res.setHeader('Cache-Control','no-store');res.end(JSON.stringify(identity));});},generateBundle(){this.emitFile({type:'asset',fileName:'version.json',source:JSON.stringify(identity)});}}],

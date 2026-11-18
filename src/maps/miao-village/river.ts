@@ -196,27 +196,45 @@ export interface MiaoFerryDef {
   deckLength: number;
   deckWidth: number;
   speed: number;
-  dwellSeconds: number;
   countdownSeconds: number;
   initialSide: 'west' | 'east';
 }
 
 /** 两座权威缆索渡船：南渡口初始停西岸，北渡口初始停东岸。 */
 export const MIAO_FERRIES: readonly MiaoFerryDef[] = [
-  { id: 'south', name: '南渡口', z: 205, westX: 212, eastX: 252, deckY: -1.15, deckLength: 5, deckWidth: 6, speed: 2.5, dwellSeconds: 8, countdownSeconds: 2, initialSide: 'west' },
-  { id: 'north', name: '北渡口', z: 335, westX: 246, eastX: 286, deckY: -1.15, deckLength: 5, deckWidth: 6, speed: 2.5, dwellSeconds: 8, countdownSeconds: 2, initialSide: 'east' },
+  { id: 'south', name: '南渡口', z: 205, westX: 212, eastX: 252, deckY: -1, deckLength: 5, deckWidth: 6, speed: 2.5, countdownSeconds: 2, initialSide: 'west' },
+  { id: 'north', name: '北渡口', z: 335, westX: 246, eastX: 286, deckY: -1, deckLength: 5, deckWidth: 6, speed: 2.5, countdownSeconds: 2, initialSide: 'east' },
 ];
 
-/** 渡船泊位：在堤岸上切出真实船坞，让 5 m 甲板停在 -1.15 而不埋进街面。 */
-export const MIAO_FERRY_BASINS = (() => {
-  const out: { id: string; ferry: string; side: 'west' | 'east'; x0: number; z0: number; x1: number; z1: number; surfaceY: number; bedY: number }[] = [];
-  for (const ferry of MIAO_FERRIES) {
-    const r = riverAt(ferry.z);
-    out.push({ id: `ferry-basin-${ferry.id}-west`, ferry: ferry.id, side: 'west', x0: ferry.westX - 3.2, z0: ferry.z - 3.1, x1: r.waterWest + 1, z1: ferry.z + 3.1, surfaceY: -2, bedY: -3.6 });
-    out.push({ id: `ferry-basin-${ferry.id}-east`, ferry: ferry.id, side: 'east', x0: r.waterEast - 1, z0: ferry.z - 3.1, x1: ferry.eastX + 3.2, z1: ferry.z + 3.1, surfaceY: -2, bedY: -3.6 });
-  }
-  return out;
-})();
+// The berth runs past the hull on each bank, and the two basins meet under
+// the cable. The entire swept hull shares one uninterrupted clearance envelope.
+export const MIAO_FERRY_BASINS = MIAO_FERRIES.flatMap((ferry) => {
+  const middle = (ferry.westX + ferry.eastX) / 2;
+  const outer = ferry.deckLength / 2 + 1;
+  const halfWidth = ferry.deckWidth / 2 + 1;
+  return (['west', 'east'] as const).map((side) => ({
+    id: `ferry-basin-${ferry.id}-${side}`,
+    x0: side === 'west' ? ferry.westX - outer : middle,
+    x1: side === 'east' ? ferry.eastX + outer : middle,
+    z0: ferry.z - halfWidth, z1: ferry.z + halfWidth,
+    surfaceY: RIVER_SURFACE_Y, bedY: -4,
+  }));
+});
+
+export const MIAO_FERRY_DOCKS = MIAO_FERRIES.flatMap((ferry) =>
+  (['west', 'east'] as const).map((side) => {
+    const direction = side === 'west' ? -1 : 1;
+    const x = (side === 'west' ? ferry.westX : ferry.eastX) + direction * ferry.deckLength / 2;
+    const landingLength = 2;
+    const steps = (quayStreetY(ferry.z, side) - ferry.deckY) * 2;
+    const stairRun = 1;
+    return {
+      id: `dock-${ferry.id}-${side}`, ferry, x, direction,
+      landingLength, stairRun, steps, halfWidth: 1.5, apronLength: 5,
+      streetX: x + direction * (landingLength + steps * stairRun),
+    };
+  }),
+);
 
 export interface RiverLadderPlan {
   id: string;

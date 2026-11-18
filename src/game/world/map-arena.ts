@@ -70,10 +70,14 @@ export function buildMapArena(map:MapDef,sky='noon',res:32|64|128=32,prepared?:T
   if(Number.isFinite(design.backgroundIntensity))scene.backgroundIntensity=design.backgroundIntensity!;
  }
  scene.userData.collisionDetails=data.detailBoxes??[];
- const contact=new Map<string,{x:number;z:number;y:number;w:number;d:number}>();
- for(const b of data.detailBoxes??[]){if(b.solid===false)continue;const old=contact.get(b.id);if(old){const x0=Math.min(old.x-old.w/2,b.x-b.w/2),x1=Math.max(old.x+old.w/2,b.x+b.w/2),z0=Math.min(old.z-old.d/2,b.z-b.d/2),z1=Math.max(old.z+old.d/2,b.z+b.d/2);old.x=(x0+x1)/2;old.z=(z0+z1)/2;old.w=x1-x0;old.d=z1-z0;}else contact.set(b.id,{x:b.x,z:b.z,y:b.bottom,w:b.w,d:b.d});}
- const staticShadows=new ContactShadows(scene,Math.max(1,contact.size+map.buildings.length));
- staticShadows.update([...contact.values()].map(b=>({...b,w:b.w+1.1,d:b.d+1.1})).concat(map.buildings.map(b=>{const xs=b.polygon.map(p=>p[0]),zs=b.polygon.map(p=>p[1]),x=(Math.min(...xs)+Math.max(...xs))/2,z=(Math.min(...zs)+Math.max(...zs))/2;return {x,z,y:queries.height(x,z)+.02,w:Math.max(...xs)-Math.min(...xs)+1.5,d:Math.max(...zs)-Math.min(...zs)+1.5};})));
+ // Dense authored villages already have baked voxel AO and sun shadows.
+ // A transparent plane per wall, stair and furnishing adds heavy overdraw indoors.
+ if(map.extensions?.interiorSystem!=='authored'){
+  const contact=new Map<string,{x:number;z:number;y:number;w:number;d:number}>();
+  for(const b of data.detailBoxes??[]){if(b.solid===false)continue;const old=contact.get(b.id);if(old){const x0=Math.min(old.x-old.w/2,b.x-b.w/2),x1=Math.max(old.x+old.w/2,b.x+b.w/2),z0=Math.min(old.z-old.d/2,b.z-b.d/2),z1=Math.max(old.z+old.d/2,b.z+b.d/2);old.x=(x0+x1)/2;old.z=(z0+z1)/2;old.w=x1-x0;old.d=z1-z0;}else contact.set(b.id,{x:b.x,z:b.z,y:b.bottom,w:b.w,d:b.d});}
+  const staticShadows=new ContactShadows(scene,Math.max(1,contact.size+map.buildings.length));
+  staticShadows.update([...contact.values()].map(b=>({...b,w:b.w+1.1,d:b.d+1.1})).concat(map.buildings.map(b=>{const xs=b.polygon.map(p=>p[0]),zs=b.polygon.map(p=>p[1]),x=(Math.min(...xs)+Math.max(...xs))/2,z=(Math.min(...zs)+Math.max(...zs))/2;return {x,z,y:queries.height(x,z)+.02,w:Math.max(...xs)-Math.min(...xs)+1.5,d:Math.max(...zs)-Math.min(...zs)+1.5};})));
+ }
  const viewDistance=design?.viewDistance??(map.size>=800?1200:700);
  const bounds={minX:1,maxX:map.size-1,minZ:1,maxZ:map.size-1};
  const blockedAt=(x:number,z:number,r:number,feet:number,height=1.8)=>queries.blocked(x,z,r,feet,height);

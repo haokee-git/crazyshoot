@@ -9,11 +9,11 @@
 import {
   MIAO_A_PLAZA, MIAO_CAPTURES, MIAO_D_PLAZA, MIAO_E_PLAZA, MIAO_LUSHENG_PLAZA,
   MIAO_PADDIES, MIAO_PIG_FARM, MIAO_PLOTS, MIAO_SITE_HEIGHTS,
-  MIAO_SPAWNS, MIAO_THEATER, plotPolygon,
+  MIAO_SPAWNS, MIAO_THEATER, MIAO_ENTRY_HALF_WIDTH, MIAO_ENTRY_TREAD, groundDoorAlong, plotPolygon,
 } from './layout';
 import { MIAO_ROADS } from './network';
 import { miaoBaseHeight } from './height-base';
-import { MIAO_BRIDGES, MIAO_FERRY_BASINS, quayStreetY, riverAt, towWidthAt } from './river';
+import { MIAO_BRIDGES, MIAO_FERRY_BASINS, MIAO_FERRY_DOCKS, quayStreetY, riverAt, towWidthAt } from './river';
 
 export const MIAO_SIZE = 500;
 export const MIAO_MARGIN = 32;
@@ -67,6 +67,24 @@ function plotPad(p: (typeof MIAO_PLOTS)[number]) {
   const z0 = Math.min(...poly.map((q) => q[1])) - 0.6;
   const z1 = Math.max(...poly.map((q) => q[1])) + 0.6;
   pad(x0, z0, x1, z1, p.baseY, 4.5);
+}
+
+function gradeHouseEntries(p: (typeof MIAO_PLOTS)[number]) {
+  if (p.interior === 'shed' || p.interior === 'pig-shed' || p.interior === 'hall') return;
+  const angle = p.yaw * Math.PI / 180, c = Math.cos(angle), s = Math.sin(angle);
+  const half = MIAO_ENTRY_HALF_WIDTH + 0.3;
+  for (const side of ['front', 'right'] as const) {
+    const front = side === 'front';
+    const edge = front ? p.d / 2 : p.w / 2;
+    const along = groundDoorAlong(p, side);
+    const xs: number[] = [], zs: number[] = [];
+    for (const a of [along - half, along + half]) for (const b of [edge, edge + MIAO_ENTRY_TREAD * 2 + 0.85]) {
+      const [u, v] = front ? [a, b] : [b, a];
+      xs.push(p.x + u * c - v * s);
+      zs.push(p.z + u * s + v * c);
+    }
+    pad(Math.min(...xs), Math.min(...zs), Math.max(...xs), Math.max(...zs), p.baseY, 1.25);
+  }
 }
 
 /** Road corridor: centre line target elevation, width + 3 m shoulder blend. */
@@ -185,10 +203,20 @@ for (const p of MIAO_PADDIES) pad(p.x - p.w / 2, p.z - p.d / 2, p.x + p.w / 2, p
 roadPad();
 // 5) 河道 / towpath / 挡土墙 / 滨河街。
 riverPad();
-// 6) 渡船泊位：切进堤岸的真实船坞（水面 -2），甲板 -1.15 不埋在街面里。
-for (const basin of MIAO_FERRY_BASINS) pad(basin.x0, basin.z0, basin.x1, basin.z1, basin.surfaceY - 0.6, 1.2);
-// 7) 最后再压一次建筑台地：道路/河岸的混合带不允许把楼心削低 1–2 m。
+// Seal each plot's footprint while keeping the adjacent road grades in place.
 for (const plot of MIAO_PLOTS) plotPad(plot);
+for (const plot of MIAO_PLOTS) gradeHouseEntries(plot);
+// Clear the swept hull and cut access into both banks after shaping the plots.
+for (const basin of MIAO_FERRY_BASINS) pad(basin.x0, basin.z0, basin.x1, basin.z1, basin.bedY, 0, true);
+for (const dock of MIAO_FERRY_DOCKS) {
+  const { x, streetX, direction, steps, halfWidth, apronLength, ferry } = dock;
+  const apronEnd = streetX + direction * apronLength;
+  pad(Math.min(streetX, apronEnd), ferry.z - halfWidth - 0.5, Math.max(streetX, apronEnd),
+    ferry.z + halfWidth + 0.5, ferry.deckY + steps / 2, 5);
+  const cutEnd = streetX - direction * 0.01;
+  pad(Math.min(x, cutEnd), ferry.z - halfWidth - 0.5, Math.max(x, cutEnd),
+    ferry.z + halfWidth + 0.5, ferry.deckY - 1, 0, true);
+}
 // 8) 桥头/桥面跨越的陆地整平到桥面标高（不碰河床）：车辆才能从引道开上桥。
 for (const bridge of MIAO_BRIDGES) {
   const half = bridge.width / 2 + 1;

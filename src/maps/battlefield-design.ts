@@ -53,10 +53,10 @@ export const BATTLEFIELDS:Record<string,BattlefieldDesign>={
  },
  miao_village:{
   pits:[],lanes:[],sniperPoints:[{x:155,z:365,height:16,name:'鼓藏堂祭祀坪'},{x:384,z:348,height:11.5,name:'剧场舞台'}],
-  handcrafted:true,vertical:{minY:-8,height:108},chunkSize:100,navigationLayers:5,navigationStep:4,
-  heightClamp:[-8,88],scoreRate:.18,viewDistance:900,worldTint:[0.88,0.90,0.85],worldAoStrength:.30,
-  fog:{color:'#a7b6b2',density:.00165},dynamicVehicleRespawn:true,
-  exposure:1.05,sunIntensity:2.1,hemiIntensity:1.72,ambientIntensity:.34,backgroundIntensity:.9,
+  handcrafted:true,vertical:{minY:-8,height:108},chunkSize:48,navigationLayers:5,navigationStep:4,
+  heightClamp:[-8,88],scoreRate:.18,viewDistance:740,worldAoStrength:.19,
+  fog:{color:'#bed8e4',density:.00095},dynamicVehicleRespawn:true,
+  exposure:1.12,sunIntensity:3.05,hemiIntensity:2.42,ambientIntensity:.60,backgroundIntensity:1.05,
  },
 };
 export function battlefieldHeight(id:string,x:number,z:number){

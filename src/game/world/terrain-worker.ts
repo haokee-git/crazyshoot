@@ -3,6 +3,7 @@ import {bakeVoxelSky} from './voxel-skylight';
 import {VoxelWorldQueries} from './voxel-world-queries';
 import {Navigation} from './navigation';
 import type {Arena} from './arena';
+import {BATTLEFIELDS} from '../../maps/battlefield-design';
 import type {MapDef} from '../../maps/types';
 import {buildWaterExitRoutes} from './water-navigation';
 self.onmessage=(event:MessageEvent<MapDef>)=>{try{
@@ -10,12 +11,13 @@ self.onmessage=(event:MessageEvent<MapDef>)=>{try{
  const data=buildVoxelMapData(event.data,progress=>self.postMessage({progress})),queries=new VoxelWorldQueries(data);
  self.postMessage({progress:{stage:'验证方块通路与出口',completed:0,total:1,ratio:.92}});
  const arena={ladders:data.ladders,bounds:{minX:1,maxX:data.size-1,minZ:1,maxZ:data.size-1},heightAt:(x:number,z:number)=>queries.height(x,z),supportAt:(x:number,z:number,h:number)=>queries.support(x,z,h),navigationHeight:(x:number,z:number)=>queries.navigationHeight(x,z),blockedAt:(x:number,z:number,r:number,y:number)=>queries.blocked(x,z,r,y),waterAt:(x:number,z:number,y?:number)=>queries.water(x,z,y),navLinks:data.navLinks,navigationLayers:data.navLayers??3,maxSupportY:data.minY+data.height} as Arena;
- data.navigation=new Navigation(arena,arena.navigationStep??3).data();
+ data.navigation=new Navigation(arena,BATTLEFIELDS[data.id]?.navigationStep).data();
  if(data.water.some(surface=>surface!==-32768))data.waterExits=buildWaterExitRoutes(data,queries);
  bakeVoxelSky(data);
  data.buildMs=performance.now()-started;
  self.postMessage({progress:{stage:'方块场景与通路已就绪',completed:1,total:1,ratio:1}});
  const buffers=[data.voxels.buffer,data.heights.buffer,data.primary.buffer,data.water.buffer,data.navigation.walk.buffer,data.navigation.ys.buffer,data.navigation.connections.buffer,data.navigation.edges!.buffer,data.navigation.actions!.buffer,...data.chunks.flatMap(c=>[c.position.buffer,c.normal.buffer,c.uv.buffer,c.color.buffer,c.block.buffer,c.index.buffer,...(c.occlusion?[c.occlusion.buffer]:[]),...(c.skyLight?[c.skyLight.buffer]:[])])];
+ if(data.columnTop)buffers.push(data.columnTop.buffer);
  if(data.waterExits)buffers.push(data.waterExits.buffer);
  if(data.volumeSurface)buffers.push(data.volumeSurface.buffer);
  if(data.volumeBed)buffers.push(data.volumeBed.buffer);

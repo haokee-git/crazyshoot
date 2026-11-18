@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { FerrySystem, isCountdown, isDocked, isMoving, type FerryConfig } from '../src/game/mechanisms/river-ferry';
+import { FerrySystem, isDocked, isMoving, type FerryConfig } from '../src/game/mechanisms/river-ferry';
 import { MIAO_FERRIES } from '../src/maps/miao-village/river';
 
 const configs: FerryConfig[] = MIAO_FERRIES.map((f) => ({ ...f }));
@@ -17,57 +17,56 @@ describe('authoritative cable ferries', () => {
     for (const f of configs) {
       expect(f.eastX - f.westX).toBe(40);
       expect(f.speed).toBe(2.5);
-      expect(f.dwellSeconds).toBe(8);
       expect(f.countdownSeconds).toBe(2);
       expect(f.deckLength).toBe(5);
       expect(f.deckWidth).toBe(6);
-      expect(f.deckY).toBeCloseTo(-1.15, 2);
+      expect(f.deckY).toBe(-1);
     }
   });
 
-  it('runs dwell → 2 s countdown → 16 s crossing → 8 s dwell', () => {
+  it('waits for a call, counts down, eases into motion and stays docked after arrival', () => {
     const ferries = new FerrySystem([configs[0]]);
     const id = 'south';
-    // The first request is accepted only after the initial dwell; speed up by requesting directly.
+    advance(ferries, 30);
     expect(isDocked(ferries.phaseOf(id)!)).toBe(true);
-    expect(ferries.requestById(id, 'west')).toBe(true);
+    expect(ferries.requestById(id)).toBe(true);
     expect(ferries.state(id)!.phase).toBe('countdownWest');
     advance(ferries, 1.9);
     expect(ferries.state(id)!.phase).toBe('countdownWest');
     advance(ferries, 0.2);
     expect(ferries.state(id)!.phase).toBe('movingEast');
+    expect(ferries.state(id)!.x - configs[0].westX).toBeLessThan(0.1);
     advance(ferries, 15.8);
-    // 16 s at 2.5 m/s: still approaching at 15.8 s
+    // Still approaching after 15.8 s of travel.
     expect(ferries.state(id)!.x).toBeGreaterThan(250);
     expect(ferries.state(id)!.x).toBeLessThan(252);
     advance(ferries, 0.4);
     const arrived = ferries.state(id)!;
     expect(arrived.phase).toBe('dockedEast');
     expect(arrived.x).toBe(252);
-    // 8 s dwell then auto-return countdown
-    advance(ferries, 7.4);
+    advance(ferries, 30);
     expect(ferries.state(id)!.phase).toBe('dockedEast');
-    advance(ferries, 0.4);
-    expect(isCountdown(ferries.state(id)!.phase)).toBe(true);
+    expect(ferries.requestById(id)).toBe(true);
+    advance(ferries, 18.5);
+    expect(ferries.state(id)!.phase).toBe('dockedWest');
+    expect(ferries.state(id)!.x).toBe(212);
   });
 
   it('never reverses mid-crossing and rejects a second call', () => {
     const ferries = new FerrySystem([configs[1]]);
-    expect(ferries.requestById('north', 'east')).toBe(true);
+    expect(ferries.requestById('north')).toBe(true);
     advance(ferries, 2.1);
     expect(ferries.state('north')!.phase).toBe('movingWest');
     for (let i = 0; i < 120; i++) {
-      expect(ferries.requestById('north', 'east')).toBe(false);
-      expect(ferries.requestById('north', 'west')).toBe(false);
+      expect(ferries.requestById('north')).toBe(false);
       ferries.tick(1 / 60);
     }
     expect(isMoving(ferries.state('north')!.phase)).toBe(true);
   });
 
-  it('lets an empty ferry be called from the far shore and resets between rounds', () => {
+  it('resets a ferry between rounds', () => {
     const ferries = new FerrySystem([configs[0]]);
-    // The system only validates phase; the engine validates caller distance and ship emptiness.
-    expect(ferries.requestById('south', 'east')).toBe(true);
+    expect(ferries.requestById('south')).toBe(true);
     expect(ferries.state('south')!.phase).toBe('countdownWest');
     for (let i = 0; i < 60 * 20; i++) ferries.tick(1 / 60);
     expect(ferries.state('south')!.phase).toBe('dockedEast');
@@ -93,7 +92,7 @@ describe('authoritative cable ferries', () => {
     expect(ferries.contains('south', 212, 205)).toBe(true);
     expect(ferries.contains('south', 214, 207.5)).toBe(true);
     expect(ferries.contains('south', 220, 205)).toBe(false);
-    ferries.requestById('south', 'west');
+    ferries.requestById('south');
     advance(ferries, 2.1);
     expect(ferries.canRequest('south')).toBe(false);
   });

@@ -1,7 +1,7 @@
 /**
  * 千户苗寨 · authored plot catalog（唯一建筑布局数据源）。
  *
- * 138 栋 = 112 主楼（84 双层 / 24 单层 / 4 三层）+ 26 单层附属棚舍。
+ * 两岸吊脚楼沿等高线成组布置，临河巷与山坡台地相接。
  * 每一栋都有稳定 id、分区、中心、yaw、面阔/进深、层数、首层标高、屋顶类型、
  * 门窗/阳台/楼梯/吊脚/室内配置。这里只描述“设计”，体素在世界生成器里展开。
  *
@@ -153,10 +153,21 @@ addRows([
   { district: 'O', prefix: 'H', z: 306, xs: [62], yaw: 0, floors: [2], w: 10, d: 8, interior: 'house' },
   { district: 'O', prefix: 'H', z: 350, xs: [66], yaw: 0, floors: [2], w: 10, d: 8, interior: 'workshop' },
   { district: 'O', prefix: 'H', z: 430, xs: [132], yaw: 180, floors: [2], w: 10, d: 8, interior: 'house' },
-  { district: 'O', prefix: 'H', z: 58, xs: [236], yaw: 0, floors: [1], w: 9, d: 7, interior: 'house' },
+  { district: 'O', prefix: 'H', z: 60, xs: [194], yaw: 0, floors: [1], w: 9, d: 7, interior: 'house' },
   { district: 'O', prefix: 'H', z: 62, xs: [282], yaw: 90, floors: [1], w: 9, d: 7, interior: 'house' },
   { district: 'O', prefix: 'H', z: 120, xs: [444], yaw: 180, floors: [1], w: 9, d: 7, interior: 'inn' },
   { district: 'O', prefix: 'H', z: 170, xs: [452], yaw: 270, floors: [1], w: 9, d: 7, interior: 'workshop' },
+]);
+
+// Two hillside clusters follow the river with staggered rows and stepped lanes.
+addRows([
+  { district: 'C', prefix: 'TW', x: 139, zs: [256, 270, 284], yaw: 270, floors: [2, 2, 1], w: 9, d: 8, interior: 'house' },
+  { district: 'C', prefix: 'TW', x: 155, zs: [261, 275, 289, 303, 317], yaw: 270, floors: [2, 1, 2, 2, 2], w: 9, d: 9, interior: 'house' },
+  { district: 'C', prefix: 'TW', x: 171, zs: [269, 283, 296, 309, 322], yaw: 270, floors: [1, 2, 2, 2, 1], w: 9, d: 8, interior: 'house' },
+  { district: 'C', prefix: 'TE', x: 316, zs: [217, 232, 247, 263, 281], yaw: 90, floors: [2, 1, 2, 2, 2], w: 9, d: 8, interior: 'house' },
+  { district: 'C', prefix: 'TE', x: 332, zs: [224, 239, 253, 269, 284], yaw: 90, floors: [2, 2, 1, 2, 2], w: 9, d: 9, interior: 'house' },
+  { district: 'E', prefix: 'TE', x: 387, zs: [221, 236, 251, 267, 282], yaw: 90, floors: [1, 2, 2, 1, 2], w: 9, d: 8, interior: 'house' },
+  { district: 'E', prefix: 'TE', x: 403, zs: [229, 245, 260, 276], yaw: 90, floors: [2, 1, 2, 2], w: 9, d: 8, interior: 'house' },
 ]);
 
 /** 附属棚舍 26：A6 / B10 / C4 / D3 / E2 / O1。 */
@@ -164,9 +175,9 @@ const shedSpecs: { district: DistrictId; x: number; z: number; yaw: number; inte
   // A 6
   { district: 'A', x: 78, z: 206, yaw: 0, interior: 'shed' },
   { district: 'A', x: 112, z: 232, yaw: 0, interior: 'shed' },
-  { district: 'A', x: 232, z: 222, yaw: 0, interior: 'shed' },
-  { district: 'A', x: 228, z: 184, yaw: 0, interior: 'shed' },
-  { district: 'A', x: 232, z: 150, yaw: 0, interior: 'shed' },
+  { district: 'A', x: 168, z: 227, yaw: 180, interior: 'shed' },
+  { district: 'A', x: 202, z: 180, yaw: 0, interior: 'shed' },
+  { district: 'A', x: 198, z: 142, yaw: 0, interior: 'shed' },
   { district: 'A', x: 84, z: 170, yaw: 0, interior: 'shed' },
   // B 10（含猪场两棚）
   { district: 'B', x: 367, z: 116, yaw: 0, interior: 'pig-shed', w: 10, d: 5 },
@@ -180,7 +191,7 @@ const shedSpecs: { district: DistrictId; x: number; z: number; yaw: number; inte
   { district: 'B', x: 400, z: 192, yaw: 0, interior: 'shed' },
   { district: 'B', x: 370, z: 200, yaw: 180, interior: 'shed' },
   // C 4
-  { district: 'C', x: 232, z: 206, yaw: 0, interior: 'shed' },
+  { district: 'C', x: 176, z: 212, yaw: 0, interior: 'shed' },
   { district: 'C', x: 224, z: 320, yaw: 0, interior: 'shed' },
   { district: 'C', x: 304, z: 310, yaw: 90, interior: 'shed' },
   { district: 'C', x: 218, z: 340, yaw: 0, interior: 'shed' },
@@ -242,7 +253,7 @@ const drumHall: MiaoPlot = {
 };
 plots.push(drumHall);
 
-/** 剧院（观众坪 cap 之外的独立结构，不计入 138 栋建筑）。 */
+/** 剧院（独立于建筑地块统计）。 */
 export const MIAO_THEATER = {
   x: 380,
   z: 335,
@@ -267,6 +278,13 @@ export function plotPolygon(p: MiaoPlot): Polygon {
     [-hw, -hd], [hw, -hd], [hw, hd], [-hw, hd],
   ];
   return corners.map(([u, v]) => [p.x + u * c - v * s, p.z + u * s + v * c] as [number, number]);
+}
+
+export const MIAO_ENTRY_HALF_WIDTH = 1;
+export const MIAO_ENTRY_TREAD = 0.65;
+
+export function groundDoorAlong(plot: MiaoPlot, side: 'front' | 'right'): number {
+  return side === 'front' ? plot.w * 0.14 : 0;
 }
 
 /** MapDef 建筑：同一 plot 数据的旋转 polygon，不丢原始 authored 字段。 */

@@ -129,8 +129,9 @@ export function buildVoxelMapData(map:MapDef,report?:(p:VoxelProgress)=>void):Te
   if(high-low<=1.5)continue;
   capLevels.push({x:cap.x,z:cap.y,r:cap.radius,blend:Math.max(8,Math.min(20,Math.ceil(high-low)*2)),target:Math.floor(macro(cap.x,cap.y))});
  }
- const fillStone=map.assetBundle==='miao-v1'?130:BLOCK.STONE;
- const fillDirt=map.assetBundle==='miao-v1'?136:BLOCK.DIRT;
+ const miaoPack=map.assetBundle==='miao-v1';
+ const fillStone=miaoPack?130:BLOCK.STONE;
+ const fillDirt=miaoPack?136:BLOCK.DIRT;
  const terrainMaterial=(kind:string)=>{
   const override=map.terrainMaterials?.[kind as keyof typeof map.terrainMaterials];
   if(override)return override;
@@ -190,7 +191,7 @@ export function buildVoxelMapData(map:MapDef,report?:(p:VoxelProgress)=>void):Te
     h=h*(1-lateral)+target*lateral;
    }
    h=Math.floor(applyBattlefieldGrading(map.id,x+.5,z+.5,h)+1e-5);heights[k]=primary[k]=h;tops[k]=surfaceVariant(terrainVariant(tops[k],x,z,map.order),x,z);
-   column(x,z,minY,h-3,fillStone);column(x,z,h-3,h-1,fillDirt);column(x,z,h-1,h,tops[k]);
+   column(x,z,minY,h-3,fillStone);column(x,z,h-3,h-1,miaoPack&&h>=20&&tops[k]===138?138:fillDirt);column(x,z,h-1,h,tops[k]);
   }if(iz%16===0)report?.({stage:'生成方块地形',completed:iz,total:depth,ratio:.28*iz/depth});}
   // 作者地表保留下沉到逐格标志：patch 应用阶段记录“这格是刻意保留的人工场坪”，
   // 道路核心/肩带据此跳过材质覆盖（地形高度已在上游整平，不受影响）。用 1 B/格，
@@ -286,7 +287,6 @@ export function buildVoxelMapData(map:MapDef,report?:(p:VoxelProgress)=>void):Te
   const glass=b.roof==='glass';if(b.roof==='gable'||b.roof==='sawtooth')for(let x=x0;x<x1;x++){const rise=Math.min(Math.max(0,maxBuildTop-base-h),4,Math.floor(Math.min(x-x0,x1-1-x)/3));box(x,z0,x+1,z1,base+h,base+h+rise+1,/manor|house|cottage|church/.test(b.id)?13:[44,45,46][zoneHash(cx,cz)%3]);}else if(b.roof!=='open')box(x0,z0,x1,z1,base+h,base+h+1,glass?BLOCK.GLASS:map.id==='pharaoh'?([87,88,89][zoneHash(cx,cz)%3]):[13,44,45,46][zoneHash(cx,cz)%4]);
   featureDone();
  }
- const miaoPack=map.assetBundle==='miao-v1';
  for(const c of map.covers){const base=objectGround(c.x,c.y),angle=(c.rot??0)*Math.PI/180,h=Math.max(0.25,c.height??(c.kind==='container'?3:c.kind==='hedge'?2:1.5));
   const footing=coverFooting(c,base);
   if(c.variant==='pier-deck'){detail(c.id??`pier-deck-${done}`,c.x,c.y,c.w,c.d,-1.1,Math.max(.25,c.height??.35),90,angle);}
@@ -363,10 +363,10 @@ export function buildVoxelMapData(map:MapDef,report?:(p:VoxelProgress)=>void):Te
    detail(`${id}-water`,c.x,c.y,r*1.2,r*1.2,footing-.3,.35,miaoPack?135:69,0);
   }
   else if(c.kind==='pots'){
-   const id=c.id??`pots-${done}`;for(let i=0;i<7;i++){const a=i*2.4+(zoneHash(c.x,c.y)%9)*.2,rr=.25+(i%3)*.32;detail(`${id}-${i}`,c.x+Math.cos(a)*rr,c.y+Math.sin(a)*rr,.45+(i%2)*.2,.45,footing+.45+(i%3)*.2,.45,miaoPack?151:91,a);}
+   const id=c.id??`pots-${done}`;for(let i=0;i<7;i++){const a=i*2.4+(zoneHash(c.x,c.y)%9)*.2,rr=.25+(i%3)*.32;detail(`${id}-${i}`,c.x+Math.cos(a)*rr,c.y+Math.sin(a)*rr,.45+(i%2)*.2,.45,(miaoPack?footing:footing+.45+(i%3)*.2),.45,miaoPack?151:91,a);}
   }
   else if(c.kind==='table'){
-   const id=c.id??`table-${done}`;detail(`${id}-top`,c.x,c.y,c.w,c.d,footing,.14,miaoPack?125:90,angle);for(const dx of [-c.w/2+.2,c.w/2-.2])for(const dz of [-c.d/2+.2,c.d/2-.2])detail(`${id}-leg-${dx}-${dz}`,c.x+dx,c.y+dz,.18,.18,footing,.8,miaoPack?122:90,angle);
+   const id=c.id??`table-${done}`;detail(`${id}-top`,c.x,c.y,c.w,c.d,miaoPack?footing+.5:footing,miaoPack?.5:.14,miaoPack?125:90,angle);for(const dx of [-c.w/2+.2,c.w/2-.2])for(const dz of [-c.d/2+.2,c.d/2-.2])detail(`${id}-leg-${dx}-${dz}`,c.x+dx,c.y+dz,.18,.18,footing,.8,miaoPack?122:90,angle);
   }
   else if(c.kind==='sack'){
    const id=c.id??`sack-${done}`;for(let i=0;i<3;i++)detail(`${id}-${i}`,c.x+(i-1)*.55,c.y+(i%2)*.3,.7,.65,footing,.55+(i%2)*.25,miaoPack?150:92,0);
@@ -533,9 +533,12 @@ export function meshVoxelChunks(data:TerrainData,report?:(p:{done:number;total:n
  const result:VoxelChunkData[]=[],total=Math.ceil(data.width/chunk)*Math.ceil(data.depth/chunk);let done=0;
  // At a material boundary, exactly one side owns the surface.
  const visibleFace=(a:number,b:number)=>a!==0&&(b===0||transparent(b)&&!transparent(a)||transparent(a)&&transparent(b)&&a>b);
- const key=(x:number,y:number,z:number)=>x+','+y+','+z;
- const detailCells=new Map<string,{x:number;y:number;z:number;id:number}>();
- const detailedVoxels=new Set<string>();
+ // The padding keeps lookups just beyond a world edge from aliasing a real cell.
+ const key=(x:number,y:number,z:number)=>
+  ((z-data.minZ*2)*(data.width*2+4)+x-data.minX*2)*(data.height*2+4)+y-data.minY*2;
+ const chunkKey=(x:number,z:number)=>Math.floor((x-data.minX)/chunk)+','+Math.floor((z-data.minZ)/chunk);
+ const detailCells=new Map<number,{x:number;y:number;z:number;id:number}>();
+ const detailedVoxels=new Set<number>();
  for(const b of data.detailBoxes??[]){
   for(let z=Math.round((b.z-b.d/2)*2);z<Math.round((b.z+b.d/2)*2);z++)
    for(let y=Math.round(b.bottom*2);y<Math.round(b.top*2);y++)
@@ -564,8 +567,26 @@ export function meshVoxelChunks(data:TerrainData,report?:(p:{done:number;total:n
  const finish=(s:BufferSet,transparent:boolean)=>{
   if(s.idx.length)result.push({position:new Float32Array(s.p),normal:new Float32Array(s.n),uv:new Float32Array(s.uv),color:new Float32Array(s.c),block:new Float32Array(s.block),index:new Uint32Array(s.idx),transparent});
  };
- const buffers=new Map<string,[BufferSet,BufferSet]>();
- for(let cz=0;cz<data.depth;cz+=chunk)for(let cx=0;cx<data.width;cx+=chunk){const w=Math.min(chunk,data.width-cx),d=Math.min(chunk,data.depth-cz);let top=0;if(data.columnTop){for(let zz=0;zz<d;zz++)for(let xx=0;xx<w;xx++){const t=data.columnTop[(cz+zz)*data.width+cx+xx];if(t>top)top=t;}}else top=data.height;const h=Math.max(1,Math.min(data.height,top));const origin=[data.minX+cx,data.minY,data.minZ+cz],dims=[w,h,d];const chunkKey=Math.floor(cx/chunk)+','+Math.floor(cz/chunk);let sets=buffers.get(chunkKey);if(!sets){sets=[createBuffer(),createBuffer()];buffers.set(chunkKey,sets);}
+ type FacePlane={axis:number;plane:number;material:number;cells:Set<number>};
+ const buffers=new Map<string,{sets:[BufferSet,BufferSet];planes:Map<string,FacePlane>}>();
+ const batch=(x:number,z:number)=>{
+  const id=chunkKey(x,z);
+  let entry=buffers.get(id);
+  if(!entry){entry={sets:[createBuffer(),createBuffer()],planes:new Map()};buffers.set(id,entry);}
+  return entry;
+ };
+ // Collect exposed half-cell faces in sparse slices. Merge exact coplanar runs,
+ // including the half-faces split off from neighbouring full-size voxels.
+ const stride=Math.max(data.width,data.height,data.depth)*2+8;
+ const halfFace=(planes:Map<string,FacePlane>,point:number[],axis:number,material:number)=>{
+  const plane=point[axis],id=axis+','+plane+','+material;
+  let slice=planes.get(id);
+  if(!slice){slice={axis,plane,material,cells:new Set()};planes.set(id,slice);}
+  const u=(axis+1)%3,v=(axis+2)%3;
+  slice.cells.add((point[v]-halfMin[v])*stride+point[u]-halfMin[u]);
+ };
+ const halfMin=[data.minX*2-2,data.minY*2-2,data.minZ*2-2];
+ for(let cz=0;cz<data.depth;cz+=chunk)for(let cx=0;cx<data.width;cx+=chunk){const w=Math.min(chunk,data.width-cx),d=Math.min(chunk,data.depth-cz);let top=0;if(data.columnTop){for(let zz=0;zz<d;zz++)for(let xx=0;xx<w;xx++){const t=data.columnTop[(cz+zz)*data.width+cx+xx];if(t>top)top=t;}}else top=data.height;const h=Math.max(1,Math.min(data.height,top));const origin=[data.minX+cx,data.minY,data.minZ+cz],dims=[w,h,d];const {sets,planes}=batch(origin[0],origin[2]);
   for(let axis=0;axis<3;axis++){const u=(axis+1)%3,v=(axis+2)%3,mask=new Int16Array(dims[u]*dims[v]),x=[0,0,0];
    for(x[axis]=-1;x[axis]<dims[axis];x[axis]++){
     let n=0;
@@ -584,7 +605,7 @@ export function meshVoxelChunks(data:TerrainData,report?:(p:{done:number;total:n
       const own=m>0?inner:outer,neighbor=m>0?outer:inner;
       if(detailCells.has(key(own[0],own[1],own[2])))continue;
       if(!visibleFace(m>0?a:b,voxelMaterial(neighbor[0],neighbor[1],neighbor[2])))continue;
-      emit(sets[transparent(Math.abs(m))?1:0],outer.map(value=>value/2),axis,m,.5,.5);
+      halfFace(planes,outer,axis,m);
      }
     }
     let j=0;while(j<dims[v]){let i=0;while(i<dims[u]){const m=mask[j*dims[u]+i];if(!m){i++;continue;}let w=1;while(i+w<dims[u]&&mask[j*dims[u]+i+w]===m)w++;let h=1;outer:while(j+h<dims[v]){for(let k=0;k<w;k++)if(mask[(j+h)*dims[u]+i+k]!==m)break outer;h++;}
@@ -596,22 +617,35 @@ export function meshVoxelChunks(data:TerrainData,report?:(p:{done:number;total:n
   }
   done++;if(done%4===0||done===total)report?.({done,total});
  }
- // Half-grid details share the terrain chunk buffers: one draw call per chunk
- // instead of a second mesh per chunk. Details are opaque and use the same
- // material array, so merging is lossless.
  for(const cell of detailCells.values()){
-  const point=[cell.x,cell.y,cell.z],chunkKey=Math.floor(cell.x/(chunk*2))+','+Math.floor(cell.z/(chunk*2));
-  let pair=buffers.get(chunkKey);
-  if(!pair){pair=[createBuffer(),createBuffer()];buffers.set(chunkKey,pair);}
-  const dst=pair[0];
+  const point=[cell.x,cell.y,cell.z],{planes}=batch(cell.x/2,cell.z/2);
   for(let axis=0;axis<3;axis++)for(const sign of [-1,1]){
    const neighbor=point.slice();neighbor[axis]+=sign;
    if(!visibleFace(cell.id,voxelMaterial(neighbor[0],neighbor[1],neighbor[2])))continue;
-   const q=point.map(value=>value/2);if(sign>0)q[axis]+=.5;
-   emit(dst,q,axis,sign*cell.id,.5,.5);
+   const face=point.slice();if(sign>0)face[axis]++;
+   halfFace(planes,face,axis,sign*cell.id);
   }
  }
- for(const [opaque,transparent] of buffers.values()){finish(opaque,false);finish(transparent,true);}
+ for(const {sets,planes} of buffers.values()){
+  for(const {axis,plane,material,cells} of planes.values()){
+   const u=(axis+1)%3,v=(axis+2)%3,dst=sets[transparent(Math.abs(material))?1:0];
+   // The face inputs arrive in different orders at terrain/detail boundaries.
+   // Start each rectangle at the lexicographically first remaining cell.
+   for(const first of [...cells].sort((a,b)=>a-b)){
+    if(!cells.has(first))continue;
+    let w=1,h=1;
+    while(first%stride+w<stride&&cells.has(first+w))w++;
+    rows:while(true){
+     for(let i=0;i<w;i++)if(!cells.has(first+h*stride+i))break rows;
+     h++;
+    }
+    for(let j=0;j<h;j++)for(let i=0;i<w;i++)cells.delete(first+j*stride+i);
+    const q=[0,0,0];q[axis]=plane/2;q[u]=(halfMin[u]+first%stride)/2;q[v]=(halfMin[v]+Math.floor(first/stride))/2;
+    emit(dst,q,axis,material,w/2,h/2);
+   }
+  }
+  finish(sets[0],false);finish(sets[1],true);
+ }
  const stitched=stitchVoxelEdges(result);
  // Bake how much of the local hemisphere is blocked at each exposed corner.
  for(const chunk of stitched){

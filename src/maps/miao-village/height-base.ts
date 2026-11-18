@@ -70,6 +70,10 @@ export function miaoBaseHeight(x: number, z: number): number {
   // 橙队基地台地。
   h += 0.6 * basin(x, z, 416, 424, 46, 104);
 
+  // House rows follow the slope and step down toward the river on either bank.
+  h += 6.4 * ridge(x, z, 133, 281, 66, 51);
+  h += 5.2 * ridge(x, z, 409, 253, 100, 66);
+
   // 芦笙场/廊桥西岸的缓台。
   h -= 1.6 * basin(x, z, 184, 250, 34, 78);
 

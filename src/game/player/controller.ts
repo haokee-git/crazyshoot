@@ -136,6 +136,13 @@ export class PlayerController {
   private bodyBlocked(arena:Arena,x:number,y:number,z:number,height=this.bodyHeight){
     return arena.playerBlocked?.(x,z,PLAYER_RADIUS,y,height,this.entityId)??arena.blockedAt?.(x,z,PLAYER_RADIUS,y,height)??arena.blocked(x,z,PLAYER_RADIUS);
   }
+  carryManualPlatform(arena:Arena,id:string,dx:number,dz:number){
+    const platform=this.platform;
+    if(!this.grounded||this.climbing||this.mantle||!platform?.manualCarry||platform.id!==id
+      ||Math.abs(this.position.y-platform.y)>.06)return;
+    const {x,y,z}=this.position;
+    if(!arena.blockedAt?.(x+dx,z+dz,PLAYER_RADIUS,y,this.bodyH))this.position.set(x+dx,y,z+dz);
+  }
   private support(arena:Arena,x:number,z:number,max:number){
     const at=(xx:number,zz:number)=>Math.max(arena.supportAt?.(xx,zz,max)??arena.heightAt?.(xx,zz)??0,arena.platformAt?.(xx,zz,max)?.y??-Infinity);
     const r=PLAYER_RADIUS+.005,d=r*Math.SQRT1_2;return Math.max(at(x,z),at(x-r,z),at(x+r,z),at(x,z-r),at(x,z+r),at(x-d,z-d),at(x+d,z-d),at(x-d,z+d),at(x+d,z+d));

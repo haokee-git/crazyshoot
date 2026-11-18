@@ -10,7 +10,7 @@ import {
   MIAO_PADDIES, MIAO_PIG_FARM, MIAO_PLOTS, MIAO_PLOT_FOOTPRINTS,
   MIAO_SPAWNS, MIAO_THEATER, MIAO_VEGETABLE_PATCHES, distanceToRoads, plotPolygon,
 } from './layout';
-import { MIAO_BRIDGES, riverAt } from './river';
+import { MIAO_BRIDGES, MIAO_FERRY_DOCKS, riverAt } from './river';
 import { miaoHeight } from './height';
 
 const hash = (x: number, z: number) => {
@@ -51,6 +51,14 @@ function nearRiver(x: number, z: number, margin = 5): boolean {
   return dx < r.halfWidth + r.towWidth + margin;
 }
 
+function nearFerryApproach(x: number, z: number, margin: number): boolean {
+  return MIAO_FERRY_DOCKS.some((dock) => {
+    const apronEnd = dock.streetX + dock.direction * dock.apronLength;
+    return Math.abs(z - dock.ferry.z) <= dock.halfWidth + margin
+      && x >= Math.min(dock.x, apronEnd) - margin && x <= Math.max(dock.x, apronEnd) + margin;
+  });
+}
+
 function freeForVegetation(x: number, z: number, margin = 3): boolean {
   if (distanceToRoads(x, z) < margin) return false;
   if (insideAnyPlot(x, z, 4)) return false;
@@ -58,7 +66,7 @@ function freeForVegetation(x: number, z: number, margin = 3): boolean {
   if (inSpawn(x, z, 4)) return false;
   if (onBridge(x, z, 4)) return false;
   if (inField(x, z, 4)) return false;
-  if (nearRiver(x, z, 4)) return false;
+  if (nearRiver(x, z, 4) || nearFerryApproach(x, z, 5)) return false;
   if (x < 6 || z < 6 || x > 494 || z > 494) return false;
   return true;
 }
@@ -304,8 +312,13 @@ export const MIAO_DECOR: DecorPlane[] = (() => {
  * ------------------------------------------------------------------ */
 
 export const MIAO_COVERS: Cover[] = [
-  ...MARKET_STALLS,
-  ...PLAZA_PROPS,
+  ...[...MARKET_STALLS, ...PLAZA_PROPS].filter((c) => {
+    // A full-size tree includes overhanging canopy voxels; leave a clear doorway
+    // approach even when the footprint centre itself is outside the house.
+    const margin = Math.hypot(c.w, c.d) / 2;
+    return !insideAnyPlot(c.x, c.y, margin + 1.5) && !nearFerryApproach(c.x, c.y, margin)
+      && (c.kind !== 'tree' || distanceToRoads(c.x, c.y) >= margin);
+  }),
   ...VEGETATION,
 ];
 

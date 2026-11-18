@@ -29,18 +29,18 @@ describe('miao village map data', () => {
   });
 
   it('keeps exact authored building counts and district distribution', () => {
-    expect(MIAO_BUILDING_COUNTS.total).toBe(138);
-    expect(MIAO_BUILDING_COUNTS.main).toBe(112);
+    expect(MIAO_BUILDING_COUNTS.total).toBe(170);
+    expect(MIAO_BUILDING_COUNTS.main).toBe(144);
     expect(MIAO_BUILDING_COUNTS.sheds).toBe(26);
-    expect(MIAO_BUILDING_COUNTS.two).toBe(84);
-    expect(MIAO_BUILDING_COUNTS.one).toBe(24);
+    expect(MIAO_BUILDING_COUNTS.two).toBe(107);
+    expect(MIAO_BUILDING_COUNTS.one).toBe(33);
     expect(MIAO_BUILDING_COUNTS.three).toBe(4);
     const expected = {
       A: { main: 30, two: 24, one: 5, three: 1, sheds: 6 },
       B: { main: 10, two: 6, one: 4, three: 0, sheds: 10 },
-      C: { main: 18, two: 14, one: 3, three: 1, sheds: 4 },
+      C: { main: 41, two: 31, one: 9, three: 1, sheds: 4 },
       D: { main: 28, two: 22, one: 5, three: 1, sheds: 3 },
-      E: { main: 16, two: 12, one: 3, three: 1, sheds: 2 },
+      E: { main: 25, two: 18, one: 6, three: 1, sheds: 2 },
       O: { main: 10, two: 6, one: 4, three: 0, sheds: 1 },
     } as const;
     for (const [district, counts] of Object.entries(expected)) expect(MIAO_BUILDING_COUNTS[district as keyof typeof expected]).toEqual(counts);
@@ -73,6 +73,14 @@ describe('miao village map data', () => {
       }
     }
     expect(roadOverlaps).toEqual([]);
+    const riverOverlaps = MIAO_PLOT_FOOTPRINTS.filter(f => {
+      for (let z = f.z0; z <= f.z1; z += 0.5) {
+        const river = riverAt(z);
+        if (f.x0 < river.towEast && f.x1 > river.towWest) return true;
+      }
+      return false;
+    });
+    expect(riverOverlaps.map(f => f.plot.id)).toEqual([]);
   });
 
   it('capture points are authored neutral and C uses a real bridge footprint', () => {
@@ -197,7 +205,7 @@ describe('miao village world data', () => {
     expect(data.height).toBe(108);
     expect(data.width).toBe(564);
     expect(data.navLayers).toBe(5);
-    expect(data.chunkSize).toBe(100);
+    expect(data.chunkSize).toBe(48);
     let maxColumnTop = 0; if (data.columnTop) for (const v of data.columnTop) if (v > maxColumnTop) maxColumnTop = v;
     expect(maxColumnTop).toBeGreaterThan(80);
     expect(data.minY + data.height).toBe(100);

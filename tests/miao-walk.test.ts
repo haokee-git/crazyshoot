@@ -2,7 +2,7 @@
  * 千户苗寨 · 真实走查（正式 PlayerController + VoxelWorldQueries + 载具运动学）。
  *
  * 覆盖任务书 §19 的核心验收：
- * - 138 栋逐栋门/楼层/楼梯/阳台/窗洞（112 主楼逐门逐层实走，26 棚舍开口）
+ * - 逐栋门/楼层/楼梯/阳台/窗洞（主楼逐门走查，棚舍查开口）
  * - 9 架梯子逐架上下（含桥侧梯）
  * - 三座桥步行；南/北桥 APC 双向；中央廊桥摩托通过、APC 被真实石墩挡住
  * - 双方出生区三个门洞真实走出（含狗腿挡板）
@@ -11,8 +11,9 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import * as THREE from 'three';
 import { miaoVillage } from '../src/maps/miao-village';
-import { MIAO_CAPTURES, MIAO_PLOTS, MIAO_SPAWNS, MIAO_SPAWN_EXITS } from '../src/maps/miao-village/layout';
-import { MIAO_BRIDGES } from '../src/maps/miao-village/river';
+import { MIAO_BUILDING_COUNTS, MIAO_CAPTURES, MIAO_PLOTS, MIAO_SPAWNS, MIAO_SPAWN_EXITS } from '../src/maps/miao-village/layout';
+import { MIAO_BRIDGES, MIAO_FERRIES, MIAO_FERRY_DOCKS } from '../src/maps/miao-village/river';
+import { FerrySystem } from '../src/game/mechanisms/river-ferry';
 import { miaoHousePlan } from '../src/game/world/miao-village-structures';
 import { buildVoxelMapData, type TerrainData } from '../src/game/world/voxel-map-data';
 import { VoxelWorldQueries } from '../src/game/world/voxel-world-queries';
@@ -96,7 +97,7 @@ function localToWorld(x: number, z: number, yaw: number, u: number, v: number): 
 }
 
 describe('miao village buildings', () => {
-  it('walks all 112 main buildings: front + side exits, every floor, every stair', () => {
+  it('walks the entrances, floors and stairs of every house', () => {
     const problems: string[] = [];
     let main = 0, stairs = 0, windowsChecked = 0;
     for (const plot of MIAO_PLOTS) {
@@ -117,9 +118,19 @@ describe('miao village buildings', () => {
           door.side === 'front' || door.side === 'back' ? door.plane : door.along);
         if (q.details.blocked(dx, dz, 0.3, door.bottom + 0.3, 1.8)) problems.push(`${tag}: door ${door.side} L${door.level} blocked`);
       }
-      // two ground exits: front and side (both with real steps)
-      const exits = plan.doors.filter((d) => d.level === 0);
-      if (exits.length < 2) problems.push(`${tag}: only ${exits.length} ground exits`);
+      for (const door of plan.doors.filter(d => !d.upper)) {
+        const front = door.side === 'front';
+        const edge = front ? plan.d / 2 : plan.w / 2;
+        const point = (offset: number) => localToWorld(plot.x, plot.z, plot.yaw,
+          front ? door.along : edge + offset, front ? edge + offset : door.along);
+        const [sx, sz] = point(1.7);
+        const [tx, tz] = point(-1.2);
+        const feet = q.support(sx, sz, door.bottom + 0.3);
+        const player = controllerAt(sx, feet, sz);
+        if (!walkTo(player, tx, tz, 120, 0.23) || Math.abs(player.position.y - door.bottom) > 0.12) {
+          problems.push(`${tag}: ${door.side} approach ${feet} → ${player.position.y.toFixed(2)} (floor ${door.bottom})`);
+        }
+      }
       // windows: real holes + solid frame
       for (const win of plan.windows) {
         const [wx, wz] = localToWorld(plot.x, plot.z, plot.yaw,
@@ -161,8 +172,8 @@ describe('miao village buildings', () => {
         }
       }
     }
-    expect(main + 1).toBe(112);
-    expect(stairs).toBeGreaterThanOrEqual(84 + 4 * 2);
+    expect(main + 1).toBe(MIAO_BUILDING_COUNTS.main);
+    expect(stairs).toBeGreaterThanOrEqual(MIAO_BUILDING_COUNTS.two + MIAO_BUILDING_COUNTS.three * 2);
     expect(windowsChecked).toBeGreaterThan(1500);
     expect(problems).toEqual([]);
   }, 180_000);
@@ -216,6 +227,56 @@ describe('miao village river, ladders and bridges', () => {
     }
     expect(problems).toEqual([]);
   }, 120_000);
+
+  it('boards both ferries, carries only deck riders, and walks onto the other quay', () => {
+    for (const cfg of MIAO_FERRIES) {
+      const system = new FerrySystem([cfg]);
+      const [west, east] = MIAO_FERRY_DOCKS.filter(dock => dock.ferry.id === cfg.id);
+      const from = cfg.initialSide === 'west' ? west : east;
+      const to = from === west ? east : west;
+      const platformId = `ferry-${cfg.id}`;
+      arena.platformAt = (x, z, maxY) => {
+        if (maxY < cfg.deckY || !system.contains(cfg.id, x, z)) return null;
+        return { id: platformId, x: system.state(cfg.id)!.x, z: cfg.z, y: cfg.deckY, yaw: 0, manualCarry: true };
+      };
+      try {
+        const start = from.streetX + from.direction * 0.7;
+        const local = controllerAt(start, q.support(start, cfg.z, Infinity), cfg.z);
+        const dockX = from.x + from.direction;
+        const bystander = controllerAt(dockX, cfg.deckY, cfg.z);
+        expect(walkTo(local, system.state(cfg.id)!.x, cfg.z, 480, 0.2), `boarding ${from.id}`).toBe(true);
+        step(local, new Set(), 60);
+        expect(local.motionSnapshot.platformId).toBe(platformId);
+        expect(system.requestById(cfg.id)).toBe(true);
+        const offset = local.position.x - system.state(cfg.id)!.x;
+        for (let i = 0; i < 60 * 19; i++) {
+          const before = system.state(cfg.id)!.x;
+          system.tick(1 / 60);
+          const now = system.state(cfg.id)!.x;
+          local.carryManualPlatform(arena, platformId, now - before, 0);
+          bystander.carryManualPlatform(arena, platformId, now - before, 0);
+          step(local, new Set(), 1);
+        }
+        expect(local.position.x - system.state(cfg.id)!.x).toBeCloseTo(offset, 1);
+        expect(local.position.y).toBe(cfg.deckY);
+        expect(bystander.position.x).toBe(dockX);
+        const reached = walkTo(local, to.streetX + to.direction * 0.7, cfg.z, 480, 0.3);
+        expect(reached, `disembarking ${to.id} at ${local.position.toArray().map(n => n.toFixed(2))}`).toBe(true);
+      } finally {
+        delete arena.platformAt;
+      }
+    }
+  }, 120_000);
+
+  it('keeps the full navigation channel clear of submerged curb and retaining wall voxels', () => {
+    for (const cfg of MIAO_FERRIES) {
+      for (let x = cfg.westX - cfg.deckLength / 2 + 0.25; x < cfg.eastX + cfg.deckLength / 2; x += 0.5) {
+        for (let z = cfg.z - cfg.deckWidth / 2 + 0.25; z < cfg.z + cfg.deckWidth / 2; z += 0.5) {
+          expect(q.blocked(x, z, 0.15, -1.8, 3), `${cfg.id} hull at ${x}, ${z}`).toBe(false);
+        }
+      }
+    }
+  });
 
   it('walks all three bridges end to end', () => {
     const problems: string[] = [];

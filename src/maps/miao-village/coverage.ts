@@ -150,7 +150,7 @@ export function miaoCoverage(cell = CELL): CoverageStats {
   const waterArea = Math.round(wet * a);
   const buildingArea = Math.round(build * a);
   const bridgeArea = Math.round(bridgeCells * a);
-  const playableArea = Math.round(play * a);
+  const playableArea = play * a;
   const total = n * n;
   const pct = (v: number) => Math.round((v / total) * 1000) / 10;
   return {
@@ -159,12 +159,12 @@ export function miaoCoverage(cell = CELL): CoverageStats {
     playablePct: pct(play), landPct: pct(land), waterPct: pct(wet),
     reachableCells: play, mountainCells: mountain,
     districts: [
-      { id: 'A', name: '游方市集', area: Math.round(districtA * a), pct: pct(districtA) },
-      { id: 'B', name: '田园打谷场', area: Math.round(districtB * a), pct: pct(districtB) },
-      { id: 'C', name: '河岸与芦笙场', area: Math.round(districtC * a), pct: pct(districtC) },
-      { id: 'D', name: '鼓藏堂坡地', area: Math.round(districtD * a), pct: pct(districtD) },
-      { id: 'E', name: '剧场片区', area: Math.round(districtE * a), pct: pct(districtE) },
-      { id: 'O', name: '寨边/外围', area: Math.round(districtO * a), pct: pct(districtO) },
+      { id: 'A', name: '游方市集', area: districtA * a, pct: pct(districtA) },
+      { id: 'B', name: '田园打谷场', area: districtB * a, pct: pct(districtB) },
+      { id: 'C', name: '河岸与芦笙场', area: districtC * a, pct: pct(districtC) },
+      { id: 'D', name: '鼓藏堂坡地', area: districtD * a, pct: pct(districtD) },
+      { id: 'E', name: '剧场片区', area: districtE * a, pct: pct(districtE) },
+      { id: 'O', name: '寨边/外围', area: districtO * a, pct: pct(districtO) },
     ],
   };
 }

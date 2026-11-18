@@ -19,20 +19,20 @@
    "name": "fir_dark_oiled",
    "family": "wood",
    "palette": [
-    "#2b1b10",
-    "#3b2617",
-    "#4d321f",
-    "#5d3d25",
-    "#6c482c",
-    "#7b5533",
-    "#8d6540",
-    "#a0744b"
+    "#68452a",
+    "#6d4a2f",
+    "#714e33",
+    "#755237",
+    "#79563b",
+    "#7d5a3f",
+    "#815e43",
+    "#866348"
    ],
    "paletteColors": 8,
    "average": [
-    86,
-    58,
-    36
+    120,
+    85,
+    58
    ],
    "nativeGrid": 32,
    "files": {
@@ -41,44 +41,43 @@
     "128": "/textures/miao-v1/128/fir_dark_oiled.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "ba3af1e1e629d51c862748ebf59f5763c02ce12859c2b8e5dfc1870a5aa61bb8",
+   "masterSha256": "4b17c3a3abc438feae1320d5fb1411d9a129bc3b9f14feda1d53cf5f3bd917fd",
    "atlas": false,
    "seam": {
-    "wrapDelta": 34.745,
-    "neighborDelta": 22.161,
-    "wrapRatio": 1.568
+    "wrapDelta": 4.688,
+    "neighborDelta": 1.758,
+    "wrapRatio": 2.666
    },
    "detailVs32": {
-    "64": 30.761,
-    "128": 30.89
+    "64": 2.047,
+    "128": 0.85
    },
    "generator": {
     "family": "wood",
     "seed": 122,
     "freq": 7,
     "vertical": true,
-    "warp": 0.18,
-    "oil": 0.86
+    "warp": 0.18
    }
   },
   {
    "name": "fir_honey_worn",
    "family": "wood",
    "palette": [
-    "#4a2e1b",
-    "#5b3a22",
-    "#6d472a",
-    "#7f5533",
-    "#91633c",
-    "#a37346",
-    "#b28252",
-    "#bf9060"
+    "#8e633c",
+    "#936841",
+    "#976c45",
+    "#9b7049",
+    "#9f744d",
+    "#a37851",
+    "#a77c55",
+    "#ac815a"
    ],
    "paletteColors": 8,
    "average": [
-    134,
-    93,
-    58
+    156,
+    113,
+    74
    ],
    "nativeGrid": 32,
    "files": {
@@ -87,44 +86,43 @@
     "128": "/textures/miao-v1/128/fir_honey_worn.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "8ab98f371ef78e1b4827032c0a11019d41a59989ba354581bdbe137d1698e5d8",
+   "masterSha256": "feede85acaf0ec2d2b222ed6353cca8f0a641ed4729ddf0a292bbafdd8b163d6",
    "atlas": false,
    "seam": {
-    "wrapDelta": 39.365,
-    "neighborDelta": 25.833,
-    "wrapRatio": 1.524
+    "wrapDelta": 4.219,
+    "neighborDelta": 1.652,
+    "wrapRatio": 2.554
    },
    "detailVs32": {
-    "64": 39.103,
-    "128": 38.129
+    "64": 1.772,
+    "128": 0.8
    },
    "generator": {
     "family": "wood",
     "seed": 123,
     "freq": 6,
     "vertical": true,
-    "warp": 0.2,
-    "oil": 1.0
+    "warp": 0.2
    }
   },
   {
    "name": "fir_grey_weathered",
    "family": "wood",
    "palette": [
-    "#272621",
-    "#32302a",
-    "#3d3b33",
-    "#48463c",
-    "#535146",
-    "#5e5c50",
-    "#69675a",
-    "#757264"
+    "#7a5f45",
+    "#7f644a",
+    "#83684e",
+    "#876c52",
+    "#8b7056",
+    "#8f745a",
+    "#93785e",
+    "#987d63"
    ],
    "paletteColors": 8,
    "average": [
-    69,
-    67,
-    58
+    136,
+    109,
+    83
    ],
    "nativeGrid": 32,
    "files": {
@@ -133,44 +131,43 @@
     "128": "/textures/miao-v1/128/fir_grey_weathered.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "cadcd416502e69c0d365351fc4784fa2d19792b7fd191970299a421447035785",
+   "masterSha256": "e0b0e931b100ae5992a40bd57fa0038530a7accdd0a01a4cc80220e13a6d9a10",
    "atlas": false,
    "seam": {
-    "wrapDelta": 20.997,
-    "neighborDelta": 15.374,
-    "wrapRatio": 1.366
+    "wrapDelta": 5.922,
+    "neighborDelta": 1.757,
+    "wrapRatio": 3.371
    },
    "detailVs32": {
-    "64": 25.461,
-    "128": 26.228
+    "64": 1.582,
+    "128": 0.845
    },
    "generator": {
     "family": "wood",
     "seed": 124,
     "freq": 5,
     "vertical": true,
-    "warp": 0.24,
-    "oil": 0.94
+    "warp": 0.24
    }
   },
   {
    "name": "wood_plank_floor",
    "family": "wood",
    "palette": [
-    "#2a1c13",
-    "#3a281b",
-    "#4b3322",
-    "#5b3f29",
-    "#6c4b31",
-    "#7d593a",
-    "#8f6846",
-    "#9e7652"
+    "#8d6945",
+    "#926e4a",
+    "#96724e",
+    "#9a7652",
+    "#9e7a56",
+    "#a27e5a",
+    "#a6825e",
+    "#ab8763"
    ],
    "paletteColors": 8,
    "average": [
-    94,
-    66,
-    43
+    154,
+    118,
+    82
    ],
    "nativeGrid": 32,
    "files": {
@@ -179,16 +176,16 @@
     "128": "/textures/miao-v1/128/wood_plank_floor.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "b17d21d761201cc6f046b7514c00aa971009ecafc633ccf39aeaf5a951879aee",
+   "masterSha256": "00c03d981680ca1b4161ddffff5797a90427903e95f24e2d87c99a8603d7ae19",
    "atlas": false,
    "seam": {
-    "wrapDelta": 30.224,
-    "neighborDelta": 20.738,
-    "wrapRatio": 1.457
+    "wrapDelta": 10.094,
+    "neighborDelta": 2.136,
+    "wrapRatio": 4.725
    },
    "detailVs32": {
-    "64": 21.731,
-    "128": 21.003
+    "64": 2.672,
+    "128": 1.425
    },
    "generator": {
     "family": "plank",
@@ -200,20 +197,20 @@
    "name": "wood_lattice",
    "family": "wood",
    "palette": [
-    "#1b130d",
-    "#2a1e14",
-    "#3b2a1b",
-    "#4c3723",
-    "#5e452c",
-    "#725437",
-    "#8a6845",
-    "#a37d54"
+    "#69442b",
+    "#6e4930",
+    "#724d34",
+    "#765138",
+    "#7a553c",
+    "#7e5940",
+    "#825d44",
+    "#876249"
    ],
    "paletteColors": 8,
    "average": [
-    121,
-    91,
-    60
+    127,
+    90,
+    65
    ],
    "nativeGrid": 32,
    "files": {
@@ -222,16 +219,16 @@
     "128": "/textures/miao-v1/128/wood_lattice.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "6af60da96adaa3cca70a2105d3aadd05c2ee8d70b8b7c8bfe4add9da9b6febbf",
+   "masterSha256": "3a2498af5a45531718786eedab11189a6afd5a3a795d7f00385c38d0360217e1",
    "atlas": false,
    "seam": {
     "wrapDelta": 0.0,
-    "neighborDelta": 11.615,
+    "neighborDelta": 2.71,
     "wrapRatio": 0.0
    },
    "detailVs32": {
-    "64": 5.52,
-    "128": 8.471
+    "64": 1.509,
+    "128": 2.21
    },
    "generator": {
     "family": "lattice",
@@ -243,20 +240,20 @@
    "name": "tile_blue_grey",
    "family": "tile",
    "palette": [
-    "#252b2c",
-    "#333b3c",
-    "#424c4d",
-    "#525d5e",
-    "#657071",
-    "#7a8585",
-    "#8f9998",
-    "#a3acab"
+    "#4c5c68",
+    "#51616d",
+    "#556571",
+    "#596975",
+    "#5d6d79",
+    "#61717d",
+    "#657581",
+    "#6a7a86"
    ],
    "paletteColors": 8,
    "average": [
-    95,
-    105,
-    106
+    92,
+    108,
+    120
    ],
    "nativeGrid": 32,
    "files": {
@@ -265,16 +262,16 @@
     "128": "/textures/miao-v1/128/tile_blue_grey.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "27e52120577370df6b65804c180224e9a62a187ce3aad4b990b6ae2b10e87a4a",
+   "masterSha256": "37d1b5440f783b9b1d573215ff9bf9f0d62df5e94048f0f13194ce5c4e37d7d2",
    "atlas": false,
    "seam": {
-    "wrapDelta": 38.776,
-    "neighborDelta": 7.24,
-    "wrapRatio": 5.356
+    "wrapDelta": 8.586,
+    "neighborDelta": 1.387,
+    "wrapRatio": 6.192
    },
    "detailVs32": {
-    "64": 21.567,
-    "128": 14.879
+    "64": 4.189,
+    "128": 3.351
    },
    "generator": {
     "family": "tile",
@@ -288,20 +285,20 @@
    "name": "tile_grey_weathered",
    "family": "tile",
    "palette": [
-    "#2d2e2b",
-    "#3d3f3a",
-    "#4e5049",
-    "#606259",
-    "#737568",
-    "#87897a",
-    "#9b9d8c",
-    "#adb09e"
+    "#5e6468",
+    "#63696d",
+    "#676d71",
+    "#6b7175",
+    "#6f7579",
+    "#73797d",
+    "#777d81",
+    "#7c8286"
    ],
    "paletteColors": 8,
    "average": [
-    103,
-    105,
-    94
+    108,
+    114,
+    118
    ],
    "nativeGrid": 32,
    "files": {
@@ -310,16 +307,16 @@
     "128": "/textures/miao-v1/128/tile_grey_weathered.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "72f859d6d36d64a591b7cc899a013a2606cdf0c8f5e3706e57d1699fd5fdd5b1",
+   "masterSha256": "d5a8498bf08e9a6758cb3629a9123d48cb27e1ef6adfc1041e3c91ea0c8ac903",
    "atlas": false,
    "seam": {
-    "wrapDelta": 39.896,
-    "neighborDelta": 6.916,
-    "wrapRatio": 5.769
+    "wrapDelta": 9.219,
+    "neighborDelta": 1.414,
+    "wrapRatio": 6.518
    },
    "detailVs32": {
-    "64": 18.935,
-    "128": 17.072
+    "64": 3.727,
+    "128": 3.92
    },
    "generator": {
     "family": "tile",
@@ -333,20 +330,20 @@
    "name": "tile_moss_edges",
    "family": "tile",
    "palette": [
-    "#2b3028",
-    "#3b4236",
-    "#4b5343",
-    "#5c6551",
-    "#6d765f",
-    "#7f886d",
-    "#929a7b",
-    "#a5ac89"
+    "#566461",
+    "#5b6966",
+    "#5f6d6a",
+    "#63716e",
+    "#677572",
+    "#6b7976",
+    "#6f7d7a",
+    "#74827f"
    ],
    "paletteColors": 8,
    "average": [
-    97,
-    105,
-    84
+    100,
+    114,
+    111
    ],
    "nativeGrid": 32,
    "files": {
@@ -355,16 +352,16 @@
     "128": "/textures/miao-v1/128/tile_moss_edges.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "32ae62488b06eb864e217ec9e154a05f75b4ad5be867faae5bda8b82dd5c6a04",
+   "masterSha256": "fcf64ad508949a4bfcd620a4dae47accce11855c81daddcd9d2a5bb43432d550",
    "atlas": false,
    "seam": {
-    "wrapDelta": 35.526,
-    "neighborDelta": 9.045,
-    "wrapRatio": 3.928
+    "wrapDelta": 8.781,
+    "neighborDelta": 2.119,
+    "wrapRatio": 4.143
    },
    "detailVs32": {
-    "64": 15.685,
-    "128": 13.036
+    "64": 3.323,
+    "128": 3.362
    },
    "generator": {
     "family": "tile",
@@ -378,20 +375,20 @@
    "name": "stone_rubble_wall",
    "family": "stone",
    "palette": [
-    "#171815",
-    "#21231e",
-    "#2c2f28",
-    "#373a31",
-    "#43463b",
-    "#4f5245",
-    "#5c5f50",
-    "#696c5b"
+    "#747460",
+    "#797965",
+    "#7d7d69",
+    "#81816d",
+    "#858571",
+    "#898975",
+    "#8d8d79",
+    "#92927e"
    ],
    "paletteColors": 8,
    "average": [
-    56,
-    58,
-    49
+    131,
+    131,
+    111
    ],
    "nativeGrid": 32,
    "files": {
@@ -400,16 +397,16 @@
     "128": "/textures/miao-v1/128/stone_rubble_wall.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "87246ac3ef49d0a725bd95f701730848ab3ec9fad967eae8389ec6d5d85e9ce5",
+   "masterSha256": "e2ad92f8cd92662103bb9211fef08fd9a93dbefae3297443504c5602f897fc5d",
    "atlas": false,
    "seam": {
-    "wrapDelta": 6.477,
-    "neighborDelta": 5.095,
-    "wrapRatio": 1.271
+    "wrapDelta": 4.336,
+    "neighborDelta": 1.596,
+    "wrapRatio": 2.717
    },
    "detailVs32": {
-    "64": 5.042,
-    "128": 3.041
+    "64": 1.55,
+    "128": 0.774
    },
    "generator": {
     "family": "rubble",
@@ -420,20 +417,20 @@
    "name": "stone_cut_grey",
    "family": "stone",
    "palette": [
-    "#1b1d1b",
-    "#252825",
-    "#303430",
-    "#3c413c",
-    "#494e47",
-    "#565c53",
-    "#646b5f",
-    "#737a6d"
+    "#828275",
+    "#87877a",
+    "#8b8b7e",
+    "#8f8f82",
+    "#939386",
+    "#97978a",
+    "#9b9b8e",
+    "#a0a093"
    ],
    "paletteColors": 8,
    "average": [
-    94,
-    100,
-    90
+    153,
+    153,
+    140
    ],
    "nativeGrid": 32,
    "files": {
@@ -442,16 +439,16 @@
     "128": "/textures/miao-v1/128/stone_cut_grey.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "9dd5a6fbfd6ee4a1f60d7cf1fae7ea76aad94d5ab29bab79efc479331e694655",
+   "masterSha256": "5faf5422d94dba5633243858d92bdfed5c964e88bb770896ddc1b2cec553aa3d",
    "atlas": false,
    "seam": {
-    "wrapDelta": 12.529,
-    "neighborDelta": 4.839,
-    "wrapRatio": 2.589
+    "wrapDelta": 3.984,
+    "neighborDelta": 1.643,
+    "wrapRatio": 2.425
    },
    "detailVs32": {
-    "64": 5.671,
-    "128": 2.758
+    "64": 1.94,
+    "128": 0.941
    },
    "generator": {
     "family": "masonry",
@@ -465,20 +462,20 @@
    "name": "paving_bluestone",
    "family": "stone",
    "palette": [
-    "#1a2022",
-    "#242b2d",
-    "#2f3739",
-    "#3a4446",
-    "#465153",
-    "#536062",
-    "#616e70",
-    "#718082"
+    "#939389",
+    "#98988e",
+    "#9c9c92",
+    "#a0a096",
+    "#a4a49a",
+    "#a8a89e",
+    "#acaca2",
+    "#b1b1a7"
    ],
    "paletteColors": 8,
    "average": [
-    91,
-    103,
-    105
+    170,
+    170,
+    160
    ],
    "nativeGrid": 32,
    "files": {
@@ -487,16 +484,16 @@
     "128": "/textures/miao-v1/128/paving_bluestone.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "bfe88e251883b5a5aae6427cea6ec9fb222e05a8b422ce13786ecf775eac60d2",
+   "masterSha256": "41d3d3a7c78193ce6c70def377b224acc0aaaaf32c24fbeb51781d1b7c1f2559",
    "atlas": false,
    "seam": {
-    "wrapDelta": 9.839,
-    "neighborDelta": 7.936,
-    "wrapRatio": 1.24
+    "wrapDelta": 3.242,
+    "neighborDelta": 2.491,
+    "wrapRatio": 1.302
    },
    "detailVs32": {
-    "64": 9.191,
-    "128": 4.673
+    "64": 2.883,
+    "128": 1.466
    },
    "generator": {
     "family": "flagstone",
@@ -509,20 +506,20 @@
    "name": "paving_cobble",
    "family": "stone",
    "palette": [
-    "#20211e",
-    "#2b2d29",
-    "#373a34",
-    "#44473f",
-    "#51554b",
-    "#5f6458",
-    "#6d7365",
-    "#7c8373"
+    "#8d8977",
+    "#928e7c",
+    "#969280",
+    "#9a9684",
+    "#9e9a88",
+    "#a29e8c",
+    "#a6a290",
+    "#aba795"
    ],
    "paletteColors": 8,
    "average": [
-    63,
-    66,
-    59
+    152,
+    148,
+    130
    ],
    "nativeGrid": 32,
    "files": {
@@ -531,16 +528,16 @@
     "128": "/textures/miao-v1/128/paving_cobble.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "6c41e664c0c12c35c43971d3a1e22ce479638fd1b2d8014d55a2e01145942d51",
+   "masterSha256": "1dd3f9738a70536ce19c1002518a9eebfc52cabd53732556d92438ee488af372",
    "atlas": false,
    "seam": {
-    "wrapDelta": 3.107,
-    "neighborDelta": 3.988,
-    "wrapRatio": 0.779
+    "wrapDelta": 1.039,
+    "neighborDelta": 1.284,
+    "wrapRatio": 0.809
    },
    "detailVs32": {
-    "64": 3.005,
-    "128": 1.576
+    "64": 0.976,
+    "128": 0.506
    },
    "generator": {
     "family": "cobble",
@@ -552,20 +549,20 @@
    "name": "paving_wet",
    "family": "stone",
    "palette": [
-    "#171d1f",
-    "#20282a",
-    "#2a3335",
-    "#343e40",
-    "#3f494b",
-    "#4a5557",
-    "#566162",
-    "#626e6f"
+    "#798682",
+    "#7e8b87",
+    "#828f8b",
+    "#86938f",
+    "#8a9793",
+    "#8e9b97",
+    "#929f9b",
+    "#97a4a0"
    ],
    "paletteColors": 8,
    "average": [
-    74,
-    84,
-    86
+    142,
+    155,
+    151
    ],
    "nativeGrid": 32,
    "files": {
@@ -574,16 +571,16 @@
     "128": "/textures/miao-v1/128/paving_wet.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "1a8036677167b58210fd3342073f958edb8c69fd7b1828519a048e6be4c4fa2b",
+   "masterSha256": "ab2ec23e7c13e0eb2c9e1f0b0f4ed2da5ae3af7f589562aa154a8362ce980326",
    "atlas": false,
    "seam": {
-    "wrapDelta": 10.87,
-    "neighborDelta": 6.089,
-    "wrapRatio": 1.785
+    "wrapDelta": 4.156,
+    "neighborDelta": 2.224,
+    "wrapRatio": 1.869
    },
    "detailVs32": {
-    "64": 7.39,
-    "128": 4.263
+    "64": 2.727,
+    "128": 1.569
    },
    "generator": {
     "family": "wet",
@@ -594,20 +591,20 @@
    "name": "water_jade_river",
    "family": "water",
    "palette": [
-    "#1d3432",
-    "#233f3c",
-    "#294b47",
-    "#305752",
-    "#37645d",
-    "#3f7168",
-    "#487e74",
-    "#558b80"
+    "#3c7e78",
+    "#41837d",
+    "#458781",
+    "#498b85",
+    "#4d8f89",
+    "#51938d",
+    "#559791",
+    "#5a9c96"
    ],
    "paletteColors": 8,
    "average": [
-    53,
-    95,
-    89
+    76,
+    142,
+    136
    ],
    "nativeGrid": 32,
    "files": {
@@ -616,16 +613,16 @@
     "128": "/textures/miao-v1/128/water_jade_river.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "47d518b11ae9b422891d6ca40637e3ca4f14b5d412decd1d8b0422a94cbcbe6b",
+   "masterSha256": "504e10f6866e04cfaf9a18da92acf62b84d343f223a556ab459d27638d3eb2da",
    "atlas": false,
    "seam": {
-    "wrapDelta": 14.346,
-    "neighborDelta": 3.613,
-    "wrapRatio": 3.971
+    "wrapDelta": 2.531,
+    "neighborDelta": 1.299,
+    "wrapRatio": 1.948
    },
    "detailVs32": {
-    "64": 2.848,
-    "128": 1.708
+    "64": 1.032,
+    "128": 0.569
    },
    "generator": {
     "family": "water",
@@ -636,20 +633,20 @@
    "name": "earth_compacted",
    "family": "earth",
    "palette": [
-    "#3f3023",
-    "#503d2c",
-    "#624c36",
-    "#745a40",
-    "#86684b",
-    "#987756",
-    "#aa8763",
-    "#ba9671"
+    "#927752",
+    "#977c57",
+    "#9b805b",
+    "#9f845f",
+    "#a38863",
+    "#a78c67",
+    "#ab906b",
+    "#b09570"
    ],
    "paletteColors": 8,
    "average": [
-    126,
-    98,
-    71
+    161,
+    134,
+    97
    ],
    "nativeGrid": 32,
    "files": {
@@ -658,16 +655,16 @@
     "128": "/textures/miao-v1/128/earth_compacted.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "aeffdc8dc1a265086afe4d84f58a47fd145cb1992e1fe5e241b8b455a121f5f7",
+   "masterSha256": "ea1fcaa2206f32e235d4189fd5cbef61ae6e325307ef54b0318235115d9a9c03",
    "atlas": false,
    "seam": {
-    "wrapDelta": 24.852,
-    "neighborDelta": 5.674,
-    "wrapRatio": 4.38
+    "wrapDelta": 6.898,
+    "neighborDelta": 1.583,
+    "wrapRatio": 4.359
    },
    "detailVs32": {
-    "64": 6.118,
-    "128": 3.222
+    "64": 1.711,
+    "128": 0.902
    },
    "generator": {
     "family": "earth",
@@ -679,20 +676,20 @@
    "name": "mud_paddy",
    "family": "earth",
    "palette": [
-    "#32291f",
-    "#433628",
-    "#544432",
-    "#65533c",
-    "#766246",
-    "#877151",
-    "#98805d",
-    "#a98f6a"
+    "#7e6342",
+    "#836847",
+    "#876c4b",
+    "#8b704f",
+    "#8f7453",
+    "#937857",
+    "#977c5b",
+    "#9c8160"
    ],
    "paletteColors": 8,
    "average": [
-    103,
-    85,
-    62
+    140,
+    113,
+    80
    ],
    "nativeGrid": 32,
    "files": {
@@ -701,16 +698,16 @@
     "128": "/textures/miao-v1/128/mud_paddy.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "46736d5096b778a4b58baf36257ef848421600b6c4c6149f411bc21f2099e9ff",
+   "masterSha256": "f602a8038d64ba161138098c7842c3da990d89c20648a8ff3128cde70dd8a4d3",
    "atlas": false,
    "seam": {
-    "wrapDelta": 14.875,
-    "neighborDelta": 5.083,
-    "wrapRatio": 2.927
+    "wrapDelta": 4.312,
+    "neighborDelta": 1.459,
+    "wrapRatio": 2.957
    },
    "detailVs32": {
-    "64": 3.528,
-    "128": 1.494
+    "64": 1.01,
+    "128": 0.429
    },
    "generator": {
     "family": "mud",
@@ -721,20 +718,20 @@
    "name": "grass_mountain",
    "family": "vegetation",
    "palette": [
-    "#26331f",
-    "#324229",
-    "#3e5232",
-    "#4b613b",
-    "#587045",
-    "#667f50",
-    "#758e5c",
-    "#849d69"
+    "#5e7f3b",
+    "#638440",
+    "#678844",
+    "#6b8c48",
+    "#6f904c",
+    "#739450",
+    "#779854",
+    "#7c9d59"
    ],
    "paletteColors": 8,
    "average": [
-    62,
-    81,
-    50
+    106,
+    139,
+    71
    ],
    "nativeGrid": 32,
    "files": {
@@ -743,16 +740,16 @@
     "128": "/textures/miao-v1/128/grass_mountain.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "3d1d73db633dd8ddfa81b9cbedd50e48de886e2b5960f79e0d178450e09f43ba",
+   "masterSha256": "9a3cb4fc4d0aad1d2bbdc9065e2e4426c907429d0191e2461520f1d616e24329",
    "atlas": false,
    "seam": {
-    "wrapDelta": 14.466,
-    "neighborDelta": 7.613,
-    "wrapRatio": 1.9
+    "wrapDelta": 5.562,
+    "neighborDelta": 1.842,
+    "wrapRatio": 3.02
    },
    "detailVs32": {
-    "64": 8.014,
-    "128": 5.661
+    "64": 2.272,
+    "128": 1.335
    },
    "generator": {
     "family": "grass",
@@ -764,20 +761,20 @@
    "name": "rice_young",
    "family": "vegetation",
    "palette": [
-    "#345a26",
-    "#3f6b2d",
-    "#4b7d35",
-    "#588f3e",
-    "#66a147",
-    "#75b252",
-    "#86c260",
-    "#9ad174"
+    "#598d3b",
+    "#5e9240",
+    "#629644",
+    "#669a48",
+    "#6a9e4c",
+    "#6ea250",
+    "#72a654",
+    "#77ab59"
    ],
    "paletteColors": 8,
    "average": [
-    69,
-    114,
-    49
+    95,
+    147,
+    65
    ],
    "nativeGrid": 32,
    "files": {
@@ -786,16 +783,16 @@
     "128": "/textures/miao-v1/128/rice_young.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "6afa577012959d468d11f6191ce07cf7d95811b8455430ebdecaf24a5b4aa175",
+   "masterSha256": "de5ebb0af51c425e6b4805ebf9441ccf02710779f89543446f6830ec898412e4",
    "atlas": false,
    "seam": {
-    "wrapDelta": 10.409,
-    "neighborDelta": 11.96,
-    "wrapRatio": 0.87
+    "wrapDelta": 3.648,
+    "neighborDelta": 3.823,
+    "wrapRatio": 0.954
    },
    "detailVs32": {
-    "64": 11.479,
-    "128": 5.832
+    "64": 3.651,
+    "128": 1.872
    },
    "generator": {
     "family": "rice",
@@ -807,20 +804,20 @@
    "name": "rice_gold",
    "family": "vegetation",
    "palette": [
-    "#5c5420",
-    "#6f6428",
-    "#827431",
-    "#95853a",
-    "#a89745",
-    "#baa952",
-    "#ccbb62",
-    "#dccd77"
+    "#9f9846",
+    "#a49d4b",
+    "#a8a14f",
+    "#aca553",
+    "#b0a957",
+    "#b4ad5b",
+    "#b8b15f",
+    "#bdb664"
    ],
    "paletteColors": 8,
    "average": [
-    137,
-    123,
-    54
+    170,
+    163,
+    81
    ],
    "nativeGrid": 32,
    "files": {
@@ -829,16 +826,16 @@
     "128": "/textures/miao-v1/128/rice_gold.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "2381f71bc25236b13543a2a1043d76bb8002977701dec079aa86252245efe2f8",
+   "masterSha256": "b9155e4fe9eeb81ec860eed5a1799569db7316b71fbbca11ef953df98fcb31fd",
    "atlas": false,
    "seam": {
-    "wrapDelta": 13.396,
-    "neighborDelta": 13.305,
+    "wrapDelta": 3.445,
+    "neighborDelta": 3.423,
     "wrapRatio": 1.007
    },
    "detailVs32": {
-    "64": 13.827,
-    "128": 6.648
+    "64": 3.545,
+    "128": 1.714
    },
    "generator": {
     "family": "rice",
@@ -850,20 +847,20 @@
    "name": "vegetable_dark",
    "family": "vegetation",
    "palette": [
-    "#22301d",
-    "#2d3f26",
-    "#394e2f",
-    "#455d38",
-    "#526c42",
-    "#607b4d",
-    "#6e8a59",
-    "#7d9a66"
+    "#4c7033",
+    "#517538",
+    "#55793c",
+    "#597d40",
+    "#5d8144",
+    "#618548",
+    "#65894c",
+    "#6a8e51"
    ],
    "paletteColors": 8,
    "average": [
-    59,
-    80,
-    49
+    85,
+    121,
+    60
    ],
    "nativeGrid": 32,
    "files": {
@@ -872,16 +869,16 @@
     "128": "/textures/miao-v1/128/vegetable_dark.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "4b459de6438cf19bc338e2ab51a8a270f0cb44c0f6d6642c2afa1e445a98e301",
+   "masterSha256": "b274e995c3448d729f3eb7bbb4e5261074e72629b7929b1b0cf7f0d4954cd6cd",
    "atlas": false,
    "seam": {
-    "wrapDelta": 12.01,
-    "neighborDelta": 9.067,
-    "wrapRatio": 1.325
+    "wrapDelta": 4.031,
+    "neighborDelta": 2.967,
+    "wrapRatio": 1.359
    },
    "detailVs32": {
-    "64": 10.599,
-    "128": 4.948
+    "64": 3.439,
+    "128": 1.624
    },
    "generator": {
     "family": "veg",
@@ -892,20 +889,20 @@
    "name": "bamboo_leaf",
    "family": "vegetation",
    "palette": [
-    "#24351f",
-    "#2f4427",
-    "#3b542f",
-    "#486438",
-    "#567443",
-    "#64854e",
-    "#72965a",
-    "#81a668"
+    "#497232",
+    "#4e7737",
+    "#527b3b",
+    "#567f3f",
+    "#5a8343",
+    "#5e8747",
+    "#628b4b",
+    "#679050"
    ],
    "paletteColors": 8,
    "average": [
-    89,
-    119,
-    71
+    91,
+    132,
+    68
    ],
    "nativeGrid": 32,
    "files": {
@@ -914,16 +911,16 @@
     "128": "/textures/miao-v1/128/bamboo_leaf.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "2b6c9c4d1be10f2fea2160c33aa11910c3f4316ce492f81bd0836a14f30f7d18",
+   "masterSha256": "c374dddae9f4a9f72ebf91a4d726a43e12caffe6898f3494dd7d6cbdaf488fe6",
    "atlas": false,
    "seam": {
-    "wrapDelta": 47.482,
-    "neighborDelta": 9.997,
-    "wrapRatio": 4.75
+    "wrapDelta": 14.648,
+    "neighborDelta": 3.13,
+    "wrapRatio": 4.681
    },
    "detailVs32": {
-    "64": 6.137,
-    "128": 2.97
+    "64": 2.01,
+    "128": 0.958
    },
    "generator": {
     "family": "leaves",
@@ -936,20 +933,20 @@
    "name": "bamboo_culm",
    "family": "vegetation",
    "palette": [
-    "#5b5b2f",
-    "#6c6c38",
-    "#7d7d42",
-    "#8e8e4d",
-    "#9f9f58",
-    "#b0b064",
-    "#c1c172",
-    "#d2d282"
+    "#8a9148",
+    "#8f964d",
+    "#939a51",
+    "#979e55",
+    "#9ba259",
+    "#9fa65d",
+    "#a3aa61",
+    "#a8af66"
    ],
    "paletteColors": 8,
    "average": [
-    146,
-    146,
-    83
+    152,
+    159,
+    86
    ],
    "nativeGrid": 32,
    "files": {
@@ -958,16 +955,16 @@
     "128": "/textures/miao-v1/128/bamboo_culm.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "bc6b521af5e70cd340ca14b7d1f2d6baed13ac9484e942cf6ce0d216e855220f",
+   "masterSha256": "6358dd9418a1d1f4d8d929bc10e2304fa09bf9e66001bfd5034813216e1aa97c",
    "atlas": false,
    "seam": {
-    "wrapDelta": 15.786,
-    "neighborDelta": 21.326,
-    "wrapRatio": 0.74
+    "wrapDelta": 8.219,
+    "neighborDelta": 5.721,
+    "wrapRatio": 1.436
    },
    "detailVs32": {
-    "64": 21.098,
-    "128": 10.848
+    "64": 5.88,
+    "128": 3.039
    },
    "generator": {
     "family": "culm",
@@ -978,20 +975,20 @@
    "name": "foliage_maple",
    "family": "vegetation",
    "palette": [
-    "#3d2416",
-    "#552f1b",
-    "#6d3a20",
-    "#854726",
-    "#9d552d",
-    "#b66637",
-    "#c97844",
-    "#d98e58"
+    "#a05a2d",
+    "#a55f32",
+    "#a96336",
+    "#ad673a",
+    "#b16b3e",
+    "#b56f42",
+    "#b97346",
+    "#be784b"
    ],
    "paletteColors": 8,
    "average": [
-    135,
-    80,
-    47
+    174,
+    104,
+    59
    ],
    "nativeGrid": 32,
    "files": {
@@ -1000,16 +997,16 @@
     "128": "/textures/miao-v1/128/foliage_maple.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "b73f77edeeba84d048c323f66fbf494ea754f485574dabb2c0d5668be86923e9",
+   "masterSha256": "64d953597f661ed03958fe94a17319358340bb4193eac0b981ffdd87c45ad79e",
    "atlas": false,
    "seam": {
-    "wrapDelta": 43.656,
-    "neighborDelta": 11.689,
-    "wrapRatio": 3.735
+    "wrapDelta": 12.133,
+    "neighborDelta": 3.256,
+    "wrapRatio": 3.726
    },
    "detailVs32": {
-    "64": 11.61,
-    "128": 6.093
+    "64": 3.245,
+    "128": 1.718
    },
    "generator": {
     "family": "leaves",
@@ -1022,19 +1019,19 @@
    "name": "foliage_camphor",
    "family": "vegetation",
    "palette": [
-    "#1f3320",
-    "#294327",
-    "#34532f",
-    "#406338",
-    "#4d7342",
-    "#5b834d",
-    "#6a9359",
-    "#7aa366"
+    "#456d31",
+    "#4a7236",
+    "#4e763a",
+    "#527a3e",
+    "#567e42",
+    "#5a8246",
+    "#5e864a",
+    "#638b4f"
    ],
    "paletteColors": 8,
    "average": [
-    74,
-    108,
+    84,
+    124,
     64
    ],
    "nativeGrid": 32,
@@ -1044,16 +1041,16 @@
     "128": "/textures/miao-v1/128/foliage_camphor.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "002cb7102a77707a56b7e237b7bf7b2fa04d29312ac59e4408c75d9b1cc7e064",
+   "masterSha256": "a35c2d62d18e6a069ac0d21b04e6aeee9cbe2cb8637be136928977bb7456d0a1",
    "atlas": false,
    "seam": {
-    "wrapDelta": 46.633,
-    "neighborDelta": 9.935,
-    "wrapRatio": 4.694
+    "wrapDelta": 14.781,
+    "neighborDelta": 3.246,
+    "wrapRatio": 4.554
    },
    "detailVs32": {
-    "64": 5.64,
-    "128": 3.179
+    "64": 1.896,
+    "128": 1.076
    },
    "generator": {
     "family": "leaves",
@@ -1066,20 +1063,20 @@
    "name": "reed_river",
    "family": "vegetation",
    "palette": [
-    "#4c4a2c",
-    "#5f5c35",
-    "#726e40",
-    "#85804b",
-    "#989257",
-    "#aba264",
-    "#bcb374",
-    "#ccc486"
+    "#788846",
+    "#7d8d4b",
+    "#81914f",
+    "#859553",
+    "#899957",
+    "#8d9d5b",
+    "#91a15f",
+    "#96a664"
    ],
    "paletteColors": 8,
    "average": [
-    97,
-    93,
-    55
+    125,
+    141,
+    75
    ],
    "nativeGrid": 32,
    "files": {
@@ -1088,16 +1085,16 @@
     "128": "/textures/miao-v1/128/reed_river.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "82998494fc7be7fdfeab4f7dd9889522362c114ddeea8149290882aa5f770973",
+   "masterSha256": "18128cebca982cafdd5b3efeb3b3bb53e2aa063cb548168fea04a6dc828b10dd",
    "atlas": false,
    "seam": {
-    "wrapDelta": 20.448,
-    "neighborDelta": 9.472,
-    "wrapRatio": 2.159
+    "wrapDelta": 5.359,
+    "neighborDelta": 2.49,
+    "wrapRatio": 2.152
    },
    "detailVs32": {
-    "64": 10.173,
-    "128": 4.901
+    "64": 2.695,
+    "128": 1.294
    },
    "generator": {
     "family": "reeds",
@@ -1108,20 +1105,20 @@
    "name": "straw_thatch",
    "family": "straw",
    "palette": [
-    "#4f3f23",
-    "#63502c",
-    "#776136",
-    "#8b7341",
-    "#9f854e",
-    "#b3975c",
-    "#c7aa6c",
-    "#d9bd7e"
+    "#9c824d",
+    "#a18752",
+    "#a58b56",
+    "#a98f5a",
+    "#ad935e",
+    "#b19762",
+    "#b59b66",
+    "#baa06b"
    ],
    "paletteColors": 8,
    "average": [
-    104,
-    85,
-    48
+    162,
+    136,
+    83
    ],
    "nativeGrid": 32,
    "files": {
@@ -1130,16 +1127,16 @@
     "128": "/textures/miao-v1/128/straw_thatch.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "b81e3dbf7fcc639cde29f6d973dff9989cf97c2e15b2feda589c5329cb418788",
+   "masterSha256": "f8f117f116a4f90150708eb99477081f21b0d52d940460e0710203451d6a5565",
    "atlas": false,
    "seam": {
-    "wrapDelta": 18.951,
-    "neighborDelta": 12.185,
-    "wrapRatio": 1.555
+    "wrapDelta": 5.125,
+    "neighborDelta": 3.082,
+    "wrapRatio": 1.663
    },
    "detailVs32": {
-    "64": 12.606,
-    "128": 6.072
+    "64": 3.169,
+    "128": 1.557
    },
    "generator": {
     "family": "thatch",
@@ -1150,20 +1147,20 @@
    "name": "brick_grey_old",
    "family": "masonry",
    "palette": [
-    "#38342f",
-    "#4a453e",
-    "#5c564d",
-    "#6e675c",
-    "#80786c",
-    "#928a7d",
-    "#a49b8d",
-    "#b4ab9c"
+    "#897f72",
+    "#8e8477",
+    "#92887b",
+    "#968c7f",
+    "#9a9083",
+    "#9e9487",
+    "#a2988b",
+    "#a79d90"
    ],
    "paletteColors": 8,
    "average": [
-    145,
-    137,
-    124
+    158,
+    148,
+    135
    ],
    "nativeGrid": 32,
    "files": {
@@ -1172,16 +1169,16 @@
     "128": "/textures/miao-v1/128/brick_grey_old.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "77b3a67ae5473f94d50865f411231255f813c056127836b3d1657ce2ae3784cd",
+   "masterSha256": "87896280c064d9dfa9daf5b92e5b99f7134e8a6ebc1ff5c421fb7a2bec0c3e88",
    "atlas": false,
    "seam": {
-    "wrapDelta": 8.576,
-    "neighborDelta": 7.371,
-    "wrapRatio": 1.163
+    "wrapDelta": 2.055,
+    "neighborDelta": 1.834,
+    "wrapRatio": 1.12
    },
    "detailVs32": {
-    "64": 14.587,
-    "128": 7.584
+    "64": 3.618,
+    "128": 1.88
    },
    "generator": {
     "family": "brick",
@@ -1192,20 +1189,20 @@
    "name": "plaster_lime_worn",
    "family": "masonry",
    "palette": [
-    "#6e6a5d",
-    "#807c6e",
-    "#928e7f",
-    "#a4a090",
-    "#b6b2a1",
-    "#c8c4b2",
-    "#d9d5c3",
-    "#e8e4d2"
+    "#b5b09b",
+    "#bab5a0",
+    "#beb9a4",
+    "#c2bda8",
+    "#c6c1ac",
+    "#cac5b0",
+    "#cec9b4",
+    "#d3ceb9"
    ],
    "paletteColors": 8,
    "average": [
-    183,
-    179,
-    162
+    198,
+    193,
+    172
    ],
    "nativeGrid": 32,
    "files": {
@@ -1214,16 +1211,16 @@
     "128": "/textures/miao-v1/128/plaster_lime_worn.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "23b1d0a1648573df767d66a24e8311e85ee230b4014f59c362e5a71b4b58616b",
+   "masterSha256": "ca5acec6a2d50a553e6b01b34895eed9d5a12bbcda7bf0d86d5fb1c8e62a6bac",
    "atlas": false,
    "seam": {
-    "wrapDelta": 39.099,
-    "neighborDelta": 8.14,
-    "wrapRatio": 4.803
+    "wrapDelta": 9.211,
+    "neighborDelta": 1.903,
+    "wrapRatio": 4.84
    },
    "detailVs32": {
-    "64": 4.653,
-    "128": 2.555
+    "64": 1.103,
+    "128": 0.601
    },
    "generator": {
     "family": "plaster",
@@ -1234,20 +1231,20 @@
    "name": "bamboo_wicker",
    "family": "craft",
    "palette": [
-    "#4b3a22",
-    "#5e4a2b",
-    "#715a35",
-    "#846b40",
-    "#977c4b",
-    "#aa8d57",
-    "#bd9e64",
-    "#cfaf73"
+    "#9a7b48",
+    "#9f804d",
+    "#a38451",
+    "#a78855",
+    "#ab8c59",
+    "#af905d",
+    "#b39461",
+    "#b89966"
    ],
    "paletteColors": 8,
    "average": [
-    141,
-    115,
-    70
+    169,
+    138,
+    87
    ],
    "nativeGrid": 32,
    "files": {
@@ -1256,16 +1253,16 @@
     "128": "/textures/miao-v1/128/bamboo_wicker.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "8d560f59a6745a441c413cfc81f3bdd5e848b57d33df2c5c27592af986d60e2d",
+   "masterSha256": "9c9c95d218ab8b18f15a6dde32e1d8aab8d8f7cab21537035b283c7b6e7383e9",
    "atlas": false,
    "seam": {
-    "wrapDelta": 16.615,
-    "neighborDelta": 9.536,
-    "wrapRatio": 1.742
+    "wrapDelta": 4.227,
+    "neighborDelta": 2.489,
+    "wrapRatio": 1.698
    },
    "detailVs32": {
-    "64": 7.235,
-    "128": 3.727
+    "64": 1.884,
+    "128": 0.969
    },
    "generator": {
     "family": "wicker",
@@ -1276,20 +1273,20 @@
    "name": "ceramic_brown",
    "family": "craft",
    "palette": [
-    "#3f2519",
-    "#523021",
-    "#653c29",
-    "#784832",
-    "#8b553b",
-    "#9e6245",
-    "#b06f4f",
-    "#c27d5a"
+    "#8d5135",
+    "#92563a",
+    "#965a3e",
+    "#9a5e42",
+    "#9e6246",
+    "#a2664a",
+    "#a66a4e",
+    "#ab6f53"
    ],
    "paletteColors": 8,
    "average": [
-    137,
-    85,
-    59
+    158,
+    98,
+    70
    ],
    "nativeGrid": 32,
    "files": {
@@ -1298,16 +1295,16 @@
     "128": "/textures/miao-v1/128/ceramic_brown.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "536c60ef0f981146fd45e0831b70172dba588983cfd5da3b321663b2c647cd52",
+   "masterSha256": "00720f96c740d65df139054313f763b74285a87c6d7fb48a951b62bef86f4295",
    "atlas": false,
    "seam": {
-    "wrapDelta": 15.581,
-    "neighborDelta": 8.978,
-    "wrapRatio": 1.736
+    "wrapDelta": 4.875,
+    "neighborDelta": 2.73,
+    "wrapRatio": 1.786
    },
    "detailVs32": {
-    "64": 11.04,
-    "128": 5.902
+    "64": 3.363,
+    "128": 1.795
    },
    "generator": {
     "family": "ceramic",
@@ -1318,20 +1315,20 @@
    "name": "cloth_indigo",
    "family": "cloth",
    "palette": [
-    "#1a2534",
-    "#223247",
-    "#2b405b",
-    "#354e6f",
-    "#405d83",
-    "#4d6d96",
-    "#5b7da9",
-    "#6c8fbb"
+    "#365478",
+    "#3b597d",
+    "#3f5d81",
+    "#436185",
+    "#476589",
+    "#4b698d",
+    "#4f6d91",
+    "#547296"
    ],
    "paletteColors": 8,
    "average": [
-    60,
-    86,
-    119
+    69,
+    99,
+    135
    ],
    "nativeGrid": 32,
    "files": {
@@ -1340,16 +1337,16 @@
     "128": "/textures/miao-v1/128/cloth_indigo.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "70b70518d6513b5fd712c142a5ed5b7f91909055aa5f8173176cd956e63d2a5c",
+   "masterSha256": "8916eafdef9f656c139337eac47893d918395786cd722a68d4d826cfb3b15646",
    "atlas": false,
    "seam": {
-    "wrapDelta": 11.63,
-    "neighborDelta": 16.74,
-    "wrapRatio": 0.695
+    "wrapDelta": 3.414,
+    "neighborDelta": 4.499,
+    "wrapRatio": 0.759
    },
    "detailVs32": {
-    "64": 12.22,
-    "128": 5.724
+    "64": 3.327,
+    "128": 1.542
    },
    "generator": {
     "family": "cloth",
@@ -1361,20 +1358,20 @@
    "name": "cloth_madder",
    "family": "cloth",
    "palette": [
-    "#4a1e22",
-    "#5e262b",
-    "#722f35",
-    "#863940",
-    "#9a444b",
-    "#ae5056",
-    "#c05d63",
-    "#cf6d72"
+    "#884740",
+    "#8d4c45",
+    "#915049",
+    "#95544d",
+    "#995851",
+    "#9d5c55",
+    "#a16059",
+    "#a6655e"
    ],
    "paletteColors": 8,
    "average": [
-    142,
-    63,
-    69
+    151,
+    86,
+    79
    ],
    "nativeGrid": 32,
    "files": {
@@ -1383,16 +1380,16 @@
     "128": "/textures/miao-v1/128/cloth_madder.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "03136ecdd0e348edb954b1713b9590996ef6d71edeb1a296e06787437665936a",
+   "masterSha256": "ae5ea09e6dc2a5c641f807c2b417e11440cc71f06f5f2078d21bd2b5b0f51117",
    "atlas": false,
    "seam": {
-    "wrapDelta": 11.518,
-    "neighborDelta": 15.076,
-    "wrapRatio": 0.764
+    "wrapDelta": 3.562,
+    "neighborDelta": 4.457,
+    "wrapRatio": 0.799
    },
    "detailVs32": {
-    "64": 10.811,
-    "128": 5.09
+    "64": 3.256,
+    "128": 1.511
    },
    "generator": {
     "family": "cloth",
@@ -1407,8 +1404,8 @@
    "paletteColors": 0,
    "average": [
     27,
-    21,
-    14
+    20,
+    13
    ],
    "nativeGrid": 32,
    "files": {
@@ -1417,7 +1414,7 @@
     "128": "/textures/miao-v1/128/miao_atlas_signs.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "52321a62200440a161e87cd93e8baae755287f34bc0d04eb694a22ca6f03e61e",
+   "masterSha256": "39351da44417f72742cc6d896f5aa4bbaa3a4582d88f333a94a2606d2966cab2",
    "atlas": true,
    "seam": null,
    "detailVs32": {
@@ -1464,9 +1461,9 @@
    "palette": [],
    "paletteColors": 0,
    "average": [
-    23,
-    20,
-    20
+    15,
+    14,
+    15
    ],
    "nativeGrid": 32,
    "files": {
@@ -1475,7 +1472,7 @@
     "128": "/textures/miao-v1/128/miao_atlas_textile.png"
    },
    "source": "tools/maps/miao-village-textures.py",
-   "masterSha256": "298b5ca59192c3b6d1a6cc56c9d9fe9cab6a72ec7fbc2d6c552abeda1e1d6a6a",
+   "masterSha256": "b9c4073a734c9ade378308b012155378b245273ef2b2ffdd710e7c0a7eace4c1",
    "atlas": true,
    "seam": null,
    "detailVs32": {

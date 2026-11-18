@@ -65,7 +65,7 @@ const bridgePatches: TerrainPatch[] = MIAO_BRIDGES.flatMap((bridge) => [
  * 千户苗寨 · QIANHU MIAO VILLAGE
  *
  * 500×500 苗寨河谷：四面八方真实几何高山，白水河贯穿，三座静态桥、两座权威
- * 缆索渡船、五据点、138 栋 authored 吊脚楼/棚舍。20 分钟默认时长（只影响本图），
+ * 缆索渡船、五据点、成组的吊脚楼与棚舍。20 分钟默认时长（只影响本图），
  * scoreRate 0.18。世界扩展（height 108 / 山体 88 / 水面多标高 / 桥面 footprint）
  * 全部通过通用字段传入 terrain worker，不在 engine 里写地图特判。
  */
@@ -77,7 +77,7 @@ export const miaoVillage: MapDef = {
   nameEn: 'QIANHU MIAO VILLAGE',
   size: MIAO_SIZE,
   baseTerrain: 'grass',
-  theme: '贵州 · 苗岭河谷 · 雨后晨雾',
+  theme: '贵州 · 苗岭河谷 · 晴日',
   summary:
     '500 米河谷苗寨：吊脚楼沿坡地成组展开，白水河三桥两渡，五据点从河岸市集、梯田打谷场到鼓藏堂与剧场。20 分钟、0.18 计分倍率，步兵与轻载具在真实街巷、梯田与风雨桥之间争夺。',
   asymmetry:
@@ -100,8 +100,6 @@ export const miaoVillage: MapDef = {
   props: [
     { id: 'flag-blue', kind: 'flag', x: 56, y: 58, team: 'blue', w: 2, d: 2 },
     { id: 'flag-orange', kind: 'flag', x: 440, y: 444, team: 'orange', w: 2, d: 2 },
-    { id: 'gate-blue', kind: 'gate', x: 88, y: 104, w: 6, d: 2, rot: 90 },
-    { id: 'gate-orange', kind: 'gate', x: 412, y: 396, w: 6, d: 2, rot: 90 },
     { id: 'lamp-a', kind: 'lamp', x: 132, y: 182 },
     { id: 'lamp-b', kind: 'lamp', x: 336, y: 168 },
     { id: 'lamp-c', kind: 'lamp', x: 198, y: 246 },
@@ -116,11 +114,11 @@ export const miaoVillage: MapDef = {
   specialCrates: MIAO_SPECIAL_CRATES,
   routes: MIAO_ROUTES.map((r) => route(r.team, r.label, r.points, r.kind)),
   notes: [
-    `138 栋建筑：主楼 ${MIAO_BUILDING_COUNTS.main}（双 ${MIAO_BUILDING_COUNTS.two} / 单 ${MIAO_BUILDING_COUNTS.one} / 三 ${MIAO_BUILDING_COUNTS.three}）+ 棚舍 ${MIAO_BUILDING_COUNTS.sheds}。`,
+    `${MIAO_BUILDING_COUNTS.total} 栋建筑：主楼 ${MIAO_BUILDING_COUNTS.main}（双 ${MIAO_BUILDING_COUNTS.two} / 单 ${MIAO_BUILDING_COUNTS.one} / 三 ${MIAO_BUILDING_COUNTS.three}）+ 棚舍 ${MIAO_BUILDING_COUNTS.sheds}。`,
     'C 只有中央廊桥桥面可占（footprint + floorY 联合判定）；水面、towpath、屋顶、桥外道路不可占。',
     'E 观众坪 floorY=9、垂直容差 1.2：舞台面 11.5 m 不可隔空占点。',
     '主河水面 -2；梯田浅水 0.15–0.35 m，独立 surfaceY，不套用 -2。',
-    '两座缆索渡船 host 权威：40 m / 2.5 m/s / 8 s 靠岸 / 2 s 倒计时；只有步兵。',
+    '两座缆索渡船 host 权威：40 m / 2.5 m/s / E 呼叫或发船 / 2 s 倒计时；只有步兵。',
     '所有道路 markings:false；没有沥青与白色交通虚线。',
     '平衡待真人调优；本图 scoreRate 0.18、默认 1200 秒。',
   ],
@@ -139,15 +137,12 @@ export const miaoVillage: MapDef = {
     vertical: { minY: MIAO_MIN_Y, height: 108 },
     heightClamp: [MIAO_MIN_Y, MIAO_MAX_Y],
     navigationLayers: 5,
-    chunkSize: 100,
     captureScoreMultiplier: 0.18,
     recommendedPlayers: [8, 12],
     bestExperience: 8,
     matchSeconds: 1200,
     minimumPlayers: 4,
-    sky: 'morning',
-    fogColor: '#a7b6b2',
-    fogDensity: 0.00165,
+    sky: 'noon',
     initialOwner: 'neutral',
     ferries: MIAO_FERRY_DATA,
     bridges: MIAO_BRIDGES,

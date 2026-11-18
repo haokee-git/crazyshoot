@@ -5,7 +5,7 @@ import { blockAt,isSolidBlock,type TerrainData } from './voxel-map-data';
 import { isWaterMaterial } from '../../content/materials/battlefield';
 import { buildWaterExitRoutes } from './water-navigation';
 export class VoxelWorldQueries {
- readonly details:SolidIndex; constructor(readonly data:TerrainData){this.details=new SolidIndex(data.detailBoxes??[]);}
+ readonly details:SolidIndex; constructor(readonly data:TerrainData){this.details=new SolidIndex(data.detailBoxes??[],data.id==='miao_village'?4:8);}
  private column(x:number,z:number){const ix=Math.floor(x)-this.data.minX,iz=Math.floor(z)-this.data.minZ;return ix<0||iz<0||ix>=this.data.width||iz>=this.data.depth?-1:iz*this.data.width+ix;}
  height(x:number,z:number){const k=this.column(x,z);return k<0?-Infinity:this.data.heights[k];}
  primary(x:number,z:number){const k=this.column(x,z);return k<0?-Infinity:this.data.primary[k];}

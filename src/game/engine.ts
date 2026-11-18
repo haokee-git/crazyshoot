@@ -673,7 +673,7 @@ export class GameEngine {
     }
     this.arena.playerBlocked=(x,z,r,feet,height=1.8,ignoreId)=>{
       if(this.arena.blockedAt?.(x,z,r,feet,height))return true;
-      if(this.ferryRailBlocked(x,z,feet,height))return true;
+      if(this.ferryRailBlocked(x,z,r,feet,height))return true;
       for(const v of this.vehicles){if(v.destroyed||Math.hypot(x-v.x,z-v.z)>6||feet+height<v.model.position.y||feet>v.model.position.y+4)continue;if(vehicleBlocks(v.model,x,z,r,feet,height))return true;}
       const overlaps=(id:string,p:THREE.Vector3,bodyHeight:number,dead:boolean,riding:boolean)=>id!==ignoreId&&!dead&&!riding&&feet<p.y+bodyHeight-.02&&feet+height>p.y+.02&&(x-p.x)**2+(z-p.z)**2<(r+.36)**2;
       if(this.controller&&overlaps(this.localNetId,this.controller.position,this.controller.bodyHeight,this.dead,!!this.drivingId))return true;
@@ -684,10 +684,10 @@ export class GameEngine {
     this.arena.platformAt=(x,z,maxY)=>{
       let best:{id:string;y:number;x:number;z:number;yaw:number;carry?:boolean;manualCarry?:boolean}|null=null;
       for(const v of this.vehicles){if(v.destroyed||Math.hypot(x-v.x,z-v.z)>6)continue;const top=vehicleSupport(v.model,x,z,maxY);if(Number.isFinite(top)&&(!best||top>best.y))best={id:v.id,y:top,x:v.x,z:v.z,yaw:v.yaw};}
-      // 渡船也是移动平台：与载具共用 platformAt，PlayerController 的平台携带逻辑原样复用。
+      // The deck is a moving support over exactly the rendered footprint.
       for(const f of this.ferries){
         const p=f.visual.group.position;
-        if(Math.abs(x-p.x)>f.cfg.deckLength/2+1.5||Math.abs(z-f.cfg.z)>f.cfg.deckWidth/2+1.5)continue;
+        if(Math.abs(x-p.x)>f.cfg.deckLength/2||Math.abs(z-p.z)>f.cfg.deckWidth/2)continue;
         const y=f.cfg.deckY;
         if(y<=maxY+.01&&(!best||y>best.y))best={id:`ferry-${f.cfg.id}`,y,x:p.x,z:f.cfg.z,yaw:f.visual.group.rotation.y,manualCarry:true};
       }
@@ -2653,37 +2653,27 @@ export class GameEngine {
    */
   private updateFerries(dt:number){
     if(!this.ferrySystem)return;
-    const before=this.ferries.map(f=>({f,x:f.visual.group.position.x,z:f.visual.group.position.z}));
     if(this.isHost)this.ferrySystem.tick(dt);
+    const blend=1-Math.exp(-dt*14);
     for(const f of this.ferries){
-      const st=this.ferrySystem.state(f.cfg.id);
-      if(!st)continue;
+      const p=f.visual.group.position;
+      const oldX=p.x;
+      const oldZ=p.z;
       if(this.isHost){
-        f.targetX=st.x;f.targetZ=st.z;f.targetYaw=st.yaw;
-        const p=f.visual.group.position;p.x=st.x;p.z=st.z;f.visual.group.rotation.y=st.yaw;
+        const st=this.ferrySystem.state(f.cfg.id)!;
+        p.x=st.x;p.z=st.z;f.visual.group.rotation.y=st.yaw;
       }else{
-        const k=1-Math.exp(-Math.max(0,dt)*14),p=f.visual.group.position;
-        // A large host catch-up step must not leave the deck visually meters behind.
-        if(Math.abs(f.targetX-p.x)>1.0)p.x=f.targetX;else p.x+=(f.targetX-p.x)*k;
-        p.z+=(f.targetZ-p.z)*k;
-        let d=((f.targetYaw-f.visual.group.rotation.y+Math.PI*3)%(Math.PI*2))-Math.PI;
-        f.visual.group.rotation.y+=d*k;
+        p.x+=(f.targetX-p.x)*blend;
+        p.z+=(f.targetZ-p.z)*blend;
+        const angle=((f.targetYaw-f.visual.group.rotation.y+Math.PI*3)%(Math.PI*2))-Math.PI;
+        f.visual.group.rotation.y+=angle*blend;
       }
-    }
-    // Explicit deck carry: the half-grid quay lip can otherwise block the generic
-    // platform delta exactly at the water's edge. Carry every player whose feet /
-    // XZ were on the old deck rectangle, then let the next platform query re-seat them.
-    for(const b of before){
-      const dx=b.f.visual.group.position.x-b.x, dz=b.f.visual.group.position.z-b.z;
+      const dx=p.x-oldX,dz=p.z-oldZ;
       if(Math.abs(dx)+Math.abs(dz)<1e-5)continue;
-      const players:PlayerController[]=[this.controller];
-      if(this.isHost)for(const h of this.hosted.values())players.push(h.controller);
-      for(const c of players){
-        if(c===this.controller&&(this.dead||this.drivingId))continue;
-        const p=c.position;
-        if(Math.abs(p.y-b.f.cfg.deckY)>1.8)continue;
-        if(Math.abs(p.x-b.x)>b.f.cfg.deckLength/2+0.8||Math.abs(p.z-b.f.cfg.z)>b.f.cfg.deckWidth/2+0.8)continue;
-        p.x+=dx;p.z+=dz;
+      const platformId=`ferry-${f.cfg.id}`;
+      if(!this.dead&&!this.drivingId)this.controller.carryManualPlatform(this.arena,platformId,dx,dz);
+      if(this.isHost)for(const h of this.hosted.values()){
+        if(!h.dead&&!h.vehicleId)h.controller.carryManualPlatform(this.arena,platformId,dx,dz);
       }
     }
   }
@@ -2714,48 +2704,47 @@ export class GameEngine {
     }
   }
 
-  /** Real ferry rail collision (dynamic platform); boarding gaps remain open. */
-  private ferryRailBlocked(x:number,z:number,feet:number,height:number):boolean {
-    if(!this.ferrySystem)return false;
+  /** Rails run along the two long sides. Both ends are flush boarding ramps. */
+  private ferryRailBlocked(x:number,z:number,r:number,feet:number,height:number):boolean {
     for(const f of this.ferries){
       const p=f.visual.group.position;
-      if(feet>f.cfg.deckY+1.9||feet+height<f.cfg.deckY-0.4)continue;
-      if(Math.abs(x-p.x)>f.cfg.deckLength/2+0.6||Math.abs(z-f.cfg.z)>f.cfg.deckWidth/2+0.6)continue;
-      const dz=Math.abs(z-f.cfg.z);
-      const rail=Math.abs(dz-(f.cfg.deckWidth/2-0.08))<0.28;
-      const boarding=Math.abs(x-p.x)<0.85;
-      if(rail&&!boarding)return true;
+      const deck=f.cfg.deckY;
+      if(feet>=deck+1.04||feet+height<=deck)continue;
+      if(Math.abs(x-p.x)>f.cfg.deckLength/2+r)continue;
+      const railZ=f.cfg.deckWidth/2-0.08;
+      if(Math.abs(Math.abs(z-p.z)-railZ)<r+0.06)return true;
     }
     return false;
   }
 
-  private nearbyFerryDock(){
-    if(!this.ferrySystem||this.drivingId||this.dead||this.controller.climbing||this.controller.mantle)return null;
-    const p=this.controller.position;
+  private nearbyFerryDock(c:PlayerController){
+    if(!this.ferrySystem||c.climbing||c.mantle)return null;
+    const p=c.position;
     for(const f of this.ferries){
-      const st=this.ferrySystem.state(f.cfg.id);
-      if(!st||!isDocked(st.phase))continue;
+      const st=this.ferrySystem.state(f.cfg.id)!;
       if(Math.abs(p.y-f.cfg.deckY)>2.2)continue;
-      const dW=Math.hypot(p.x-f.cfg.westX,p.z-f.cfg.z);
-      const dE=Math.hypot(p.x-f.cfg.eastX,p.z-f.cfg.z);
-      const d=Math.min(dW,dE);
-      if(d<=5.2)return {id:f.cfg.id,side:dW<=dE?'west' as const:'east' as const};
+      const deck=f.visual.group.position;
+      const aboard=Math.abs(p.y-f.cfg.deckY)<.12&&Math.abs(p.x-deck.x)<=f.cfg.deckLength/2&&Math.abs(p.z-deck.z)<=f.cfg.deckWidth/2;
+      const west=Math.hypot(p.x-f.cfg.westX,p.z-f.cfg.z)<=6;
+      const east=Math.hypot(p.x-f.cfg.eastX,p.z-f.cfg.z)<=6;
+      if(aboard||west||east){
+        const call=(west&&st.phase==='dockedEast')||(east&&st.phase==='dockedWest');
+        return {id:f.cfg.id,phase:st.phase,aboard,call,canRequest:isDocked(st.phase)&&(aboard||call)};
+      }
     }
     return null;
   }
 
   private ferryPrompt():string{
-    const ferry=this.nearbyFerryDock();
+    if(this.drivingId||this.dead)return '';
+    const ferry=this.nearbyFerryDock(this.controller);
     if(!ferry)return '';
-    const st=this.ferrySystem?.state(ferry.id);
-    if(!st)return '';
-    return st.phase==='dockedWest'?'E 呼叫渡船 → 东岸':'E 呼叫渡船 → 西岸';
+    if(ferry.phase==='countdownWest'||ferry.phase==='countdownEast')return '渡船即将出发';
+    if(ferry.phase==='movingEast'||ferry.phase==='movingWest')return '渡船行驶中';
+    if(ferry.aboard)return ferry.phase==='dockedWest'?'E 驶向东岸':'E 驶向西岸';
+    return ferry.call?'E 呼叫渡船':'登上渡船后按 E 出发';
   }
 
-  /**
-   * 每局开始把载具恢复到出生状态：清动态车、恢复初始 32 辆（或本图车位数）、
-   * 恢复材质/血量/弹药，并重建载具特效层。host 广播 vehReset 让客机同步。
-   */
   private resetVehicles(){
     const now=this.simulationNow;
     const manager=this.vehicleSpawnManager;
@@ -3397,13 +3386,9 @@ export class GameEngine {
     if(msg.t==='seatAck'&&!this.isHost&&msg.peerId===this.localNetId){this.pendingSeatChange=false;return;}
     if(msg.t==='ferryCall'&&this.isHost&&fromPeerId){
       const h=this.hosted.get(fromPeerId);
-      const id=typeof msg.id==='string'?msg.id:'';const f=this.ferries.find(q=>q.cfg.id===id);
-      if(!h||h.dead||h.vehicleId||!f||!this.ferrySystem)return;
-      const st=this.ferrySystem.state(id);if(!st||!isDocked(st.phase))return;
-      const pos=h.controller.position;
-      const distance=Math.min(Math.hypot(pos.x-f.cfg.westX,pos.z-f.cfg.z),Math.hypot(pos.x-f.cfg.eastX,pos.z-f.cfg.z));
-      if(!Number.isFinite(distance)||distance>5.5)return;
-      this.ferrySystem.requestById(id,msg.side==='east'?'east':'west');
+      if(!h||h.dead||h.vehicleId)return;
+      const dock=this.nearbyFerryDock(h.controller);
+      if(dock?.canRequest&&dock.id===msg.id)this.ferrySystem?.requestById(dock.id);
       return;
     }
     if(msg.t==='vehInput'&&this.isHost&&fromPeerId){
@@ -4203,10 +4188,10 @@ export class GameEngine {
       else this.net?.send({t:'pickupLoot',matchId:this.matchId,id:crate.id});
       return true;
     }
-    const ferry=this.nearbyFerryDock();
-    if(ferry){
-      if(this.isHost)this.ferrySystem?.requestById(ferry.id,ferry.side);
-      else this.net?.send({t:'ferryCall',matchId:this.matchId,id:ferry.id,side:ferry.side});
+    const ferry=this.nearbyFerryDock(this.controller);
+    if(ferry?.canRequest){
+      if(this.isHost)this.ferrySystem?.requestById(ferry.id);
+      else this.net?.send({t:'ferryCall',matchId:this.matchId,id:ferry.id});
       return true;
     }
     const before=this.drivingId??null;

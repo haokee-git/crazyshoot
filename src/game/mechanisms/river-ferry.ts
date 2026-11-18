@@ -2,7 +2,7 @@
  * 权威缆索渡船状态机（纯逻辑，可单测；不依赖 THREE/DOM）。
  *
  * 相位：
- *   dockedWest / dockedEast         靠岸（8 s 靠岸停留，期间可 E 呼叫/出发）
+ *   dockedWest / dockedEast         靠岸（按 E 呼叫/出发）
  *   countdownWest / countdownEast    2 s 出发倒计时（不可倒转）
  *   movingEast / movingWest          40 m / 2.5 m/s = 16 s 航程
  *
@@ -19,7 +19,6 @@ export interface FerryConfig {
   deckLength: number;
   deckWidth: number;
   speed: number;
-  dwellSeconds: number;
   countdownSeconds: number;
   initialSide: 'west' | 'east';
 }
@@ -90,21 +89,11 @@ export class FerrySystem {
     return Math.abs(f.cfg.eastX - f.cfg.westX) / Math.max(0.1, f.cfg.speed);
   }
 
-  private heading(f: Runtime): 1 | -1 {
-    return f.phase === 'movingEast' || f.phase === 'countdownWest' ? 1 : -1;
-  }
-
   tick(dt: number): void {
     const step = Math.max(0, Math.min(0.25, dt));
     for (const f of this.ferries) {
+      if (isDocked(f.phase)) continue;
       f.t += step;
-      if (f.phase === 'dockedWest' || f.phase === 'dockedEast') {
-        // 靠岸停留 8 s 后自动折返，形成持续的班次；期间 E 可提前出发。
-        if (f.t >= f.cfg.dwellSeconds) {
-          this.beginCountdown(f, f.phase === 'dockedWest' ? 'east' : 'west');
-        }
-        continue;
-      }
       if (f.phase === 'countdownWest' || f.phase === 'countdownEast') {
         if (f.t >= f.cfg.countdownSeconds) {
           const east = f.phase === 'countdownWest';
@@ -117,9 +106,14 @@ export class FerrySystem {
       if (f.phase === 'movingEast' || f.phase === 'movingWest') {
         const total = this.duration(f);
         const progress = Math.min(1, f.t / total);
+        // Ease the first and last second while retaining the cable's travel time.
+        const ramp = Math.min(0.25, 1 / total);
+        const eased = progress < ramp ? progress ** 2 / (2 * ramp)
+          : progress > 1 - ramp ? 1 - ramp - (1 - progress) ** 2 / (2 * ramp)
+          : progress - ramp / 2;
         const fromX = f.from === 'west' ? f.cfg.westX : f.cfg.eastX;
         const toX = f.from === 'west' ? f.cfg.eastX : f.cfg.westX;
-        f.x = fromX + (toX - fromX) * progress;
+        f.x = fromX + (toX - fromX) * eased / (1 - ramp);
         f.yaw = f.phase === 'movingEast' ? Math.PI : 0;
         if (progress >= 1) {
           f.phase = f.phase === 'movingEast' ? 'dockedEast' : 'dockedWest';
@@ -137,18 +131,8 @@ export class FerrySystem {
     f.t = 0;
   }
 
-  /**
-   * E 交互：呼叫/出发。只有靠岸时可受理；caller 在任一端都合法（同岸登船、对岸呼叫
-   * 都让船驶向另一岸）。移动/倒计时中返回 false，不允许反复倒转。
-   */
-  request(_side: 'west' | 'east'): boolean {
-    const f = this.ferries.find((q) => isDocked(q.phase));
-    if (!f) return false;
-    this.beginCountdown(f, f.phase === 'dockedWest' ? 'east' : 'west');
-    return true;
-  }
-
-  requestById(id: string, _side: 'west' | 'east'): boolean {
+  /** Start an idle ferry after the caller and boarding location are validated. */
+  requestById(id: string): boolean {
     const f = this.ferries.find((q) => q.cfg.id === id);
     if (!f || !isDocked(f.phase)) return false;
     this.beginCountdown(f, f.phase === 'dockedWest' ? 'east' : 'west');
@@ -185,8 +169,8 @@ export class FerrySystem {
     f.yaw = Number.isFinite(snapshot.yaw) ? snapshot.yaw : f.yaw;
   }
 
-  /** Deck platform: axis-aligned 5 x 6 m; yaw is only visual (0/π). */
-  contains(id: string, x: number, z: number, pad = 0.2): boolean {
+  /** Deck platform is axis-aligned; yaw is only visual (0/π). */
+  contains(id: string, x: number, z: number, pad = 0): boolean {
     const f = this.ferries.find((q) => q.cfg.id === id);
     if (!f) return false;
     return Math.abs(x - f.x) <= f.cfg.deckLength / 2 + pad && Math.abs(z - f.cfg.z) <= f.cfg.deckWidth / 2 + pad;

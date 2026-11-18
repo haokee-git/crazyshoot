@@ -31,7 +31,10 @@ OUT = ROOT / "public" / "textures" / "miao-v1"
 DOCS = ROOT / "docs" / "map-miao-village" / "materials"
 TIERS = (32, 64, 128)
 ATLAS_CELLS = 4
-FONT = "/System/Library/Fonts/STHeiti Medium.ttc"
+SIGN_FONTS = (
+    Path("/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"),
+    Path("/System/Library/Fonts/STHeiti Medium.ttc"),
+)
 
 
 # ---------------------------------------------------------------------------
@@ -106,7 +109,7 @@ def wrap_line(y: np.ndarray, n: int, width: float):
 def grain(n: int, seed: int, freq: int, vertical: bool = True, warp: float = 0.12):
     u, v = uv(n)
     noise = fbm(n, 4, seed, 4)
-    t = (v if vertical else u) * freq + noise * warp * freq
+    t = (u if vertical else v) * freq + noise * warp
     g = np.sin(t * np.pi * 2)
     return g
 
@@ -194,9 +197,9 @@ def leaves(n: int, seed: int, cells: int, scale: float = 1.0):
 def water(n: int, seed: int):
     u, v = uv(n)
     waves = (
-        np.sin((u * 3 + v * 1.2) * np.pi * 2 + 0.6) * 0.22
-        + np.sin((u * -1.4 + v * 2.1) * np.pi * 2 + 1.9) * 0.18
-        + np.sin((u * 5 + v * 3.4) * np.pi * 2 + 3.4) * 0.10
+        np.sin((u * 3 + v) * np.pi * 2 + 0.6) * 0.22
+        + np.sin((u * -1 + v * 2) * np.pi * 2 + 1.9) * 0.18
+        + np.sin((u * 5 + v * 3) * np.pi * 2 + 3.4) * 0.10
     )
     return 0.45 + waves + 0.12 * fbm(n, 6, seed, 3)
 
@@ -206,69 +209,69 @@ def water(n: int, seed: int):
 # ---------------------------------------------------------------------------
 BLOCKS = [
     # id, name, family, palette, generator, params
-    (122, "fir_dark_oiled", "wood", ["#2b1b10", "#3b2617", "#4d321f", "#5d3d25", "#6c482c", "#7b5533", "#8d6540", "#a0744b"],
-     "wood", {"seed": 122, "freq": 7, "vertical": True, "warp": .18, "oil": .86}),
-    (123, "fir_honey_worn", "wood", ["#4a2e1b", "#5b3a22", "#6d472a", "#7f5533", "#91633c", "#a37346", "#b28252", "#bf9060"],
-     "wood", {"seed": 123, "freq": 6, "vertical": True, "warp": .2, "oil": 1.0}),
-    (124, "fir_grey_weathered", "wood", ["#272621", "#32302a", "#3d3b33", "#48463c", "#535146", "#5e5c50", "#69675a", "#757264"],
-     "wood", {"seed": 124, "freq": 5, "vertical": True, "warp": .24, "oil": .94}),
-    (125, "wood_plank_floor", "wood", ["#2a1c13", "#3a281b", "#4b3322", "#5b3f29", "#6c4b31", "#7d593a", "#8f6846", "#9e7652"],
+    (122, "fir_dark_oiled", "wood", ["#68452a", "#6d4a2f", "#714e33", "#755237", "#79563b", "#7d5a3f", "#815e43", "#866348"],
+     "wood", {"seed": 122, "freq": 7, "vertical": True, "warp": .18}),
+    (123, "fir_honey_worn", "wood", ["#8e633c", "#936841", "#976c45", "#9b7049", "#9f744d", "#a37851", "#a77c55", "#ac815a"],
+     "wood", {"seed": 123, "freq": 6, "vertical": True, "warp": .2}),
+    (124, "fir_grey_weathered", "wood", ["#7a5f45", "#7f644a", "#83684e", "#876c52", "#8b7056", "#8f745a", "#93785e", "#987d63"],
+     "wood", {"seed": 124, "freq": 5, "vertical": True, "warp": .24}),
+    (125, "wood_plank_floor", "wood", ["#8d6945", "#926e4a", "#96724e", "#9a7652", "#9e7a56", "#a27e5a", "#a6825e", "#ab8763"],
      "plank", {"seed": 125, "planks": 5}),
-    (126, "wood_lattice", "wood", ["#1b130d", "#2a1e14", "#3b2a1b", "#4c3723", "#5e452c", "#725437", "#8a6845", "#a37d54"],
+    (126, "wood_lattice", "wood", ["#69442b", "#6e4930", "#724d34", "#765138", "#7a553c", "#7e5940", "#825d44", "#876249"],
      "lattice", {"seed": 126, "cells": 4}),
-    (127, "tile_blue_grey", "tile", ["#252b2c", "#333b3c", "#424c4d", "#525d5e", "#657071", "#7a8585", "#8f9998", "#a3acab"],
+    (127, "tile_blue_grey", "tile", ["#4c5c68", "#51616d", "#556571", "#596975", "#5d6d79", "#61717d", "#657581", "#6a7a86"],
      "tile", {"seed": 127, "rows": 4, "cols": 5, "moss": .0}),
-    (128, "tile_grey_weathered", "tile", ["#2d2e2b", "#3d3f3a", "#4e5049", "#606259", "#737568", "#87897a", "#9b9d8c", "#adb09e"],
+    (128, "tile_grey_weathered", "tile", ["#5e6468", "#63696d", "#676d71", "#6b7175", "#6f7579", "#73797d", "#777d81", "#7c8286"],
      "tile", {"seed": 128, "rows": 4, "cols": 5, "moss": .12}),
-    (129, "tile_moss_edges", "tile", ["#2b3028", "#3b4236", "#4b5343", "#5c6551", "#6d765f", "#7f886d", "#929a7b", "#a5ac89"],
+    (129, "tile_moss_edges", "tile", ["#566461", "#5b6966", "#5f6d6a", "#63716e", "#677572", "#6b7976", "#6f7d7a", "#74827f"],
      "tile", {"seed": 129, "rows": 4, "cols": 5, "moss": .42}),
-    (130, "stone_rubble_wall", "stone", ["#171815", "#21231e", "#2c2f28", "#373a31", "#43463b", "#4f5245", "#5c5f50", "#696c5b"],
+    (130, "stone_rubble_wall", "stone", ["#747460", "#797965", "#7d7d69", "#81816d", "#858571", "#898975", "#8d8d79", "#92927e"],
      "rubble", {"seed": 130}),
-    (131, "stone_cut_grey", "stone", ["#1b1d1b", "#252825", "#303430", "#3c413c", "#494e47", "#565c53", "#646b5f", "#737a6d"],
+    (131, "stone_cut_grey", "stone", ["#828275", "#87877a", "#8b8b7e", "#8f8f82", "#939386", "#97978a", "#9b9b8e", "#a0a093"],
      "masonry", {"seed": 131, "rows": 4, "cols": 3, "mortar": .7}),
-    (132, "paving_bluestone", "stone", ["#1a2022", "#242b2d", "#2f3739", "#3a4446", "#465153", "#536062", "#616e70", "#718082"],
+    (132, "paving_bluestone", "stone", ["#939389", "#98988e", "#9c9c92", "#a0a096", "#a4a49a", "#a8a89e", "#acaca2", "#b1b1a7"],
      "flagstone", {"seed": 132, "rows": 3, "cols": 3}),
-    (133, "paving_cobble", "stone", ["#20211e", "#2b2d29", "#373a34", "#44473f", "#51554b", "#5f6458", "#6d7365", "#7c8373"],
+    (133, "paving_cobble", "stone", ["#8d8977", "#928e7c", "#969280", "#9a9684", "#9e9a88", "#a29e8c", "#a6a290", "#aba795"],
      "cobble", {"seed": 133, "cells": 6}),
-    (134, "paving_wet", "stone", ["#171d1f", "#20282a", "#2a3335", "#343e40", "#3f494b", "#4a5557", "#566162", "#626e6f"],
+    (134, "paving_wet", "stone", ["#798682", "#7e8b87", "#828f8b", "#86938f", "#8a9793", "#8e9b97", "#929f9b", "#97a4a0"],
      "wet", {"seed": 134}),
-    (135, "water_jade_river", "water", ["#1d3432", "#233f3c", "#294b47", "#305752", "#37645d", "#3f7168", "#487e74", "#558b80"],
+    (135, "water_jade_river", "water", ["#3c7e78", "#41837d", "#458781", "#498b85", "#4d8f89", "#51938d", "#559791", "#5a9c96"],
      "water", {"seed": 135}),
-    (136, "earth_compacted", "earth", ["#3f3023", "#503d2c", "#624c36", "#745a40", "#86684b", "#987756", "#aa8763", "#ba9671"],
+    (136, "earth_compacted", "earth", ["#927752", "#977c57", "#9b805b", "#9f845f", "#a38863", "#a78c67", "#ab906b", "#b09570"],
      "earth", {"seed": 136, "cells": 5}),
-    (137, "mud_paddy", "earth", ["#32291f", "#433628", "#544432", "#65533c", "#766246", "#877151", "#98805d", "#a98f6a"],
+    (137, "mud_paddy", "earth", ["#7e6342", "#836847", "#876c4b", "#8b704f", "#8f7453", "#937857", "#977c5b", "#9c8160"],
      "mud", {"seed": 137}),
-    (138, "grass_mountain", "vegetation", ["#26331f", "#324229", "#3e5232", "#4b613b", "#587045", "#667f50", "#758e5c", "#849d69"],
+    (138, "grass_mountain", "vegetation", ["#5e7f3b", "#638440", "#678844", "#6b8c48", "#6f904c", "#739450", "#779854", "#7c9d59"],
      "grass", {"seed": 138, "density": 1.0}),
-    (139, "rice_young", "vegetation", ["#345a26", "#3f6b2d", "#4b7d35", "#588f3e", "#66a147", "#75b252", "#86c260", "#9ad174"],
+    (139, "rice_young", "vegetation", ["#598d3b", "#5e9240", "#629644", "#669a48", "#6a9e4c", "#6ea250", "#72a654", "#77ab59"],
      "rice", {"seed": 139, "gold": False}),
-    (140, "rice_gold", "vegetation", ["#5c5420", "#6f6428", "#827431", "#95853a", "#a89745", "#baa952", "#ccbb62", "#dccd77"],
+    (140, "rice_gold", "vegetation", ["#9f9846", "#a49d4b", "#a8a14f", "#aca553", "#b0a957", "#b4ad5b", "#b8b15f", "#bdb664"],
      "rice", {"seed": 140, "gold": True}),
-    (141, "vegetable_dark", "vegetation", ["#22301d", "#2d3f26", "#394e2f", "#455d38", "#526c42", "#607b4d", "#6e8a59", "#7d9a66"],
+    (141, "vegetable_dark", "vegetation", ["#4c7033", "#517538", "#55793c", "#597d40", "#5d8144", "#618548", "#65894c", "#6a8e51"],
      "veg", {"seed": 141}),
-    (142, "bamboo_leaf", "vegetation", ["#24351f", "#2f4427", "#3b542f", "#486438", "#567443", "#64854e", "#72965a", "#81a668"],
+    (142, "bamboo_leaf", "vegetation", ["#497232", "#4e7737", "#527b3b", "#567f3f", "#5a8343", "#5e8747", "#628b4b", "#679050"],
      "leaves", {"seed": 142, "cells": 4, "scale": 1.5}),
-    (143, "bamboo_culm", "vegetation", ["#5b5b2f", "#6c6c38", "#7d7d42", "#8e8e4d", "#9f9f58", "#b0b064", "#c1c172", "#d2d282"],
+    (143, "bamboo_culm", "vegetation", ["#8a9148", "#8f964d", "#939a51", "#979e55", "#9ba259", "#9fa65d", "#a3aa61", "#a8af66"],
      "culm", {"seed": 143}),
-    (144, "foliage_maple", "vegetation", ["#3d2416", "#552f1b", "#6d3a20", "#854726", "#9d552d", "#b66637", "#c97844", "#d98e58"],
+    (144, "foliage_maple", "vegetation", ["#a05a2d", "#a55f32", "#a96336", "#ad673a", "#b16b3e", "#b56f42", "#b97346", "#be784b"],
      "leaves", {"seed": 144, "cells": 5, "scale": 1.1}),
-    (145, "foliage_camphor", "vegetation", ["#1f3320", "#294327", "#34532f", "#406338", "#4d7342", "#5b834d", "#6a9359", "#7aa366"],
+    (145, "foliage_camphor", "vegetation", ["#456d31", "#4a7236", "#4e763a", "#527a3e", "#567e42", "#5a8246", "#5e864a", "#638b4f"],
      "leaves", {"seed": 145, "cells": 4, "scale": 1.3}),
-    (146, "reed_river", "vegetation", ["#4c4a2c", "#5f5c35", "#726e40", "#85804b", "#989257", "#aba264", "#bcb374", "#ccc486"],
+    (146, "reed_river", "vegetation", ["#788846", "#7d8d4b", "#81914f", "#859553", "#899957", "#8d9d5b", "#91a15f", "#96a664"],
      "reeds", {"seed": 146}),
-    (147, "straw_thatch", "straw", ["#4f3f23", "#63502c", "#776136", "#8b7341", "#9f854e", "#b3975c", "#c7aa6c", "#d9bd7e"],
+    (147, "straw_thatch", "straw", ["#9c824d", "#a18752", "#a58b56", "#a98f5a", "#ad935e", "#b19762", "#b59b66", "#baa06b"],
      "thatch", {"seed": 147}),
-    (148, "brick_grey_old", "masonry", ["#38342f", "#4a453e", "#5c564d", "#6e675c", "#80786c", "#928a7d", "#a49b8d", "#b4ab9c"],
+    (148, "brick_grey_old", "masonry", ["#897f72", "#8e8477", "#92887b", "#968c7f", "#9a9083", "#9e9487", "#a2988b", "#a79d90"],
      "brick", {"seed": 148}),
-    (149, "plaster_lime_worn", "masonry", ["#6e6a5d", "#807c6e", "#928e7f", "#a4a090", "#b6b2a1", "#c8c4b2", "#d9d5c3", "#e8e4d2"],
+    (149, "plaster_lime_worn", "masonry", ["#b5b09b", "#bab5a0", "#beb9a4", "#c2bda8", "#c6c1ac", "#cac5b0", "#cec9b4", "#d3ceb9"],
      "plaster", {"seed": 149}),
-    (150, "bamboo_wicker", "craft", ["#4b3a22", "#5e4a2b", "#715a35", "#846b40", "#977c4b", "#aa8d57", "#bd9e64", "#cfaf73"],
+    (150, "bamboo_wicker", "craft", ["#9a7b48", "#9f804d", "#a38451", "#a78855", "#ab8c59", "#af905d", "#b39461", "#b89966"],
      "wicker", {"seed": 150}),
-    (151, "ceramic_brown", "craft", ["#3f2519", "#523021", "#653c29", "#784832", "#8b553b", "#9e6245", "#b06f4f", "#c27d5a"],
+    (151, "ceramic_brown", "craft", ["#8d5135", "#92563a", "#965a3e", "#9a5e42", "#9e6246", "#a2664a", "#a66a4e", "#ab6f53"],
      "ceramic", {"seed": 151}),
-    (152, "cloth_indigo", "cloth", ["#1a2534", "#223247", "#2b405b", "#354e6f", "#405d83", "#4d6d96", "#5b7da9", "#6c8fbb"],
+    (152, "cloth_indigo", "cloth", ["#365478", "#3b597d", "#3f5d81", "#436185", "#476589", "#4b698d", "#4f6d91", "#547296"],
      "cloth", {"seed": 152, "warp": 8}),
-    (153, "cloth_madder", "cloth", ["#4a1e22", "#5e262b", "#722f35", "#863940", "#9a444b", "#ae5056", "#c05d63", "#cf6d72"],
+    (153, "cloth_madder", "cloth", ["#884740", "#8d4c45", "#915049", "#95544d", "#995851", "#9d5c55", "#a16059", "#a6655e"],
      "cloth", {"seed": 153, "warp": 8}),
 ]
 
@@ -288,11 +291,9 @@ SIGN_NAMES = ["苗绣", "蜡染", "银饰", "酸汤", "竹编", "米酒", "客�
 def gen(family, n, P, p):
     u, v = uv(n)
     if family == "wood":
-        g = grain(n, p["seed"], p["freq"] * n // 32, p["vertical"], p["warp"])
+        g = grain(n, p["seed"], p["freq"], p["vertical"], p["warp"])
         f = fbm(n, 5, p["seed"] + 3, 3)
-        idx = idx_from(g * .7 + f * .3 + .1, len(P))
-        if p.get("oil", 1) < 1:
-            idx = (idx * p["oil"]).astype(int)
+        idx = idx_from(g * .13 + f * .65 + fbm(n, 10, p["seed"] + 7, 2) * .22, len(P))
         return idx
     if family == "plank":
         planks = p["planks"]
@@ -300,10 +301,10 @@ def gen(family, n, P, p):
         seam = wrap_line(v * planks, n, 1.0)
         tone = np.random.default_rng(p["seed"]).random(planks)
         base = tone[band.astype(int) % planks]
-        g = grain(n, p["seed"], 18 * n // 32, True, .1)
+        g = grain(n, p["seed"], 9, True, .1)
         f = fbm(n, 6, p["seed"] + 4, 3)
-        idx = idx_from(base * .5 + g * .25 + f * .25, len(P))
-        idx[seam] = 0
+        idx = idx_from(base * .35 + g * .10 + f * .55, len(P))
+        idx[seam] = np.maximum(0, idx[seam] - 2)
         return idx
     if family == "lattice":
         cell = p["cells"]
@@ -314,7 +315,7 @@ def gen(family, n, P, p):
         f = fbm(n, 6, p["seed"], 2)
         idx = idx_from(f * .4 + .2, len(P))
         idx[line] = len(P) - 1
-        idx[diag & ~line] = max(0, len(P) - 3)
+        idx[diag & ~line] = np.minimum(len(P) - 1, idx[diag & ~line] + 1)
         return idx
     if family == "tile":
         rows, cols = p["rows"], p["cols"]
@@ -322,10 +323,10 @@ def gen(family, n, P, p):
         off = (row % 2) * 0.5
         col = np.floor(((u + off / cols) * cols))
         tile = ((row * 7 + col * 13) % 5) / 5.0
-        mortar = wrap_line(v * rows, n, 1.0) | wrap_line((u + off / cols) * cols, n, 1.0)
+        mortar = wrap_line(v * rows, n, n / 50) | wrap_line((u + off / cols) * cols, n, n / 90)
         f = fbm(n, 6, p["seed"] + row.astype(int) * 3, 3)
         idx = idx_from(tile * .55 + f * .45, len(P))
-        idx[mortar] = 0
+        idx[mortar] = np.maximum(0, idx[mortar] - 2)
         if p["moss"] > 0:
             moss = fbm(n, 9, p["seed"] + 33, 3) > (1.02 - p["moss"])
             idx[moss] = min(len(P) - 1, 2)
@@ -333,10 +334,7 @@ def gen(family, n, P, p):
     if family == "rubble":
         f = fbm(n, 5, p["seed"], 4)
         g = cobbles(n, p["seed"] + 5, 5)
-        crack = np.abs(np.sin((u * 6 + v * 3 + f * 0.8) * np.pi * 2)) < 0.045
-        idx = idx_from(f * .35 + g * .65, len(P))
-        idx[crack] = 0
-        return idx
+        return idx_from(f * .68 + g * .32, len(P))
     if family == "masonry":
         return idx_from(masonry(n, p["seed"], p["rows"], p["cols"], p["mortar"]), len(P))
     if family == "flagstone":
@@ -365,8 +363,8 @@ def gen(family, n, P, p):
         return idx_from(f * .65 + wet * .35, len(P))
     if family == "grass":
         f = fbm(n, 6, p["seed"], 4)
-        s = strokes(n, p["seed"] + 1, int(120 * p["density"] * n / 64), 3.0, .8)
-        return idx_from(f * .6 + s * .4, len(P))
+        s = strokes(n, p["seed"] + 1, int(42 * p["density"] * n / 64), 3.0, .8)
+        return idx_from(f * .84 + s * .16, len(P))
     if family == "rice":
         f = fbm(n, 5, p["seed"], 3)
         row = np.abs(np.sin(v * np.pi * 2 * 5 + f * 2)) < .22
@@ -443,8 +441,9 @@ def atlas_panel(kind, i):
         d.rectangle([col + 2, row + 2, col + s - 3, row + s - 3], fill=(96, 66, 38, 255))
         d.rectangle([col + 3, row + 3, col + s - 4, row + s - 4], outline=(160, 120, 70, 255))
         try:
-            font = ImageFont.truetype(FONT, 14)
-        except Exception:
+            font_path = next(path for path in SIGN_FONTS if path.is_file())
+            font = ImageFont.truetype(str(font_path), 13, index=2 if "Noto" in font_path.name else 0)
+        except (OSError, StopIteration):
             font = ImageFont.load_default()
         text = SIGN_NAMES[i % len(SIGN_NAMES)]
         d.text((col + s / 2, row + s / 2), text, font=font, fill=(236, 220, 184, 255), anchor="mm")
@@ -471,14 +470,14 @@ def atlas_panel(kind, i):
         col, row, s = cell_box(i)
         base = [(28, 38, 58), (52, 34, 30), (34, 44, 34), (48, 46, 60)][i % 4]
         d.rectangle([col, row, col + s - 1, row + s - 1], fill=base + (255,))
-        for k in range(0, s, 4):
-            c = (150, 170, 200, 255) if (k // 4 + i) % 2 else (190, 100, 80, 255)
+        for k in range(0, s, 8):
+            c = (77, 102, 132, 255) if (k // 8 + i) % 2 else (125, 87, 76, 255)
             d.line([col + k, row, col + k, row + s - 1], fill=c)
         step = 8
         for y in range(row + 4, row + s - 3, step):
             for x in range(col + 4, col + s - 3, step):
                 if ((x + y) // step + i) % 2:
-                    d.rectangle([x, y, x + 3, y + 3], fill=(220, 205, 170, 255))
+                    d.rectangle([x, y, x + 3, y + 3], fill=(150, 130, 107, 255))
     else:  # festival
         col, row, s = cell_box(i)
         d.rectangle([col, row, col + s - 1, row + s - 1], fill=(26, 32, 40, 255))
@@ -534,7 +533,8 @@ def main():
     if args.check:
         print("check mode: generating in memory")
     OUT.mkdir(parents=True, exist_ok=True)
-    DOCS.mkdir(parents=True, exist_ok=True)
+    if not args.check:
+        DOCS.mkdir(parents=True, exist_ok=True)
     records = []
     for cid, name, family, palette, genname, params in BLOCKS:
         tiers = {}
@@ -628,8 +628,8 @@ def main():
             "| id | name | family | palette | mean RGB |",
             "|---:|---|---|---|---|",
         ]
-        for r in records[:32]:
-            readme.append(f"| {122 + len(readme) - 9} | {r['name']} | {r['family']} | {r['paletteColors']} | {tuple(r['average'])} |")
+        for cid, r in enumerate(records[:32], 122):
+            readme.append(f"| {cid} | {r['name']} | {r['family']} | {r['paletteColors']} | {tuple(r['average'])} |")
         readme += [
             "",
             "验收：`npx vitest run tests/miao-assets.test.ts`；接缝指标见 `manifest.json` 的 `seam`。",
