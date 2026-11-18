@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRAZYSHOOT // WEAPON LAB</title>
+    <style>
+      :root { color-scheme: dark; }
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #070a0c; }
+      body { font-family: "Rajdhani", "DIN Alternate", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif; color: #e6efec; }
+      #weapon-stage { position: fixed; inset: 0; background: radial-gradient(ellipse at 48% 42%, #162125 0%, #0a0f12 58%, #06090b 100%); }
+      #weapon-stage canvas { display: block; width: 100%; height: 100%; }
+      .ui { position: fixed; z-index: 2; pointer-events: none; }
+      .top-left { top: 34px; left: 38px; }
+      .kicker { font-family: "SFMono-Regular", "Cascadia Mono", monospace; font-size: 9px; letter-spacing: .26em; color: #35e0d0; }
+      .weapon-name { margin-top: 8px; font-size: 56px; font-weight: 700; letter-spacing: .08em; line-height: .9; }
+      .weapon-class { margin-top: 8px; color: #819095; font-size: 12px; letter-spacing: .12em; }
+      .top-right { top: 36px; right: 38px; text-align: right; font-family: "SFMono-Regular", monospace; font-size: 8px; letter-spacing: .16em; color: #64747a; line-height: 1.9; }
+      .top-right b { color: #ffb454; font-weight: 500; }
+      .panel {
+        position: fixed; z-index: 2; right: 38px; top: 148px; width: 260px;
+        border: 1px solid rgba(218,235,230,.13); background: rgba(9,14,17,.86); padding: 18px 18px 14px;
+      }
+      .panel::before { content: ""; position: absolute; left: 0; top: 0; width: 34px; height: 2px; background: #35e0d0; }
+      .panel-label { font-family: "SFMono-Regular", monospace; font-size: 8px; letter-spacing: .2em; color: #65747a; margin-bottom: 10px; }
+      .stat { display: flex; align-items: center; gap: 8px; margin: 8px 0; font-size: 10px; color: #aab7b3; }
+      .stat span { width: 42px; color: #7e8d91; }
+      .bar { flex: 1; height: 3px; background: rgba(218,235,230,.12); }
+      .bar i { display: block; height: 100%; background: #35e0d0; }
+      .role { margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(218,235,230,.1); color: #ffb454; font-size: 10px; letter-spacing: .04em; line-height: 1.5; }
+      .rack {
+        position: fixed; z-index: 3; left: 38px; bottom: 34px; display: flex; flex-wrap: wrap; gap: 6px; max-width: 64vw;
+      }
+      .rack button {
+        pointer-events: auto; border: 1px solid rgba(218,235,230,.16); background: rgba(9,14,17,.8);
+        color: #8b9a9e; font-family: inherit; font-size: 11px; letter-spacing: .08em; padding: 9px 14px; cursor: pointer;
+      }
+      .rack button.on { border-color: #ffb454; color: #ffe3bd; background: rgba(255,180,84,.1); }
+      .bottom { position: fixed; z-index: 2; left: 38px; bottom: 12px; color: #435054; font-family: "SFMono-Regular", monospace; font-size: 8px; letter-spacing: .12em; }
+      .right-bottom { position: fixed; z-index: 2; right: 38px; bottom: 14px; color: #435054; font-family: "SFMono-Regular", monospace; font-size: 8px; letter-spacing: .12em; }
+      .corner { position: fixed; width: 22px; height: 22px; border-color: rgba(53,224,208,.5); border-style: solid; z-index: 2; pointer-events: none; }
+      .c1 { top: 18px; left: 18px; border-width: 1px 0 0 1px; }
+      .c2 { top: 18px; right: 18px; border-width: 1px 1px 0 0; }
+      .c3 { bottom: 18px; left: 18px; border-width: 0 0 1px 1px; }
+      .c4 { bottom: 18px; right: 18px; border-width: 0 1px 1px 0; }
+      body.capture .ui, body.capture .panel, body.capture .rack, body.capture .bottom, body.capture .right-bottom, body.capture .corner { display: none !important; }
+      body.capture #weapon-stage { background: radial-gradient(ellipse at 50% 42%, #1a2528 0%, #0b1113 60%, #06090b 100%); }
+    </style>
+  </head>
+  <body>
+    <div id="weapon-stage"></div>
+    <div class="ui top-left">
+      <div class="kicker">CRAZYSHOOT // WEAPON LAB</div>
+      <div class="weapon-name" id="weapon-name">M16A4</div>
+      <div class="weapon-class" id="weapon-class">ASSAULT RIFLE / 5.56</div>
+    </div>
+    <div class="ui top-right">
+      MODEL REVIEW <b>R1</b><br />
+      LOW-POLY / CARTOON<br />
+      NOT IN-GAME YET
+    </div>
+    <aside class="panel">
+      <div class="panel-label">BALANCE SNAPSHOT</div>
+      <div id="stats"></div>
+      <div class="role" id="role"></div>
+    </aside>
+    <div class="rack" id="rack"></div>
+    <div class="bottom">TURNTABLE / 32MM // PREVIEW ONLY</div>
+    <div class="right-bottom">32×32 WORLD TEXTURE STANDARD // BUILD 0.4.4</div>
+    <i class="corner c1"></i><i class="corner c2"></i><i class="corner c3"></i><i class="corner c4"></i>
+    <script type="module" src="/src/preview/weapons.ts"></script>
+  </body>
+</html>

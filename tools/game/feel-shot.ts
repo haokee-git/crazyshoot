@@ -1,0 +1,16 @@
+import { chromium } from 'playwright';
+import fs from 'node:fs';
+const exe = ['/Users/haokee/Library/Caches/ms-playwright/chromium-1234/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing'].find(fs.existsSync)!;
+const b=await chromium.launch({headless:true,executablePath:exe});
+const p=await b.newPage({viewport:{width:1280,height:720}});
+await p.goto('http://127.0.0.1:5174/game.html?prep=2&turn=1&res=32&bots=1&size=4&sky=noon',{waitUntil:'load'});
+await p.waitForTimeout(700); await p.waitForTimeout(700);await p.locator('.lobby-solo').click(); await p.waitForTimeout(900); await p.locator('.prep-close').click().catch(()=>{}); await p.waitForFunction(()=>(window as any).__game?.phase==='live',null,{timeout:15000}).catch(()=>{});
+await p.evaluate(()=>{const g=(window as any).__game; g.health=27; g.hurtFlash=1;});
+await p.waitForTimeout(120); await p.screenshot({path:'previews/game/00-lowhealth-hud.png'});
+await p.evaluate(()=>{const g=(window as any).__game; g.setLoadout({...g.selection, weaponId:'akm'}); g.health=100; g.hurtFlash=0;});
+await p.waitForTimeout(300);
+await p.mouse.down({button:'right'}); await p.mouse.up({button:'right'}); await p.waitForTimeout(300);
+console.log('ads',await p.evaluate(()=>{const g=(window as any).__game; return g.ads;}));
+await p.mouse.down({button:'left'}); await p.waitForTimeout(90); await p.mouse.up({button:'left'}); await p.waitForTimeout(60);
+console.log('recoil',await p.evaluate(()=>{const g=(window as any).__game; return {rp:g.recoilPitch,ry:g.recoilYaw,shake:g.shakePitch};}));
+await p.screenshot({path:'previews/game/00-recoil-fx.png'}); await b.close();

@@ -1,0 +1,10 @@
+import { chromium } from 'playwright';
+import fs from 'node:fs';
+const exe = ['/Users/haokee/Library/Caches/ms-playwright/chromium-1234/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing'].find(fs.existsSync)!;
+const b=await chromium.launch({headless:true,executablePath:exe});
+const p=await b.newPage({viewport:{width:1600,height:900}});
+await p.goto('http://127.0.0.1:5174/game.html?prep=20&res=32&bots=0&sky=noon&map=docks',{waitUntil:'load'});
+await p.waitForTimeout(600); await p.waitForTimeout(700);await p.locator('.lobby-solo').click(); await p.waitForTimeout(1200);
+await p.screenshot({path:'previews/game/00-loadout-real-silhouettes.png'});
+console.log('overlay',await p.evaluate(()=>!!document.querySelector('.prep-overlay')));
+await b.close();

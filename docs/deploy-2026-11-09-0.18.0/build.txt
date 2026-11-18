@@ -1,0 +1,14 @@
+identity: 0.18.0 / 9f50151d5224e349
+mapRevision: voxel-halfgrid-v5
+materialRevision: 4
+builtAt: 2026-11-09T14:15+08:00
+node: v26.7.0
+npm: 11.19.0
+test: npm test -> 17 files / 122 tests passed
+build: npm run build -> 94 modules, success
+mainJs: assets/game-iyMCVb_B.js
+mainJsSha256: 7a004b33a76eff4641f1a416332bc66c9cf45eac74d86b8f8bd97b8484775ea6
+archive: 0.18.0-9f50151d5224e349.tar.gz
+archiveBytes: 34047468
+archiveSha256: 66c9f0867f29a02be021b414f3a73bd80a11c81f9b82cc3bbdf61bd1dd7fac7c
+fileCount: 1221 (tar members; 1220 manifest files + release-manifest.json)

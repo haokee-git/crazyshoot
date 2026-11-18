@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRAZYSHOOT // VEHICLE LAB</title>
+    <style>
+      :root { color-scheme: dark; }
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #070a0c; }
+      body { font-family: "Rajdhani", "DIN Alternate", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif; color: #e6efec; }
+      #vehicle-stage { position: fixed; inset: 0; background: radial-gradient(ellipse at 50% 42%, #1b2527 0%, #0b1113 58%, #06090b 100%); }
+      #vehicle-stage canvas { display: block; width: 100%; height: 100%; }
+      .ui { position: fixed; z-index: 2; pointer-events: none; }
+      .top-left { top: 34px; left: 38px; }
+      .kicker { font-family: "SFMono-Regular", "Cascadia Mono", monospace; font-size: 9px; letter-spacing: .26em; color: #35e0d0; }
+      .vehicle-name { margin-top: 8px; font-size: 54px; font-weight: 700; letter-spacing: .06em; line-height: .92; }
+      .vehicle-class { margin-top: 8px; color: #819095; font-size: 12px; letter-spacing: .12em; }
+      .top-right { top: 36px; right: 38px; text-align: right; font-family: "SFMono-Regular", monospace; font-size: 8px; letter-spacing: .16em; color: #64747a; line-height: 1.9; }
+      .top-right b { color: #ffb454; font-weight: 500; }
+      .panel { position: fixed; z-index: 2; right: 38px; top: 150px; width: 270px; border: 1px solid rgba(218,235,230,.13); background: rgba(9,14,17,.86); padding: 18px; }
+      .panel::before { content: ""; position: absolute; left: 0; top: 0; width: 34px; height: 2px; background: #35e0d0; }
+      .panel-label { font-family: "SFMono-Regular", monospace; font-size: 8px; letter-spacing: .2em; color: #65747a; margin-bottom: 10px; }
+      .stat { display: flex; align-items: center; gap: 8px; margin: 9px 0; font-size: 10px; color: #aab7b3; }
+      .stat span { width: 48px; color: #7e8d91; }
+      .stat b { margin-left: auto; font-family: "SFMono-Regular", monospace; font-weight: 500; color: #e6efec; }
+      .weapons { margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(218,235,230,.1); color: #9fb1ad; font-size: 10px; line-height: 1.7; }
+      .weapons b { color: #ffb454; font-weight: 500; }
+      .rack { position: fixed; z-index: 3; left: 38px; bottom: 32px; display: flex; flex-wrap: wrap; gap: 6px; max-width: 65vw; }
+      .rack button { pointer-events: auto; border: 1px solid rgba(218,235,230,.16); background: rgba(9,14,17,.8); color: #8b9a9e; font-family: inherit; font-size: 10px; letter-spacing: .06em; padding: 8px 11px; cursor: pointer; }
+      .rack button.on { border-color: #ffb454; color: #ffe3bd; background: rgba(255,180,84,.1); }
+      .bottom { position: fixed; z-index: 2; left: 38px; bottom: 10px; color: #435054; font-family: "SFMono-Regular", monospace; font-size: 8px; letter-spacing: .12em; }
+      .right-bottom { position: fixed; z-index: 2; right: 38px; bottom: 12px; color: #435054; font-family: "SFMono-Regular", monospace; font-size: 8px; letter-spacing: .12em; }
+      .corner { position: fixed; width: 22px; height: 22px; border-color: rgba(53,224,208,.5); border-style: solid; z-index: 2; pointer-events: none; }
+      .c1 { top: 18px; left: 18px; border-width: 1px 0 0 1px; } .c2 { top: 18px; right: 18px; border-width: 1px 1px 0 0; }
+      .c3 { bottom: 18px; left: 18px; border-width: 0 0 1px 1px; } .c4 { bottom: 18px; right: 18px; border-width: 0 1px 1px 0; }
+      body.capture .ui, body.capture .panel, body.capture .rack, body.capture .bottom, body.capture .right-bottom, body.capture .corner { display: none !important; }
+    </style>
+  </head>
+  <body>
+    <div id="vehicle-stage"></div>
+    <div class="ui top-left">
+      <div class="kicker">CRAZYSHOOT // VEHICLE LAB</div>
+      <div class="vehicle-name" id="vehicle-name">JEEP</div>
+      <div class="vehicle-class" id="vehicle-class">ARMED JEEP / 3 SEATS</div>
+    </div>
+    <div class="ui top-right">MODEL REVIEW <b>V1</b><br />LOW-POLY / CARTOON<br />NOT IN-GAME YET</div>
+    <aside class="panel">
+      <div class="panel-label">VEHICLE PROFILE</div>
+      <div id="stats"></div>
+      <div class="weapons" id="weapons"></div>
+    </aside>
+    <div class="rack" id="rack"></div>
+    <div class="bottom">TURNTABLE // PREVIEW ONLY</div>
+    <div class="right-bottom">32×32 WORLD TEXTURE STANDARD // BUILD 0.10.1</div>
+    <i class="corner c1"></i><i class="corner c2"></i><i class="corner c3"></i><i class="corner c4"></i>
+    <script type="module" src="/src/preview/vehicles.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+import { chromium } from 'playwright';
+import fs from 'node:fs';
+const exe = ['/Users/haokee/Library/Caches/ms-playwright/chromium-1234/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing'].find(fs.existsSync)!;
+const b=await chromium.launch({headless:true,executablePath:exe});
+const host=await b.newPage({viewport:{width:1280,height:720}}); const guest=await b.newPage({viewport:{width:1280,height:720}});
+const url='http://127.0.0.1:5174/game.html?prep=2&turn=1&res=32&bots=0&sky=noon&map=docks';
+await host.goto(url); await guest.goto(url); await host.waitForTimeout(800); await host.locator('.lobby-primary').first().click(); await host.waitForTimeout(2400);
+const code=(await host.locator('.lobby-code').first().textContent())!.trim(); await guest.locator('.lobby-input.code').fill(code); await guest.locator('.lobby-secondary').click();
+await host.waitForFunction(()=>{const e=document.querySelector('.lobby-primary.start') as HTMLButtonElement;return !!e&&!e.disabled;},null,{timeout:20000}).catch(()=>{}); await host.locator('.lobby-primary.start').click().catch(()=>{});
+for(const p of [host,guest]){await p.waitForTimeout(900); await p.locator('.prep-close').click().catch(()=>{});} await host.waitForFunction(()=>(window as any).__game?.phase==='live',null,{timeout:15000}).catch(()=>{});
+const setDead=async()=>host.evaluate(()=>{const g=(window as any).__game; g.caps[0].owner='blue'; g.caps[0].progress=1; g.dead=true; g.health=0; g.respawnAt=performance.now()+12000; g.resolveRespawnChoice('blue');});
+await setDead(); await host.waitForTimeout(300);
+console.log('options',await host.evaluate(()=>[...document.querySelectorAll('.respawn-points button')].map(b=>b.textContent?.trim())));
+await host.locator('.respawn-gear').click(); await host.waitForTimeout(350);
+console.log('overlayOpen',await host.evaluate(()=>{const g=(window as any).__game;return {open:g.overlayOpen, dead:g.dead, overlay:!!document.querySelector('.prep-overlay')};}));
+await host.screenshot({path:'previews/game/00-respawn-loadout.png'});
+await host.locator('.prep-close').click(); await host.waitForTimeout(350);
+console.log('closed',await host.evaluate(()=>{const g=(window as any).__game;return {open:g.overlayOpen,dead:g.dead};}));
+// pick A and force timer ready
+await host.locator('.respawn-points button').filter({hasText:'A 点'}).click().catch(()=>{});
+await host.evaluate(()=>{const g=(window as any).__game;g.respawnAt=performance.now();});
+await host.waitForTimeout(500);
+console.log('respawnedA',await host.evaluate(()=>{const g=(window as any).__game;return {dead:g.dead,choice:g.respawnChoice,pos:g.controller.position.toArray(),capA:g.caps[0]?[g.caps[0].x,g.caps[0].z]:null};}));
+// fallback: choose A then make it unavailable
+await setDead();
+await host.locator('.respawn-points button').filter({hasText:'A 点'}).click().catch(()=>{});
+await host.evaluate(()=>{const g=(window as any).__game; g.caps[0].owner='orange'; g.respawnAt=performance.now();});
+await host.waitForTimeout(500);
+console.log('fallback',await host.evaluate(()=>{const g=(window as any).__game;return {dead:g.dead,choice:g.respawnChoice,pos:g.controller.position.toArray()};}));
+await b.close();

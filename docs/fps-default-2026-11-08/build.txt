@@ -1,0 +1,20 @@
+
+> crazyshoot@0.16.4 build
+> tsc --noEmit && vite build
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - JSON import "./package.json" without import attributes (vite.config.ts:4:17). Add `with { type: 'json' }`
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 82 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/version.json                           0.10 kB │ gzip:   0.10 kB
+dist/game.html                              0.50 kB │ gzip:   0.32 kB
+dist/index.html                             0.69 kB │ gzip:   0.46 kB
+dist/assets/terrain-worker-BbeTqXYS.js     69.47 kB
+dist/assets/game-qeU8QWcG.css              42.87 kB │ gzip:   9.64 kB
+dist/assets/game-yeJeYEuP.js            1,032.92 kB │ gzip: 294.80 kB
+
+✓ built in 348ms

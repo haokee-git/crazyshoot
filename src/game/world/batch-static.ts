@@ -1,0 +1,24 @@
+import * as THREE from 'three';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+// Atlas repeat is done in shader so differently sized objects share one material.
+export function batchStatic(root:THREE.Object3D){
+ root.updateMatrixWorld(true);const sources:THREE.Mesh[]=[];root.traverse(o=>{const m=o as THREE.Mesh;if(m.isMesh&&!(m as THREE.InstancedMesh).isInstancedMesh&&m.visible&&!Array.isArray(m.material)&&!m.material.transparent)sources.push(m);else if(m.isMesh&&Array.isArray(m.material)&&m.visible)sources.push(m);});
+ const imgs=new Map<string,HTMLImageElement>();for(const m of sources)for(const mat of Array.isArray(m.material)?m.material:[m.material]){const t=(mat as THREE.MeshLambertMaterial).map;if((t?.image as HTMLImageElement)?.src)imgs.set((t!.image as HTMLImageElement).src,t!.image as HTMLImageElement);}
+ const dim=8,tile=68,canvas=document.createElement('canvas');canvas.width=canvas.height=dim*tile;const ctx=canvas.getContext('2d')!;ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);const rects=new Map<string,number[]>();let i=1;
+ for(const [key,img] of imgs){if(i>=dim*dim)throw new Error('静态材质超过图集容量');const x=i%dim*tile,y=Math.floor(i/dim)*tile;ctx.drawImage(img,x,y,tile,tile);ctx.drawImage(img,x+2,y+2,64,64);rects.set(key,[(x+2)/canvas.width,1-(y+66)/canvas.height,64/canvas.width,64/canvas.height]);i++;}
+ const atlas=new THREE.CanvasTexture(canvas);atlas.colorSpace=THREE.SRGBColorSpace;atlas.minFilter=THREE.LinearMipmapLinearFilter;atlas.magFilter=THREE.NearestFilter;atlas.anisotropy=2;
+ const material=new THREE.MeshLambertMaterial({map:atlas,vertexColors:true,side:THREE.DoubleSide,flatShading:true});
+ material.onBeforeCompile=shader=>{shader.vertexShader='attribute vec4 atlasRect; varying vec4 vAtlasRect;\n'+shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvAtlasRect=atlasRect;');shader.fragmentShader='varying vec4 vAtlasRect;\n'+shader.fragmentShader.replace('#include <map_fragment>','vec4 sampledDiffuseColor = texture2D(map, vAtlasRect.xy + fract(vMapUv) * vAtlasRect.zw);\ndiffuseColor *= sampledDiffuseColor;');};material.customProgramCacheKey=()=> 'battlefield-atlas-v1';
+ const buckets=new Map<string,THREE.BufferGeometry[]>(),geos=new Set<THREE.BufferGeometry>(),mats=new Set<THREE.Material>(),textures=new Set<THREE.Texture>();const color=new THREE.Color();
+ for(const mesh of sources){if(!mesh.visible)continue;let parent=mesh.parent,on=true;while(parent&&parent!==root){if(!parent.visible){on=false;break;}parent=parent.parent;}if(!on)continue;
+  const geometry=mesh.geometry.index?mesh.geometry.toNonIndexed():mesh.geometry.clone();geometry.applyMatrix4(mesh.matrixWorld);const original=mesh.material;const groups=Array.isArray(original)?geometry.groups:[{start:0,count:geometry.getAttribute('position').count,materialIndex:0}];
+  for(const group of groups){const mat=(Array.isArray(original)?original[group.materialIndex??0]:original) as THREE.MeshLambertMaterial;if(mat.transparent)continue;const geo=new THREE.BufferGeometry(),count=group.count,start=group.start;
+   for(const name of ['position','normal','uv']){const a=geometry.getAttribute(name);const width=name==='uv'?2:3;geo.setAttribute(name,new THREE.Float32BufferAttribute(a?Array.from(a.array).slice(start*width,(start+count)*width):new Float32Array(count*width),width));}
+   const tex=mat.map,rect=(tex?.image as HTMLImageElement)?.src?rects.get((tex!.image as HTMLImageElement).src)!:[.004,.004,.0001,.0001];const uv=geo.getAttribute('uv');for(let j=0;j<count;j++)uv.setXY(j,uv.getX(j)*(tex?.repeat.x??1),uv.getY(j)*(tex?.repeat.y??1));
+   const colors=new Float32Array(count*3),rs=new Float32Array(count*4);color.copy(mat.color??new THREE.Color(1,1,1));const a=geometry.getAttribute('color');for(let j=0;j<count;j++){colors[j*3]=color.r*(a?a.getX(start+j):1);colors[j*3+1]=color.g*(a?a.getY(start+j):1);colors[j*3+2]=color.b*(a?a.getZ(start+j):1);rs.set(rect,j*4);}geo.setAttribute('color',new THREE.BufferAttribute(colors,3));geo.setAttribute('atlasRect',new THREE.BufferAttribute(rs,4));
+   geo.computeBoundingBox();const center=geo.boundingBox!.getCenter(new THREE.Vector3());const key=`${Math.floor(center.x/32)},${Math.floor(center.z/32)}`;const a2=buckets.get(key)??[];a2.push(geo);buckets.set(key,a2);mats.add(mat);if(tex)textures.add(tex);
+  }geometry.dispose();geos.add(mesh.geometry);mesh.removeFromParent();
+ }
+ for(const [key,list] of buckets){const geo=mergeGeometries(list,false);for(const g of list)g.dispose();if(!geo)continue;geo.computeBoundingSphere();const mesh=new THREE.Mesh(geo,material);mesh.name=`static:${key}`;root.add(mesh);}
+ for(const g of geos)g.dispose();for(const m of mats)m.dispose();for(const t of textures)t.dispose();return {chunks:buckets.size,textures:imgs.size};
+}

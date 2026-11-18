@@ -1,0 +1,1520 @@
+{
+ "version": 1,
+ "pack": "miao-v1",
+ "generatedBy": "tools/maps/miao-village-textures.py",
+ "nativeGrid": 32,
+ "tiers": [
+  32,
+  64,
+  128
+ ],
+ "colorSpace": "sRGB",
+ "sampling": "nearest",
+ "blockRange": [
+  122,
+  153
+ ],
+ "textures": [
+  {
+   "name": "fir_dark_oiled",
+   "family": "wood",
+   "palette": [
+    "#2b1b10",
+    "#3b2617",
+    "#4d321f",
+    "#5d3d25",
+    "#6c482c",
+    "#7b5533",
+    "#8d6540",
+    "#a0744b"
+   ],
+   "paletteColors": 8,
+   "average": [
+    86,
+    58,
+    36
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/fir_dark_oiled.png",
+    "64": "/textures/miao-v1/64/fir_dark_oiled.png",
+    "128": "/textures/miao-v1/128/fir_dark_oiled.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "ba3af1e1e629d51c862748ebf59f5763c02ce12859c2b8e5dfc1870a5aa61bb8",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 34.745,
+    "neighborDelta": 22.161,
+    "wrapRatio": 1.568
+   },
+   "detailVs32": {
+    "64": 30.761,
+    "128": 30.89
+   },
+   "generator": {
+    "family": "wood",
+    "seed": 122,
+    "freq": 7,
+    "vertical": true,
+    "warp": 0.18,
+    "oil": 0.86
+   }
+  },
+  {
+   "name": "fir_honey_worn",
+   "family": "wood",
+   "palette": [
+    "#4a2e1b",
+    "#5b3a22",
+    "#6d472a",
+    "#7f5533",
+    "#91633c",
+    "#a37346",
+    "#b28252",
+    "#bf9060"
+   ],
+   "paletteColors": 8,
+   "average": [
+    134,
+    93,
+    58
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/fir_honey_worn.png",
+    "64": "/textures/miao-v1/64/fir_honey_worn.png",
+    "128": "/textures/miao-v1/128/fir_honey_worn.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "8ab98f371ef78e1b4827032c0a11019d41a59989ba354581bdbe137d1698e5d8",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 39.365,
+    "neighborDelta": 25.833,
+    "wrapRatio": 1.524
+   },
+   "detailVs32": {
+    "64": 39.103,
+    "128": 38.129
+   },
+   "generator": {
+    "family": "wood",
+    "seed": 123,
+    "freq": 6,
+    "vertical": true,
+    "warp": 0.2,
+    "oil": 1.0
+   }
+  },
+  {
+   "name": "fir_grey_weathered",
+   "family": "wood",
+   "palette": [
+    "#272621",
+    "#32302a",
+    "#3d3b33",
+    "#48463c",
+    "#535146",
+    "#5e5c50",
+    "#69675a",
+    "#757264"
+   ],
+   "paletteColors": 8,
+   "average": [
+    69,
+    67,
+    58
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/fir_grey_weathered.png",
+    "64": "/textures/miao-v1/64/fir_grey_weathered.png",
+    "128": "/textures/miao-v1/128/fir_grey_weathered.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "cadcd416502e69c0d365351fc4784fa2d19792b7fd191970299a421447035785",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 20.997,
+    "neighborDelta": 15.374,
+    "wrapRatio": 1.366
+   },
+   "detailVs32": {
+    "64": 25.461,
+    "128": 26.228
+   },
+   "generator": {
+    "family": "wood",
+    "seed": 124,
+    "freq": 5,
+    "vertical": true,
+    "warp": 0.24,
+    "oil": 0.94
+   }
+  },
+  {
+   "name": "wood_plank_floor",
+   "family": "wood",
+   "palette": [
+    "#2a1c13",
+    "#3a281b",
+    "#4b3322",
+    "#5b3f29",
+    "#6c4b31",
+    "#7d593a",
+    "#8f6846",
+    "#9e7652"
+   ],
+   "paletteColors": 8,
+   "average": [
+    94,
+    66,
+    43
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/wood_plank_floor.png",
+    "64": "/textures/miao-v1/64/wood_plank_floor.png",
+    "128": "/textures/miao-v1/128/wood_plank_floor.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "b17d21d761201cc6f046b7514c00aa971009ecafc633ccf39aeaf5a951879aee",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 30.224,
+    "neighborDelta": 20.738,
+    "wrapRatio": 1.457
+   },
+   "detailVs32": {
+    "64": 21.731,
+    "128": 21.003
+   },
+   "generator": {
+    "family": "plank",
+    "seed": 125,
+    "planks": 5
+   }
+  },
+  {
+   "name": "wood_lattice",
+   "family": "wood",
+   "palette": [
+    "#1b130d",
+    "#2a1e14",
+    "#3b2a1b",
+    "#4c3723",
+    "#5e452c",
+    "#725437",
+    "#8a6845",
+    "#a37d54"
+   ],
+   "paletteColors": 8,
+   "average": [
+    121,
+    91,
+    60
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/wood_lattice.png",
+    "64": "/textures/miao-v1/64/wood_lattice.png",
+    "128": "/textures/miao-v1/128/wood_lattice.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "6af60da96adaa3cca70a2105d3aadd05c2ee8d70b8b7c8bfe4add9da9b6febbf",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 0.0,
+    "neighborDelta": 11.615,
+    "wrapRatio": 0.0
+   },
+   "detailVs32": {
+    "64": 5.52,
+    "128": 8.471
+   },
+   "generator": {
+    "family": "lattice",
+    "seed": 126,
+    "cells": 4
+   }
+  },
+  {
+   "name": "tile_blue_grey",
+   "family": "tile",
+   "palette": [
+    "#252b2c",
+    "#333b3c",
+    "#424c4d",
+    "#525d5e",
+    "#657071",
+    "#7a8585",
+    "#8f9998",
+    "#a3acab"
+   ],
+   "paletteColors": 8,
+   "average": [
+    95,
+    105,
+    106
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/tile_blue_grey.png",
+    "64": "/textures/miao-v1/64/tile_blue_grey.png",
+    "128": "/textures/miao-v1/128/tile_blue_grey.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "27e52120577370df6b65804c180224e9a62a187ce3aad4b990b6ae2b10e87a4a",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 38.776,
+    "neighborDelta": 7.24,
+    "wrapRatio": 5.356
+   },
+   "detailVs32": {
+    "64": 21.567,
+    "128": 14.879
+   },
+   "generator": {
+    "family": "tile",
+    "seed": 127,
+    "rows": 4,
+    "cols": 5,
+    "moss": 0.0
+   }
+  },
+  {
+   "name": "tile_grey_weathered",
+   "family": "tile",
+   "palette": [
+    "#2d2e2b",
+    "#3d3f3a",
+    "#4e5049",
+    "#606259",
+    "#737568",
+    "#87897a",
+    "#9b9d8c",
+    "#adb09e"
+   ],
+   "paletteColors": 8,
+   "average": [
+    103,
+    105,
+    94
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/tile_grey_weathered.png",
+    "64": "/textures/miao-v1/64/tile_grey_weathered.png",
+    "128": "/textures/miao-v1/128/tile_grey_weathered.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "72f859d6d36d64a591b7cc899a013a2606cdf0c8f5e3706e57d1699fd5fdd5b1",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 39.896,
+    "neighborDelta": 6.916,
+    "wrapRatio": 5.769
+   },
+   "detailVs32": {
+    "64": 18.935,
+    "128": 17.072
+   },
+   "generator": {
+    "family": "tile",
+    "seed": 128,
+    "rows": 4,
+    "cols": 5,
+    "moss": 0.12
+   }
+  },
+  {
+   "name": "tile_moss_edges",
+   "family": "tile",
+   "palette": [
+    "#2b3028",
+    "#3b4236",
+    "#4b5343",
+    "#5c6551",
+    "#6d765f",
+    "#7f886d",
+    "#929a7b",
+    "#a5ac89"
+   ],
+   "paletteColors": 8,
+   "average": [
+    97,
+    105,
+    84
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/tile_moss_edges.png",
+    "64": "/textures/miao-v1/64/tile_moss_edges.png",
+    "128": "/textures/miao-v1/128/tile_moss_edges.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "32ae62488b06eb864e217ec9e154a05f75b4ad5be867faae5bda8b82dd5c6a04",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 35.526,
+    "neighborDelta": 9.045,
+    "wrapRatio": 3.928
+   },
+   "detailVs32": {
+    "64": 15.685,
+    "128": 13.036
+   },
+   "generator": {
+    "family": "tile",
+    "seed": 129,
+    "rows": 4,
+    "cols": 5,
+    "moss": 0.42
+   }
+  },
+  {
+   "name": "stone_rubble_wall",
+   "family": "stone",
+   "palette": [
+    "#171815",
+    "#21231e",
+    "#2c2f28",
+    "#373a31",
+    "#43463b",
+    "#4f5245",
+    "#5c5f50",
+    "#696c5b"
+   ],
+   "paletteColors": 8,
+   "average": [
+    56,
+    58,
+    49
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/stone_rubble_wall.png",
+    "64": "/textures/miao-v1/64/stone_rubble_wall.png",
+    "128": "/textures/miao-v1/128/stone_rubble_wall.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "87246ac3ef49d0a725bd95f701730848ab3ec9fad967eae8389ec6d5d85e9ce5",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 6.477,
+    "neighborDelta": 5.095,
+    "wrapRatio": 1.271
+   },
+   "detailVs32": {
+    "64": 5.042,
+    "128": 3.041
+   },
+   "generator": {
+    "family": "rubble",
+    "seed": 130
+   }
+  },
+  {
+   "name": "stone_cut_grey",
+   "family": "stone",
+   "palette": [
+    "#1b1d1b",
+    "#252825",
+    "#303430",
+    "#3c413c",
+    "#494e47",
+    "#565c53",
+    "#646b5f",
+    "#737a6d"
+   ],
+   "paletteColors": 8,
+   "average": [
+    94,
+    100,
+    90
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/stone_cut_grey.png",
+    "64": "/textures/miao-v1/64/stone_cut_grey.png",
+    "128": "/textures/miao-v1/128/stone_cut_grey.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "9dd5a6fbfd6ee4a1f60d7cf1fae7ea76aad94d5ab29bab79efc479331e694655",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 12.529,
+    "neighborDelta": 4.839,
+    "wrapRatio": 2.589
+   },
+   "detailVs32": {
+    "64": 5.671,
+    "128": 2.758
+   },
+   "generator": {
+    "family": "masonry",
+    "seed": 131,
+    "rows": 4,
+    "cols": 3,
+    "mortar": 0.7
+   }
+  },
+  {
+   "name": "paving_bluestone",
+   "family": "stone",
+   "palette": [
+    "#1a2022",
+    "#242b2d",
+    "#2f3739",
+    "#3a4446",
+    "#465153",
+    "#536062",
+    "#616e70",
+    "#718082"
+   ],
+   "paletteColors": 8,
+   "average": [
+    91,
+    103,
+    105
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/paving_bluestone.png",
+    "64": "/textures/miao-v1/64/paving_bluestone.png",
+    "128": "/textures/miao-v1/128/paving_bluestone.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "bfe88e251883b5a5aae6427cea6ec9fb222e05a8b422ce13786ecf775eac60d2",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 9.839,
+    "neighborDelta": 7.936,
+    "wrapRatio": 1.24
+   },
+   "detailVs32": {
+    "64": 9.191,
+    "128": 4.673
+   },
+   "generator": {
+    "family": "flagstone",
+    "seed": 132,
+    "rows": 3,
+    "cols": 3
+   }
+  },
+  {
+   "name": "paving_cobble",
+   "family": "stone",
+   "palette": [
+    "#20211e",
+    "#2b2d29",
+    "#373a34",
+    "#44473f",
+    "#51554b",
+    "#5f6458",
+    "#6d7365",
+    "#7c8373"
+   ],
+   "paletteColors": 8,
+   "average": [
+    63,
+    66,
+    59
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/paving_cobble.png",
+    "64": "/textures/miao-v1/64/paving_cobble.png",
+    "128": "/textures/miao-v1/128/paving_cobble.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "6c41e664c0c12c35c43971d3a1e22ce479638fd1b2d8014d55a2e01145942d51",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 3.107,
+    "neighborDelta": 3.988,
+    "wrapRatio": 0.779
+   },
+   "detailVs32": {
+    "64": 3.005,
+    "128": 1.576
+   },
+   "generator": {
+    "family": "cobble",
+    "seed": 133,
+    "cells": 6
+   }
+  },
+  {
+   "name": "paving_wet",
+   "family": "stone",
+   "palette": [
+    "#171d1f",
+    "#20282a",
+    "#2a3335",
+    "#343e40",
+    "#3f494b",
+    "#4a5557",
+    "#566162",
+    "#626e6f"
+   ],
+   "paletteColors": 8,
+   "average": [
+    74,
+    84,
+    86
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/paving_wet.png",
+    "64": "/textures/miao-v1/64/paving_wet.png",
+    "128": "/textures/miao-v1/128/paving_wet.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "1a8036677167b58210fd3342073f958edb8c69fd7b1828519a048e6be4c4fa2b",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 10.87,
+    "neighborDelta": 6.089,
+    "wrapRatio": 1.785
+   },
+   "detailVs32": {
+    "64": 7.39,
+    "128": 4.263
+   },
+   "generator": {
+    "family": "wet",
+    "seed": 134
+   }
+  },
+  {
+   "name": "water_jade_river",
+   "family": "water",
+   "palette": [
+    "#1d3432",
+    "#233f3c",
+    "#294b47",
+    "#305752",
+    "#37645d",
+    "#3f7168",
+    "#487e74",
+    "#558b80"
+   ],
+   "paletteColors": 8,
+   "average": [
+    53,
+    95,
+    89
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/water_jade_river.png",
+    "64": "/textures/miao-v1/64/water_jade_river.png",
+    "128": "/textures/miao-v1/128/water_jade_river.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "47d518b11ae9b422891d6ca40637e3ca4f14b5d412decd1d8b0422a94cbcbe6b",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 14.346,
+    "neighborDelta": 3.613,
+    "wrapRatio": 3.971
+   },
+   "detailVs32": {
+    "64": 2.848,
+    "128": 1.708
+   },
+   "generator": {
+    "family": "water",
+    "seed": 135
+   }
+  },
+  {
+   "name": "earth_compacted",
+   "family": "earth",
+   "palette": [
+    "#3f3023",
+    "#503d2c",
+    "#624c36",
+    "#745a40",
+    "#86684b",
+    "#987756",
+    "#aa8763",
+    "#ba9671"
+   ],
+   "paletteColors": 8,
+   "average": [
+    126,
+    98,
+    71
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/earth_compacted.png",
+    "64": "/textures/miao-v1/64/earth_compacted.png",
+    "128": "/textures/miao-v1/128/earth_compacted.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "aeffdc8dc1a265086afe4d84f58a47fd145cb1992e1fe5e241b8b455a121f5f7",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 24.852,
+    "neighborDelta": 5.674,
+    "wrapRatio": 4.38
+   },
+   "detailVs32": {
+    "64": 6.118,
+    "128": 3.222
+   },
+   "generator": {
+    "family": "earth",
+    "seed": 136,
+    "cells": 5
+   }
+  },
+  {
+   "name": "mud_paddy",
+   "family": "earth",
+   "palette": [
+    "#32291f",
+    "#433628",
+    "#544432",
+    "#65533c",
+    "#766246",
+    "#877151",
+    "#98805d",
+    "#a98f6a"
+   ],
+   "paletteColors": 8,
+   "average": [
+    103,
+    85,
+    62
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/mud_paddy.png",
+    "64": "/textures/miao-v1/64/mud_paddy.png",
+    "128": "/textures/miao-v1/128/mud_paddy.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "46736d5096b778a4b58baf36257ef848421600b6c4c6149f411bc21f2099e9ff",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 14.875,
+    "neighborDelta": 5.083,
+    "wrapRatio": 2.927
+   },
+   "detailVs32": {
+    "64": 3.528,
+    "128": 1.494
+   },
+   "generator": {
+    "family": "mud",
+    "seed": 137
+   }
+  },
+  {
+   "name": "grass_mountain",
+   "family": "vegetation",
+   "palette": [
+    "#26331f",
+    "#324229",
+    "#3e5232",
+    "#4b613b",
+    "#587045",
+    "#667f50",
+    "#758e5c",
+    "#849d69"
+   ],
+   "paletteColors": 8,
+   "average": [
+    62,
+    81,
+    50
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/grass_mountain.png",
+    "64": "/textures/miao-v1/64/grass_mountain.png",
+    "128": "/textures/miao-v1/128/grass_mountain.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "3d1d73db633dd8ddfa81b9cbedd50e48de886e2b5960f79e0d178450e09f43ba",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 14.466,
+    "neighborDelta": 7.613,
+    "wrapRatio": 1.9
+   },
+   "detailVs32": {
+    "64": 8.014,
+    "128": 5.661
+   },
+   "generator": {
+    "family": "grass",
+    "seed": 138,
+    "density": 1.0
+   }
+  },
+  {
+   "name": "rice_young",
+   "family": "vegetation",
+   "palette": [
+    "#345a26",
+    "#3f6b2d",
+    "#4b7d35",
+    "#588f3e",
+    "#66a147",
+    "#75b252",
+    "#86c260",
+    "#9ad174"
+   ],
+   "paletteColors": 8,
+   "average": [
+    69,
+    114,
+    49
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/rice_young.png",
+    "64": "/textures/miao-v1/64/rice_young.png",
+    "128": "/textures/miao-v1/128/rice_young.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "6afa577012959d468d11f6191ce07cf7d95811b8455430ebdecaf24a5b4aa175",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 10.409,
+    "neighborDelta": 11.96,
+    "wrapRatio": 0.87
+   },
+   "detailVs32": {
+    "64": 11.479,
+    "128": 5.832
+   },
+   "generator": {
+    "family": "rice",
+    "seed": 139,
+    "gold": false
+   }
+  },
+  {
+   "name": "rice_gold",
+   "family": "vegetation",
+   "palette": [
+    "#5c5420",
+    "#6f6428",
+    "#827431",
+    "#95853a",
+    "#a89745",
+    "#baa952",
+    "#ccbb62",
+    "#dccd77"
+   ],
+   "paletteColors": 8,
+   "average": [
+    137,
+    123,
+    54
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/rice_gold.png",
+    "64": "/textures/miao-v1/64/rice_gold.png",
+    "128": "/textures/miao-v1/128/rice_gold.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "2381f71bc25236b13543a2a1043d76bb8002977701dec079aa86252245efe2f8",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 13.396,
+    "neighborDelta": 13.305,
+    "wrapRatio": 1.007
+   },
+   "detailVs32": {
+    "64": 13.827,
+    "128": 6.648
+   },
+   "generator": {
+    "family": "rice",
+    "seed": 140,
+    "gold": true
+   }
+  },
+  {
+   "name": "vegetable_dark",
+   "family": "vegetation",
+   "palette": [
+    "#22301d",
+    "#2d3f26",
+    "#394e2f",
+    "#455d38",
+    "#526c42",
+    "#607b4d",
+    "#6e8a59",
+    "#7d9a66"
+   ],
+   "paletteColors": 8,
+   "average": [
+    59,
+    80,
+    49
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/vegetable_dark.png",
+    "64": "/textures/miao-v1/64/vegetable_dark.png",
+    "128": "/textures/miao-v1/128/vegetable_dark.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "4b459de6438cf19bc338e2ab51a8a270f0cb44c0f6d6642c2afa1e445a98e301",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 12.01,
+    "neighborDelta": 9.067,
+    "wrapRatio": 1.325
+   },
+   "detailVs32": {
+    "64": 10.599,
+    "128": 4.948
+   },
+   "generator": {
+    "family": "veg",
+    "seed": 141
+   }
+  },
+  {
+   "name": "bamboo_leaf",
+   "family": "vegetation",
+   "palette": [
+    "#24351f",
+    "#2f4427",
+    "#3b542f",
+    "#486438",
+    "#567443",
+    "#64854e",
+    "#72965a",
+    "#81a668"
+   ],
+   "paletteColors": 8,
+   "average": [
+    89,
+    119,
+    71
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/bamboo_leaf.png",
+    "64": "/textures/miao-v1/64/bamboo_leaf.png",
+    "128": "/textures/miao-v1/128/bamboo_leaf.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "2b6c9c4d1be10f2fea2160c33aa11910c3f4316ce492f81bd0836a14f30f7d18",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 47.482,
+    "neighborDelta": 9.997,
+    "wrapRatio": 4.75
+   },
+   "detailVs32": {
+    "64": 6.137,
+    "128": 2.97
+   },
+   "generator": {
+    "family": "leaves",
+    "seed": 142,
+    "cells": 4,
+    "scale": 1.5
+   }
+  },
+  {
+   "name": "bamboo_culm",
+   "family": "vegetation",
+   "palette": [
+    "#5b5b2f",
+    "#6c6c38",
+    "#7d7d42",
+    "#8e8e4d",
+    "#9f9f58",
+    "#b0b064",
+    "#c1c172",
+    "#d2d282"
+   ],
+   "paletteColors": 8,
+   "average": [
+    146,
+    146,
+    83
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/bamboo_culm.png",
+    "64": "/textures/miao-v1/64/bamboo_culm.png",
+    "128": "/textures/miao-v1/128/bamboo_culm.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "bc6b521af5e70cd340ca14b7d1f2d6baed13ac9484e942cf6ce0d216e855220f",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 15.786,
+    "neighborDelta": 21.326,
+    "wrapRatio": 0.74
+   },
+   "detailVs32": {
+    "64": 21.098,
+    "128": 10.848
+   },
+   "generator": {
+    "family": "culm",
+    "seed": 143
+   }
+  },
+  {
+   "name": "foliage_maple",
+   "family": "vegetation",
+   "palette": [
+    "#3d2416",
+    "#552f1b",
+    "#6d3a20",
+    "#854726",
+    "#9d552d",
+    "#b66637",
+    "#c97844",
+    "#d98e58"
+   ],
+   "paletteColors": 8,
+   "average": [
+    135,
+    80,
+    47
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/foliage_maple.png",
+    "64": "/textures/miao-v1/64/foliage_maple.png",
+    "128": "/textures/miao-v1/128/foliage_maple.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "b73f77edeeba84d048c323f66fbf494ea754f485574dabb2c0d5668be86923e9",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 43.656,
+    "neighborDelta": 11.689,
+    "wrapRatio": 3.735
+   },
+   "detailVs32": {
+    "64": 11.61,
+    "128": 6.093
+   },
+   "generator": {
+    "family": "leaves",
+    "seed": 144,
+    "cells": 5,
+    "scale": 1.1
+   }
+  },
+  {
+   "name": "foliage_camphor",
+   "family": "vegetation",
+   "palette": [
+    "#1f3320",
+    "#294327",
+    "#34532f",
+    "#406338",
+    "#4d7342",
+    "#5b834d",
+    "#6a9359",
+    "#7aa366"
+   ],
+   "paletteColors": 8,
+   "average": [
+    74,
+    108,
+    64
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/foliage_camphor.png",
+    "64": "/textures/miao-v1/64/foliage_camphor.png",
+    "128": "/textures/miao-v1/128/foliage_camphor.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "002cb7102a77707a56b7e237b7bf7b2fa04d29312ac59e4408c75d9b1cc7e064",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 46.633,
+    "neighborDelta": 9.935,
+    "wrapRatio": 4.694
+   },
+   "detailVs32": {
+    "64": 5.64,
+    "128": 3.179
+   },
+   "generator": {
+    "family": "leaves",
+    "seed": 145,
+    "cells": 4,
+    "scale": 1.3
+   }
+  },
+  {
+   "name": "reed_river",
+   "family": "vegetation",
+   "palette": [
+    "#4c4a2c",
+    "#5f5c35",
+    "#726e40",
+    "#85804b",
+    "#989257",
+    "#aba264",
+    "#bcb374",
+    "#ccc486"
+   ],
+   "paletteColors": 8,
+   "average": [
+    97,
+    93,
+    55
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/reed_river.png",
+    "64": "/textures/miao-v1/64/reed_river.png",
+    "128": "/textures/miao-v1/128/reed_river.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "82998494fc7be7fdfeab4f7dd9889522362c114ddeea8149290882aa5f770973",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 20.448,
+    "neighborDelta": 9.472,
+    "wrapRatio": 2.159
+   },
+   "detailVs32": {
+    "64": 10.173,
+    "128": 4.901
+   },
+   "generator": {
+    "family": "reeds",
+    "seed": 146
+   }
+  },
+  {
+   "name": "straw_thatch",
+   "family": "straw",
+   "palette": [
+    "#4f3f23",
+    "#63502c",
+    "#776136",
+    "#8b7341",
+    "#9f854e",
+    "#b3975c",
+    "#c7aa6c",
+    "#d9bd7e"
+   ],
+   "paletteColors": 8,
+   "average": [
+    104,
+    85,
+    48
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/straw_thatch.png",
+    "64": "/textures/miao-v1/64/straw_thatch.png",
+    "128": "/textures/miao-v1/128/straw_thatch.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "b81e3dbf7fcc639cde29f6d973dff9989cf97c2e15b2feda589c5329cb418788",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 18.951,
+    "neighborDelta": 12.185,
+    "wrapRatio": 1.555
+   },
+   "detailVs32": {
+    "64": 12.606,
+    "128": 6.072
+   },
+   "generator": {
+    "family": "thatch",
+    "seed": 147
+   }
+  },
+  {
+   "name": "brick_grey_old",
+   "family": "masonry",
+   "palette": [
+    "#38342f",
+    "#4a453e",
+    "#5c564d",
+    "#6e675c",
+    "#80786c",
+    "#928a7d",
+    "#a49b8d",
+    "#b4ab9c"
+   ],
+   "paletteColors": 8,
+   "average": [
+    145,
+    137,
+    124
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/brick_grey_old.png",
+    "64": "/textures/miao-v1/64/brick_grey_old.png",
+    "128": "/textures/miao-v1/128/brick_grey_old.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "77b3a67ae5473f94d50865f411231255f813c056127836b3d1657ce2ae3784cd",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 8.576,
+    "neighborDelta": 7.371,
+    "wrapRatio": 1.163
+   },
+   "detailVs32": {
+    "64": 14.587,
+    "128": 7.584
+   },
+   "generator": {
+    "family": "brick",
+    "seed": 148
+   }
+  },
+  {
+   "name": "plaster_lime_worn",
+   "family": "masonry",
+   "palette": [
+    "#6e6a5d",
+    "#807c6e",
+    "#928e7f",
+    "#a4a090",
+    "#b6b2a1",
+    "#c8c4b2",
+    "#d9d5c3",
+    "#e8e4d2"
+   ],
+   "paletteColors": 8,
+   "average": [
+    183,
+    179,
+    162
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/plaster_lime_worn.png",
+    "64": "/textures/miao-v1/64/plaster_lime_worn.png",
+    "128": "/textures/miao-v1/128/plaster_lime_worn.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "23b1d0a1648573df767d66a24e8311e85ee230b4014f59c362e5a71b4b58616b",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 39.099,
+    "neighborDelta": 8.14,
+    "wrapRatio": 4.803
+   },
+   "detailVs32": {
+    "64": 4.653,
+    "128": 2.555
+   },
+   "generator": {
+    "family": "plaster",
+    "seed": 149
+   }
+  },
+  {
+   "name": "bamboo_wicker",
+   "family": "craft",
+   "palette": [
+    "#4b3a22",
+    "#5e4a2b",
+    "#715a35",
+    "#846b40",
+    "#977c4b",
+    "#aa8d57",
+    "#bd9e64",
+    "#cfaf73"
+   ],
+   "paletteColors": 8,
+   "average": [
+    141,
+    115,
+    70
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/bamboo_wicker.png",
+    "64": "/textures/miao-v1/64/bamboo_wicker.png",
+    "128": "/textures/miao-v1/128/bamboo_wicker.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "8d560f59a6745a441c413cfc81f3bdd5e848b57d33df2c5c27592af986d60e2d",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 16.615,
+    "neighborDelta": 9.536,
+    "wrapRatio": 1.742
+   },
+   "detailVs32": {
+    "64": 7.235,
+    "128": 3.727
+   },
+   "generator": {
+    "family": "wicker",
+    "seed": 150
+   }
+  },
+  {
+   "name": "ceramic_brown",
+   "family": "craft",
+   "palette": [
+    "#3f2519",
+    "#523021",
+    "#653c29",
+    "#784832",
+    "#8b553b",
+    "#9e6245",
+    "#b06f4f",
+    "#c27d5a"
+   ],
+   "paletteColors": 8,
+   "average": [
+    137,
+    85,
+    59
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/ceramic_brown.png",
+    "64": "/textures/miao-v1/64/ceramic_brown.png",
+    "128": "/textures/miao-v1/128/ceramic_brown.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "536c60ef0f981146fd45e0831b70172dba588983cfd5da3b321663b2c647cd52",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 15.581,
+    "neighborDelta": 8.978,
+    "wrapRatio": 1.736
+   },
+   "detailVs32": {
+    "64": 11.04,
+    "128": 5.902
+   },
+   "generator": {
+    "family": "ceramic",
+    "seed": 151
+   }
+  },
+  {
+   "name": "cloth_indigo",
+   "family": "cloth",
+   "palette": [
+    "#1a2534",
+    "#223247",
+    "#2b405b",
+    "#354e6f",
+    "#405d83",
+    "#4d6d96",
+    "#5b7da9",
+    "#6c8fbb"
+   ],
+   "paletteColors": 8,
+   "average": [
+    60,
+    86,
+    119
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/cloth_indigo.png",
+    "64": "/textures/miao-v1/64/cloth_indigo.png",
+    "128": "/textures/miao-v1/128/cloth_indigo.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "70b70518d6513b5fd712c142a5ed5b7f91909055aa5f8173176cd956e63d2a5c",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 11.63,
+    "neighborDelta": 16.74,
+    "wrapRatio": 0.695
+   },
+   "detailVs32": {
+    "64": 12.22,
+    "128": 5.724
+   },
+   "generator": {
+    "family": "cloth",
+    "seed": 152,
+    "warp": 8
+   }
+  },
+  {
+   "name": "cloth_madder",
+   "family": "cloth",
+   "palette": [
+    "#4a1e22",
+    "#5e262b",
+    "#722f35",
+    "#863940",
+    "#9a444b",
+    "#ae5056",
+    "#c05d63",
+    "#cf6d72"
+   ],
+   "paletteColors": 8,
+   "average": [
+    142,
+    63,
+    69
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/cloth_madder.png",
+    "64": "/textures/miao-v1/64/cloth_madder.png",
+    "128": "/textures/miao-v1/128/cloth_madder.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "03136ecdd0e348edb954b1713b9590996ef6d71edeb1a296e06787437665936a",
+   "atlas": false,
+   "seam": {
+    "wrapDelta": 11.518,
+    "neighborDelta": 15.076,
+    "wrapRatio": 0.764
+   },
+   "detailVs32": {
+    "64": 10.811,
+    "128": 5.09
+   },
+   "generator": {
+    "family": "cloth",
+    "seed": 153,
+    "warp": 8
+   }
+  },
+  {
+   "name": "miao_atlas_signs",
+   "family": "atlas",
+   "palette": [],
+   "paletteColors": 0,
+   "average": [
+    27,
+    21,
+    14
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/miao_atlas_signs.png",
+    "64": "/textures/miao-v1/64/miao_atlas_signs.png",
+    "128": "/textures/miao-v1/128/miao_atlas_signs.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "52321a62200440a161e87cd93e8baae755287f34bc0d04eb694a22ca6f03e61e",
+   "atlas": true,
+   "seam": null,
+   "detailVs32": {
+    "64": 0,
+    "128": 0
+   },
+   "generator": {
+    "family": "signs",
+    "cells": 4
+   }
+  },
+  {
+   "name": "miao_atlas_market",
+   "family": "atlas",
+   "palette": [],
+   "paletteColors": 0,
+   "average": [
+    21,
+    15,
+    10
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/miao_atlas_market.png",
+    "64": "/textures/miao-v1/64/miao_atlas_market.png",
+    "128": "/textures/miao-v1/128/miao_atlas_market.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "37574325ddef204bec66d1d03598ad71980c2137cf0ad57bfc8d3adc603d0331",
+   "atlas": true,
+   "seam": null,
+   "detailVs32": {
+    "64": 0,
+    "128": 0
+   },
+   "generator": {
+    "family": "market",
+    "cells": 4
+   }
+  },
+  {
+   "name": "miao_atlas_textile",
+   "family": "atlas",
+   "palette": [],
+   "paletteColors": 0,
+   "average": [
+    23,
+    20,
+    20
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/miao_atlas_textile.png",
+    "64": "/textures/miao-v1/64/miao_atlas_textile.png",
+    "128": "/textures/miao-v1/128/miao_atlas_textile.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "298b5ca59192c3b6d1a6cc56c9d9fe9cab6a72ec7fbc2d6c552abeda1e1d6a6a",
+   "atlas": true,
+   "seam": null,
+   "detailVs32": {
+    "64": 0,
+    "128": 0
+   },
+   "generator": {
+    "family": "textile",
+    "cells": 4
+   }
+  },
+  {
+   "name": "miao_atlas_festival",
+   "family": "atlas",
+   "palette": [],
+   "paletteColors": 0,
+   "average": [
+    12,
+    10,
+    11
+   ],
+   "nativeGrid": 32,
+   "files": {
+    "32": "/textures/miao-v1/32/miao_atlas_festival.png",
+    "64": "/textures/miao-v1/64/miao_atlas_festival.png",
+    "128": "/textures/miao-v1/128/miao_atlas_festival.png"
+   },
+   "source": "tools/maps/miao-village-textures.py",
+   "masterSha256": "7b9fd4b9ecc499cdad831b3d29e9bcc187c86c714359147d10c419778db457cf",
+   "atlas": true,
+   "seam": null,
+   "detailVs32": {
+    "64": 0,
+    "128": 0
+   },
+   "generator": {
+    "family": "festival",
+    "cells": 4
+   }
+  }
+ ]
+}

@@ -1,0 +1,6 @@
+identity: 0.18.3 / be037a4dcf4b7e96
+test: npx vitest run -> 19 files / 138 tests passed
+build: npm run build -> success
+mainJs: assets/game-DIa0LWIy.js
+mainJsSha256: 12612ed220ca713281f8b00b5a2e8ebb7d4d9c18b285ba93cc2d64c8cc056a5e
+archiveSha256: 505580304ebd0e4f734c9e989099fde95216c462a88659d39db61738d7b26a9b

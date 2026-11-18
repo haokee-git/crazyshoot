@@ -1,0 +1,40 @@
+{
+  "name": "crazyshoot",
+  "private": true,
+  "version": "0.21.0",
+  "type": "module",
+  "description": "CRAZYSHOOT - browser battlefield FPS",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "maps:render": "tsx tools/maps/render-plans.ts",
+    "maps:capture": "tsx tools/maps/capture-plans.ts",
+    "maps": "npm run maps:render && npm run maps:capture",
+    "test:water": "tsx tools/maps/audit-water.ts",
+    "test": "vitest run",
+    "build:signal": "esbuild server/signal/server.mjs --bundle --platform=node --format=cjs --outfile=dist-signal/server.cjs --external:bufferutil --external:utf-8-validate",
+    "test:audit": "tsx tools/game/audit/core-regression.ts docs/audit-2026-11-06/after.json && tsx tools/game/audit/maps-regression.ts && tsx tools/game/audit/network-regression.ts && tsx tools/game/audit/lifecycle-regression.ts",
+    "test:vehicles": "tsx tools/game/audit/vehicle-regression.ts",
+    "test:performance": "tsx tools/game/audit/performance-route.ts",
+    "test:round2": "tsx tools/round2/browser-regression.ts",
+    "materials:export": "python3 tools/round2/export-pixel-materials.py"
+  },
+  "dependencies": {
+    "preact": "^11.1.1",
+    "three": "^0.187.0",
+    "ws": "^8.22.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.0",
+    "@types/three": "^0.187.0",
+    "@types/ws": "^8.18.2",
+    "esbuild": "^0.28.2",
+    "node-turn": "^0.0.6",
+    "playwright": "^1.64.1",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.5",
+    "vitest": "^5.1.0"
+  }
+}

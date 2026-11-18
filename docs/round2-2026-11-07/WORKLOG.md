@@ -1,0 +1,38 @@
+# Round 2 implementation checkpoint
+Date 2026-11-07. User authorized implementation of full plan. No subagents. Workspace has no git. Baseline source-before.tgz here.
+
+Locked requirements: full voxel maps (NOT continuous terrain); same masters at32/64/128; 1m terrain auto-step; tactical barriers >1m, default1.5m sparse half-grid; Space intelligent jump/mantle; ADS beats sprint; PUBG style FPP arms/rifles vs single-hand raised SMG sprint; optics honest collimation/depth; J1900/4GB budget. No J1900 access. No remote deployment performed/authorized separately yet; final production build verification explicitly required.
+
+Implemented:
+- New sparse SolidIndex half-grid details merged for render and queries; covers1.5m and later rock/wreck/fountain/bridge guard/pallet first ledges>=1.5. Typed voxel main grid unchanged.
+- Controller vertical capsule sweep/head clearance,9 footprint samples includingdiagonals,1m stepping,Space mantle. Moving vehicle compound support, local depenetration. Snapshot/replay includes mantle and movement state.
+- Layered Navigation (3 surfaces/cell,shared fields) and LocalNavigation bounded dynamic detour. Bot target last-known aim point, finite turns, shot alignment. Decision staggering and path budget.
+- Rebuilt FPP into hero-model/optics/arms/presentation modules. Explicit sockets11weapons.48 segment optics,collimated lens shader. Hero surfaces rounded and merged. Separate native-res FPP scene/depth vs scaled world RT. Scope lens samples same world RT (notsecondworldrender). MOST RECENT change moves blackout from DOM into world blit so scope housing visible.
+- 9 builtin image_gen masters in art/materials-v2. tools/round2/export-materials.py exports56materials168PNGs fromsame128masters withperiodic boundarytexels, mappedoldspecialtyassets retainoriginal highres sources. public/textures/battlefield-v2. TextureArray+native mipmaps removesatlasbleeding/edge-dark/meanfade.
+- Version0.15.0 pkg/src/version;Vite build identity generatesversion.json,match content mismatch rejected. Current last dist buildId cb1b3b078ef35934 but source changes since build may require rebuild.
+
+Validation already passed:
+-40unit tests (6files),tsc/build at previous checkpoints;rerun final.
+- tools/round2/browser-regression.ts:88weapon×optic,176hip/ADS screenshots;maxalignmenterror<0.00001px,max7506tri. Actualmapmantle,ADS+Shift,AI motorcycle detour.15maps×res trials (4maps+training)23bots,pathsallreachable. Source has extra terrain/stance/Scope blackout changes since this test, finalproduction run pending.
+- tools/round2/network-regression.ts:13checks passed; includes loading barrier,hostdeath,loadout/respawn,ladder,keys,100msRTTgame-delivery mantle,ADS priority,authoritative shots,leave. Latest motion snapshots etc requirefinal retest.
+- tools/round2/lifecycle-regression.ts:100weapon+100corpse GPUplateau97/18 and98/19. JSheap wasnotGC-normalized (36->97MB allocation), needs forced GC retention check.
+- Current production preview own session58974 port5175, servesdist. Existing Vite5174 preexisted user; don'tstopit. Source tests use5174,productiontests GAME_URL=5175 forbrowser-regression. Existing network/lifecycle scripts fixed5174;can change test-only base env.
+- Previous regular browserbb wasclosed. NodeRepl globals mayhave closedbb,pg;createfreshifneeded. Chrome executable /Users/haokee/Library/Caches/ms-playwright/chromium-1234/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing. ffmpeg video installed /private/tmp/crazyshoot-browsers/ffmpeg-1013/ffmpeg-mac. tools use process.env.PLAYWRIGHT_BROWSERS_PATH.
+
+Outstanding:
+1. Inspect MOST RECENT scope rendering afterworldmask move. Optional slightSMG sprint lift toshowright hand. Finishsource beforefinalbuild.
+2. Improve actual thirdperson gun orientation vs projectile (current aim pose hasconstant2.5degpitch/-4degyawoffset), ifneeded export alignCharacterAimusingtorso worldquat+gunquat andresolvehands.
+3. Source final build; run browser-regression against5175 final artifact (saves~176matrix+15map shots,video~25s). Verify version andloaded JS/worker hashes. No src changesduringbrowserruns (HMR disrupts).
+4. Network final test,someguardsadded sincepass; lifecycle forceGC retention and actualrender threepasses.
+5. Dedicated performance: tools/round2/performance-route.ts correct hook on presentation.render (NOT renderer.render3passes). Supports BENCH_MAP,SIZE,BENCH_OUT,GAME_BASE_URL and60secondroutes;need4map 12v12 atminimum pluscontrollednearcombat,texturetiers. Measure onlysinglebrowser,closemanualones.
+6. Final scene quality/texture4x4 inspection incl all52nonstransparentnewexport nowcreates4x4all. Captureactualwalk,sprint,stop,look,reload,wall,mantlevideo; existingmatrix videoonlycontains subset.
+7. Delivery report status/sources/generatedimageprompts/buildhash/testlimits. Packagebuiltartifact andscreenshots. NoJ1900performanceclaim. Usercouldopenproductionpreview5175 toseeactualnewversion;onlineisstill0.12old (version.json0.13.3) unlessfuturedeploymentauthorized.
+
+Important pitfalls fixed during work: newFPPmuzzle is camera-local scene, fire() now usesgetMuzzleWorld; prototypeinitial4x showednestedrings, lensnowopaqueportal sampledworldRT;training128missingplaster fixedclassicmapping; TS accidentalcontroller.climbing stringreplace r usedbeforedeclaration fixed.
+
+Latest user correction: scope exterior MUST show clear scene, no black mask and no blur. Removed both world-blit blackout and DOMmask. Uses single-world FOV ADS plus opaque optical portal toprevent internal rings, exterior staysclear.
+Latest code adds validated short jump navigation edges, analog world movement for bots, identity-aware actor blocking, finite rendered barrel alignment, shared neutral muzzle probes for stable wall blocking, host guest muzzle/recoil coherence. 43unit tests. Production-check passed versionbundle SHA,nearwall nooscillation/noammo,worldorigin,movingAPCplatform(2mcar=>2mplayer),renderedAIaimexact. Lifecycle forceGCusedheap8.4->9.6MB;GPUcountsplateau. Last browser/network passed before latestscopeexteriorchange;rerunfinal underway. Latestcompletebuild read dist/version.json.
+
+Latest art steering: User rejected area-average photo textures, then rejected HDthatonlylooked2x2 enlargement. Generated16 newpixel-cluster baseconcepts inart/materials-v3, plus16 separately image_gen-edited128detailreferences in detail128 (onebatchconnectionfailed,retriedbuiltin,allcompleted). Newexport-pixel-materials.py: integer-grid samples,32palette12colors;64/128retainmacroanchoridentityanduseauthoredfine-detailreferenceaccents (36colorbound), NO BOX/Lanczos or interpolation. All168PNGs export withperiodicedges,exact nested-gridanchors;newfeature-versusNNupscale metricssaved pertexture. Contactproof detail-tiers-proof.png shows clear genuinefinepores/scratches/aggregate. Runtime NOW references battlefield-v3 and materialRevision3, mip nearest-mipmap-linear and worldRT nearestmagnification;highqualityoutputsupportsDPR2. Latestcode tsc passed beforetestmetadata changes;needs newbuild and actualbrowserrefresh final screenshots (old reportsstillv2). Performance still NOTRUN (pending oncebuildfrozen). Usercontinuesimplementation, no subagents. Keepallothertaskobjectives.
+
+FINAL CHECKPOINT 2026-11-07: build 5eea7f7086ec8fff / material3. All43unit,7browser,13network,7lifecycle,6production checks passed on final production artifact. Four60sec24player routes +60secnearcombat +15sec/tier32/64/128 done; actual72-layer texture arrays verified. Nearcombat139maxdrawcalls. NoJ1900oronlineclaim. Lateststatus in DELIVERY.md and PERFORMANCE.md; gallery.html and actions.webm. Historicalnotes above superseded.

@@ -1,0 +1,13 @@
+identity: 0.18.2 / 983d7394ad8ecd7c
+mapRevision: voxel-halfgrid-v6
+materialRevision: 4
+builtAt: 2026-11-09T20:01+08:00
+test: npx vitest run -> 19 files / 138 tests passed
+build: npm run build -> success
+mainJs: assets/game-6nN0kDdh.js
+mainJsSha256: 573a194039af8246fbb2e5e5a4187c78c7dae66c4de67bc399d4dcdce95e8281
+archive: 0.18.2-983d7394ad8ecd7c.tar.gz
+archiveBytes: 34020381
+archiveSha256: 26029ebcc06513550a1498045920ca64c7ebefef05663a35c32c55d78c6008ef
+fileCount: 1221 (tar members; 1220 manifest files + release-manifest.json)
+features: capture ground-relative + cap leveling, hit-zone thigh->limb, AI counter-snipe/first-shot, lean arc translation, smoke occlusion, cover footing, AMR model + special revert, stance transitions/cover stance, vehicle crosshair convergence + spawn clearance, sprint/reload speed, prone freedom

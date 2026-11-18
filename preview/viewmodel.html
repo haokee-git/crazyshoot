@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRAZYSHOOT // VIEWMODEL LAB</title>
+    <style>
+      :root { color-scheme: dark; }
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #080c0e; }
+      body { font-family: "Rajdhani", "DIN Alternate", "Helvetica Neue", "PingFang SC", sans-serif; color: #e6efec; }
+      #vm-stage { position: fixed; inset: 0; background: radial-gradient(ellipse at 50% 42%, #1b2527 0%, #0b1113 60%, #06090b 100%); }
+      #vm-stage canvas { display: block; width: 100%; height: 100%; }
+      .ui { position: fixed; z-index: 2; pointer-events: none; }
+      .top-left { top: 30px; left: 34px; }
+      .kicker { font-family: "SFMono-Regular", monospace; font-size: 9px; letter-spacing: .24em; color: #35e0d0; }
+      .name { margin-top: 8px; font-size: 42px; font-weight: 700; letter-spacing: .06em; }
+      .sub { margin-top: 6px; color: #819095; font-size: 11px; letter-spacing: .12em; }
+      .top-right { top: 34px; right: 34px; text-align: right; font-family: "SFMono-Regular", monospace; font-size: 8px; letter-spacing: .14em; color: #64747a; line-height: 1.9; }
+      .top-right b { color: #ffb454; font-weight: 500; }
+      .bottom { position: fixed; left: 34px; bottom: 24px; font-family: "SFMono-Regular", monospace; font-size: 8px; letter-spacing: .12em; color: #435054; }
+      .right { position: fixed; right: 34px; bottom: 24px; font-family: "SFMono-Regular", monospace; font-size: 8px; letter-spacing: .12em; color: #435054; }
+      .crosshair { position: fixed; left: 50%; top: 50%; width: 24px; height: 24px; transform: translate(-50%,-50%); z-index: 2; pointer-events: none; }
+      .crosshair i { position: absolute; background: rgba(230,245,240,.75); }
+      .crosshair i:nth-child(1) { left: 11px; top: 0; width: 1px; height: 8px; }
+      .crosshair i:nth-child(2) { left: 11px; bottom: 0; width: 1px; height: 8px; }
+      .crosshair i:nth-child(3) { top: 11px; left: 0; height: 1px; width: 8px; }
+      .crosshair i:nth-child(4) { top: 11px; right: 0; height: 1px; width: 8px; }
+      body.capture .ui, body.capture .bottom, body.capture .right { display: none !important; }
+      body.capture .crosshair { opacity: .4; }
+    </style>
+  </head>
+  <body>
+    <div id="vm-stage"></div>
+    <div class="ui top-left">
+      <div class="kicker">CRAZYSHOOT // VIEWMODEL LAB</div>
+      <div class="name">M16A2</div>
+      <div class="sub">FIRST-PERSON / HANDS + FOREARMS</div>
+    </div>
+    <div class="ui top-right">MOTION REVIEW <b>V1</b><br />HIP / ADS / RECOIL / RELOAD<br />NOT IN-GAME YET</div>
+    <div class="crosshair"><i /><i /><i /><i /></div>
+    <div class="bottom">PREVIEW ONLY // 30 FPS LOOP</div>
+    <div class="right">32×32 WORLD TEXTURE // BUILD 0.10.2</div>
+    <script type="module" src="/src/preview/viewmodel.ts"></script>
+  </body>
+</html>

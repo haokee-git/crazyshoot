@@ -1,0 +1,11 @@
+import { chromium } from 'playwright';
+import fs from 'node:fs';
+const exe = ['/Users/haokee/Library/Caches/ms-playwright/chromium-1234/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing'].find(fs.existsSync)!;
+const b = await chromium.launch({ headless: true, executablePath: exe });
+const p = await b.newPage({ viewport: { width: 1600, height: 1000 } });
+await p.goto('http://127.0.0.1:5174/preview/maps-3d.html?map=docks&capture=1&ui=0&view=overview', { waitUntil: 'load' });
+await p.waitForFunction('window.__mapReady === true');
+await p.evaluate(() => { (window as any).__mapSetView('overview'); (window as any).__mapToggleRoutes(true); });
+await p.evaluate(() => new Promise<void>((r) => requestAnimationFrame(() => requestAnimationFrame(() => r()))));
+await p.screenshot({ path: 'previews/maps/3d-docks-routes.png' });
+await b.close();

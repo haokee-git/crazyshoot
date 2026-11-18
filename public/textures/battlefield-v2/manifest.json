@@ -1,0 +1,959 @@
+{
+  "version": 2,
+  "generator": "built-in image_gen; preserved prior image_gen specialty masters",
+  "rasterizer": "128 master -> BOX 64/32; periodic boundary texels, no independent regeneration",
+  "textures": [
+    {
+      "name": "asphalt_fine",
+      "family": "ground",
+      "sourceCell": 0,
+      "average": [
+        78,
+        83,
+        84
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/asphalt_fine.png",
+        "64": "/textures/battlefield-v2/64/asphalt_fine.png",
+        "128": "/textures/battlefield-v2/128/asphalt_fine.png"
+      },
+      "source": "art/materials-v2/asphalt.png",
+      "masterSha256": "d8492b8c4a500ef1ffad7e6d891d4d5398fd3312e918be7336df0c8313d25a8b"
+    },
+    {
+      "name": "asphalt_aggregate",
+      "family": "ground",
+      "sourceCell": 1,
+      "average": [
+        79,
+        84,
+        84
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/asphalt_aggregate.png",
+        "64": "/textures/battlefield-v2/64/asphalt_aggregate.png",
+        "128": "/textures/battlefield-v2/128/asphalt_aggregate.png"
+      },
+      "source": "art/materials-v2/asphalt.png",
+      "masterSha256": "e73ed7083b0246b8aa4b70ce3d6b94124e15a956e80e4cd971a94caf5426cd44"
+    },
+    {
+      "name": "asphalt_cracked",
+      "family": "ground",
+      "sourceCell": 2,
+      "average": [
+        77,
+        82,
+        82
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/asphalt_cracked.png",
+        "64": "/textures/battlefield-v2/64/asphalt_cracked.png",
+        "128": "/textures/battlefield-v2/128/asphalt_cracked.png"
+      },
+      "source": "art/materials-v2/asphalt.png",
+      "masterSha256": "7d8e956564f7d376a85bc63bb4b57b0e66b91885a2132369a3254a32fa272e60"
+    },
+    {
+      "name": "asphalt_oil",
+      "family": "ground",
+      "sourceCell": 3,
+      "average": [
+        76,
+        81,
+        82
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/asphalt_oil.png",
+        "64": "/textures/battlefield-v2/64/asphalt_oil.png",
+        "128": "/textures/battlefield-v2/128/asphalt_oil.png"
+      },
+      "source": "art/materials-v2/asphalt.png",
+      "masterSha256": "e47307fbb1cf4e326d5215fc3d15ef07be528ca6367f80d4d0ab99b4386b60fe"
+    },
+    {
+      "name": "earth_dry",
+      "family": "ground",
+      "sourceCell": 4,
+      "average": [
+        130,
+        103,
+        77
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/earth_dry.png",
+        "64": "/textures/battlefield-v2/64/earth_dry.png",
+        "128": "/textures/battlefield-v2/128/earth_dry.png"
+      },
+      "source": "art/materials-v2/earth.png",
+      "masterSha256": "9ad8b9bd656f2c3b255d82cf205e41a0bb8985f3de23f33bc5bcd8bdde5aae90"
+    },
+    {
+      "name": "mud_rutted",
+      "family": "ground",
+      "sourceCell": 5,
+      "average": [
+        111,
+        98,
+        78
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/mud_rutted.png",
+        "64": "/textures/battlefield-v2/64/mud_rutted.png",
+        "128": "/textures/battlefield-v2/128/mud_rutted.png"
+      },
+      "source": "art/materials-v2/earth.png",
+      "masterSha256": "614cca0b321707b365a36f19ba3c3a90ae81adeee7b704076068ce0aca0b3fee"
+    },
+    {
+      "name": "gravel_pale",
+      "family": "ground",
+      "sourceCell": 6,
+      "average": [
+        146,
+        144,
+        133
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/gravel_pale.png",
+        "64": "/textures/battlefield-v2/64/gravel_pale.png",
+        "128": "/textures/battlefield-v2/128/gravel_pale.png"
+      },
+      "source": "art/materials-v2/rock.png",
+      "masterSha256": "7ab7cb508e6b581a2c3ed95360988fa25956ef8c2d497523fa8355640d27fc73"
+    },
+    {
+      "name": "aggregate_dark",
+      "family": "ground",
+      "sourceCell": 7,
+      "average": [
+        130,
+        130,
+        122
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/aggregate_dark.png",
+        "64": "/textures/battlefield-v2/64/aggregate_dark.png",
+        "128": "/textures/battlefield-v2/128/aggregate_dark.png"
+      },
+      "source": "art/materials-v2/rock.png",
+      "masterSha256": "6b37f4043468f2d8f79d91f71f8873daf918b65e559913642ddd7df6843df7f2"
+    },
+    {
+      "name": "grass_olive",
+      "family": "ground",
+      "sourceCell": 8,
+      "average": [
+        106,
+        124,
+        70
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/grass_olive.png",
+        "64": "/textures/battlefield-v2/64/grass_olive.png",
+        "128": "/textures/battlefield-v2/128/grass_olive.png"
+      },
+      "source": "art/materials-v2/grass.png",
+      "masterSha256": "2a99b281d4fd6f57b928d22daae67914ee02009c6ada450d9401574ef052bffe"
+    },
+    {
+      "name": "grass_dry",
+      "family": "ground",
+      "sourceCell": 9,
+      "average": [
+        112,
+        125,
+        76
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/grass_dry.png",
+        "64": "/textures/battlefield-v2/64/grass_dry.png",
+        "128": "/textures/battlefield-v2/128/grass_dry.png"
+      },
+      "source": "art/materials-v2/grass.png",
+      "masterSha256": "6ac3572fdfb57dc0c9c5c1a187241a3228ad84691f236f4c985f6681ef2cb7c8"
+    },
+    {
+      "name": "forest_floor",
+      "family": "ground",
+      "sourceCell": 10,
+      "average": [
+        101,
+        116,
+        69
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/forest_floor.png",
+        "64": "/textures/battlefield-v2/64/forest_floor.png",
+        "128": "/textures/battlefield-v2/128/forest_floor.png"
+      },
+      "source": "art/materials-v2/grass.png",
+      "masterSha256": "e7486c52e4edbbcfd593b907f7745486943c30c39b576631d956adb03e498234"
+    },
+    {
+      "name": "moss_soil",
+      "family": "ground",
+      "sourceCell": 11,
+      "average": [
+        103,
+        121,
+        70
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/moss_soil.png",
+        "64": "/textures/battlefield-v2/64/moss_soil.png",
+        "128": "/textures/battlefield-v2/128/moss_soil.png"
+      },
+      "source": "art/materials-v2/grass.png",
+      "masterSha256": "4d9362e432ffb0033a910df18ce5cb9c0f30dd41bf92b61338a128d8f44bd086"
+    },
+    {
+      "name": "sand_packed",
+      "family": "ground",
+      "sourceCell": 12,
+      "average": [
+        171,
+        156,
+        122
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/sand_packed.png",
+        "64": "/textures/battlefield-v2/64/sand_packed.png",
+        "128": "/textures/battlefield-v2/128/sand_packed.png"
+      },
+      "source": "art/materials-v2/earth.png",
+      "masterSha256": "a53360322ee7c9cbbe969cf2fb4576cfa0156ee78a83bd93c86a36f76ffc173b"
+    },
+    {
+      "name": "limestone",
+      "family": "ground",
+      "sourceCell": 13,
+      "average": [
+        143,
+        145,
+        137
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/limestone.png",
+        "64": "/textures/battlefield-v2/64/limestone.png",
+        "128": "/textures/battlefield-v2/128/limestone.png"
+      },
+      "source": "art/materials-v2/rock.png",
+      "masterSha256": "bc1dfd6d34684eb31c69c82186b3e9b348d7542b745091cdcd4ecbf1ec1b4711"
+    },
+    {
+      "name": "bedrock",
+      "family": "ground",
+      "sourceCell": 14,
+      "average": [
+        138,
+        140,
+        134
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/bedrock.png",
+        "64": "/textures/battlefield-v2/64/bedrock.png",
+        "128": "/textures/battlefield-v2/128/bedrock.png"
+      },
+      "source": "art/materials-v2/rock.png",
+      "masterSha256": "bfb6ea2f23f5d647d1f81275987cb38808e8e041b53a029069bdafee9c636dda"
+    },
+    {
+      "name": "concrete_rubble",
+      "family": "ground",
+      "sourceCell": 15,
+      "average": [
+        141,
+        140,
+        129
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/concrete_rubble.png",
+        "64": "/textures/battlefield-v2/64/concrete_rubble.png",
+        "128": "/textures/battlefield-v2/128/concrete_rubble.png"
+      },
+      "source": "art/materials-v2/rock.png",
+      "masterSha256": "eacb146b8cba5d28db6968e8ddc96fbccbeebaf73cc6848c7abec73937688292"
+    },
+    {
+      "name": "concrete_poured",
+      "family": "architecture",
+      "sourceCell": 0,
+      "average": [
+        157,
+        155,
+        146
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/concrete_poured.png",
+        "64": "/textures/battlefield-v2/64/concrete_poured.png",
+        "128": "/textures/battlefield-v2/128/concrete_poured.png"
+      },
+      "source": "art/materials-v2/concrete.png",
+      "masterSha256": "0c00e6decb02a11bf8a8b07b61d571efb5c49c7ed5bb40e4f41eb1bc85f71974"
+    },
+    {
+      "name": "concrete_cracked",
+      "family": "architecture",
+      "sourceCell": 1,
+      "average": [
+        150,
+        150,
+        141
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/concrete_cracked.png",
+        "64": "/textures/battlefield-v2/64/concrete_cracked.png",
+        "128": "/textures/battlefield-v2/128/concrete_cracked.png"
+      },
+      "source": "art/materials-v2/concrete.png",
+      "masterSha256": "3542c3eb346a80f0ada17ce9764730cdd92b34ccec4a9e3ee65e68ac328a5b34"
+    },
+    {
+      "name": "brick_red",
+      "family": "architecture",
+      "sourceCell": 2,
+      "average": [
+        149,
+        88,
+        65
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/brick_red.png",
+        "64": "/textures/battlefield-v2/64/brick_red.png",
+        "128": "/textures/battlefield-v2/128/brick_red.png"
+      },
+      "source": "art/materials-v2/brick.png",
+      "masterSha256": "501e82bd2039a01061aa68cd41a9db20d6c29a789018f39908146f36b3aef89d"
+    },
+    {
+      "name": "brick_grey",
+      "family": "architecture",
+      "sourceCell": 3,
+      "average": [
+        137,
+        135,
+        123
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/brick_grey.png",
+        "64": "/textures/battlefield-v2/64/brick_grey.png",
+        "128": "/textures/battlefield-v2/128/brick_grey.png"
+      },
+      "source": "art/materials-v2/brick.png",
+      "masterSha256": "0043e946d7be5d0f955ad800db728c50eeff5d9c7b40fee987842b33132b4d2a"
+    },
+    {
+      "name": "plaster_grey",
+      "family": "architecture",
+      "sourceCell": 4,
+      "average": [
+        166,
+        166,
+        156
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/plaster_grey.png",
+        "64": "/textures/battlefield-v2/64/plaster_grey.png",
+        "128": "/textures/battlefield-v2/128/plaster_grey.png"
+      },
+      "source": "art/materials-v2/concrete.png",
+      "masterSha256": "150220bde2d5808bcca7748c19fe600447cc668c2bcce30b97f004fdcdc4e11e"
+    },
+    {
+      "name": "plaster_stained",
+      "family": "architecture",
+      "sourceCell": 5,
+      "average": [
+        160,
+        158,
+        147
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/plaster_stained.png",
+        "64": "/textures/battlefield-v2/64/plaster_stained.png",
+        "128": "/textures/battlefield-v2/128/plaster_stained.png"
+      },
+      "source": "art/materials-v2/concrete.png",
+      "masterSha256": "17e6cef8709a4583d9a7d97f857466cbfce7b437a75faf74601c3877c19972d6"
+    },
+    {
+      "name": "retaining_stone",
+      "family": "architecture",
+      "sourceCell": 6,
+      "average": [
+        111,
+        105,
+        95
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/retaining_stone.png",
+        "64": "/textures/battlefield-v2/64/retaining_stone.png",
+        "128": "/textures/battlefield-v2/128/retaining_stone.png"
+      },
+      "source": "public/textures/battlefield-v1/source/architecture-atlas-v1.png#6",
+      "masterSha256": "5b216b6436530a10750df8855f6a31f17e6e10932186330a1fdf5bd417ac8cb6"
+    },
+    {
+      "name": "concrete_panel",
+      "family": "architecture",
+      "sourceCell": 7,
+      "average": [
+        157,
+        155,
+        146
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/concrete_panel.png",
+        "64": "/textures/battlefield-v2/64/concrete_panel.png",
+        "128": "/textures/battlefield-v2/128/concrete_panel.png"
+      },
+      "source": "art/materials-v2/concrete.png",
+      "masterSha256": "0c00e6decb02a11bf8a8b07b61d571efb5c49c7ed5bb40e4f41eb1bc85f71974"
+    },
+    {
+      "name": "metal_galvanized",
+      "family": "architecture",
+      "sourceCell": 8,
+      "average": [
+        135,
+        143,
+        143
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/metal_galvanized.png",
+        "64": "/textures/battlefield-v2/64/metal_galvanized.png",
+        "128": "/textures/battlefield-v2/128/metal_galvanized.png"
+      },
+      "source": "art/materials-v2/steel.png",
+      "masterSha256": "7a3da2e7eb1101a228fb30504ee888e6e22dc7ac4b54745ece424645c01ca8f5"
+    },
+    {
+      "name": "metal_blue",
+      "family": "architecture",
+      "sourceCell": 9,
+      "average": [
+        100,
+        124,
+        133
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/metal_blue.png",
+        "64": "/textures/battlefield-v2/64/metal_blue.png",
+        "128": "/textures/battlefield-v2/128/metal_blue.png"
+      },
+      "source": "art/materials-v2/steel.png",
+      "masterSha256": "eead9b0cfab5790818fe500d0a53546761608535dbff3e80b4df9c3f1f79a4cf"
+    },
+    {
+      "name": "roof_red",
+      "family": "architecture",
+      "sourceCell": 10,
+      "average": [
+        119,
+        74,
+        70
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/roof_red.png",
+        "64": "/textures/battlefield-v2/64/roof_red.png",
+        "128": "/textures/battlefield-v2/128/roof_red.png"
+      },
+      "source": "public/textures/battlefield-v1/source/architecture-atlas-v1.png#10",
+      "masterSha256": "fd7e513283ae864a5ba389decbf707f3d526bb7b0d7fb9849c3d2abf0a80ac5f"
+    },
+    {
+      "name": "roof_patched",
+      "family": "architecture",
+      "sourceCell": 11,
+      "average": [
+        106,
+        93,
+        87
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/roof_patched.png",
+        "64": "/textures/battlefield-v2/64/roof_patched.png",
+        "128": "/textures/battlefield-v2/128/roof_patched.png"
+      },
+      "source": "public/textures/battlefield-v1/source/architecture-atlas-v1.png#11",
+      "masterSha256": "a31bad489a30c9378da931f95d49a21ef20bb8d0ac1c306b6f7c7defabb14813"
+    },
+    {
+      "name": "roof_tar",
+      "family": "architecture",
+      "sourceCell": 12,
+      "average": [
+        68,
+        70,
+        72
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/roof_tar.png",
+        "64": "/textures/battlefield-v2/64/roof_tar.png",
+        "128": "/textures/battlefield-v2/128/roof_tar.png"
+      },
+      "source": "public/textures/battlefield-v1/source/architecture-atlas-v1.png#12",
+      "masterSha256": "94b6073daf319431fa66568b713af538182d5f40527066570f94275027a6438a"
+    },
+    {
+      "name": "roof_slate",
+      "family": "architecture",
+      "sourceCell": 13,
+      "average": [
+        97,
+        98,
+        100
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/roof_slate.png",
+        "64": "/textures/battlefield-v2/64/roof_slate.png",
+        "128": "/textures/battlefield-v2/128/roof_slate.png"
+      },
+      "source": "public/textures/battlefield-v1/source/architecture-atlas-v1.png#13",
+      "masterSha256": "3883f2ede0d2286330d1d9268d75539aaba22d180604d19081921992bc4e1066"
+    },
+    {
+      "name": "window_industrial",
+      "family": "architecture",
+      "sourceCell": 14,
+      "average": [
+        79,
+        87,
+        91
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/window_industrial.png",
+        "64": "/textures/battlefield-v2/64/window_industrial.png",
+        "128": "/textures/battlefield-v2/128/window_industrial.png"
+      },
+      "source": "public/textures/battlefield-v1/source/architecture-atlas-v1.png#14",
+      "masterSha256": "5fdeb4dcace07d725e563449f8ac2bd5fe08c97c02f37c59bb926be28d85c1e1"
+    },
+    {
+      "name": "timber_weathered",
+      "family": "architecture",
+      "sourceCell": 15,
+      "average": [
+        138,
+        115,
+        83
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/timber_weathered.png",
+        "64": "/textures/battlefield-v2/64/timber_weathered.png",
+        "128": "/textures/battlefield-v2/128/timber_weathered.png"
+      },
+      "source": "art/materials-v2/wood.png",
+      "masterSha256": "aef758a0a0c60b7b2d4d469e8d4c833802aed1b90ce85233e749d696d44fb52b"
+    },
+    {
+      "name": "container_olive",
+      "family": "industrial",
+      "sourceCell": 0,
+      "average": [
+        92,
+        91,
+        62
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/container_olive.png",
+        "64": "/textures/battlefield-v2/64/container_olive.png",
+        "128": "/textures/battlefield-v2/128/container_olive.png"
+      },
+      "source": "public/textures/battlefield-v1/source/industrial-atlas-v1.png#0",
+      "masterSha256": "d2b3d1a40f7cec7fb2e8264af2a501e6e41db86a4f72cbab187f036c633bf3ad"
+    },
+    {
+      "name": "container_blue",
+      "family": "industrial",
+      "sourceCell": 1,
+      "average": [
+        72,
+        83,
+        96
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/container_blue.png",
+        "64": "/textures/battlefield-v2/64/container_blue.png",
+        "128": "/textures/battlefield-v2/128/container_blue.png"
+      },
+      "source": "public/textures/battlefield-v1/source/industrial-atlas-v1.png#1",
+      "masterSha256": "6edfe62c0a4bef385d9ad0ce54324dad469bab142be515a962ce2706f4f4ac51"
+    },
+    {
+      "name": "container_rust",
+      "family": "industrial",
+      "sourceCell": 2,
+      "average": [
+        120,
+        67,
+        53
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/container_rust.png",
+        "64": "/textures/battlefield-v2/64/container_rust.png",
+        "128": "/textures/battlefield-v2/128/container_rust.png"
+      },
+      "source": "public/textures/battlefield-v1/source/industrial-atlas-v1.png#2",
+      "masterSha256": "a5c07429868eb62200ecf9074894bbae41bb877db582c8aef78deb281500bad0"
+    },
+    {
+      "name": "container_grey",
+      "family": "industrial",
+      "sourceCell": 3,
+      "average": [
+        132,
+        128,
+        122
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/container_grey.png",
+        "64": "/textures/battlefield-v2/64/container_grey.png",
+        "128": "/textures/battlefield-v2/128/container_grey.png"
+      },
+      "source": "public/textures/battlefield-v1/source/industrial-atlas-v1.png#3",
+      "masterSha256": "4ce8f359ac39a6aaac38659955ea770763c93d6b902ef5dc1eda67ab75e13e39"
+    },
+    {
+      "name": "sandbag_tan",
+      "family": "industrial",
+      "sourceCell": 4,
+      "average": [
+        130,
+        107,
+        76
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/sandbag_tan.png",
+        "64": "/textures/battlefield-v2/64/sandbag_tan.png",
+        "128": "/textures/battlefield-v2/128/sandbag_tan.png"
+      },
+      "source": "public/textures/battlefield-v1/source/industrial-atlas-v1.png#4",
+      "masterSha256": "4fd457a5065a064e02b6e44bd34a40744c3d70a06a5c21e131860c80e2f52196"
+    },
+    {
+      "name": "sandbag_olive",
+      "family": "industrial",
+      "sourceCell": 5,
+      "average": [
+        72,
+        69,
+        46
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/sandbag_olive.png",
+        "64": "/textures/battlefield-v2/64/sandbag_olive.png",
+        "128": "/textures/battlefield-v2/128/sandbag_olive.png"
+      },
+      "source": "public/textures/battlefield-v1/source/industrial-atlas-v1.png#5",
+      "masterSha256": "28124c8de8673636d26cc520074166c37607126df0242b0ed44f0a3c9ad16ebf"
+    },
+    {
+      "name": "crate_military",
+      "family": "industrial",
+      "sourceCell": 6,
+      "average": [
+        106,
+        90,
+        65
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/crate_military.png",
+        "64": "/textures/battlefield-v2/64/crate_military.png",
+        "128": "/textures/battlefield-v2/128/crate_military.png"
+      },
+      "source": "public/textures/battlefield-v1/source/industrial-atlas-v1.png#6",
+      "masterSha256": "dc73141494a445efe9a58570872d2bdfa2810d260e34bb2eb35cd770d4708b4c"
+    },
+    {
+      "name": "dock_timber",
+      "family": "industrial",
+      "sourceCell": 7,
+      "average": [
+        130,
+        111,
+        86
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/dock_timber.png",
+        "64": "/textures/battlefield-v2/64/dock_timber.png",
+        "128": "/textures/battlefield-v2/128/dock_timber.png"
+      },
+      "source": "art/materials-v2/wood.png",
+      "masterSha256": "9cf51a07eb34700f2d91e1c53dec6dc5f1f3d49a34e7498a43353147caedba71"
+    },
+    {
+      "name": "floor_plate",
+      "family": "industrial",
+      "sourceCell": 8,
+      "average": [
+        91,
+        87,
+        82
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/floor_plate.png",
+        "64": "/textures/battlefield-v2/64/floor_plate.png",
+        "128": "/textures/battlefield-v2/128/floor_plate.png"
+      },
+      "source": "public/textures/battlefield-v1/source/industrial-atlas-v1.png#8",
+      "masterSha256": "4b67a578b2ce7d924f30aa6a0aba04bbee5723334efe31fc0acd58a3490ce202"
+    },
+    {
+      "name": "steel_grate",
+      "family": "industrial",
+      "sourceCell": 9,
+      "average": [
+        71,
+        64,
+        57
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/steel_grate.png",
+        "64": "/textures/battlefield-v2/64/steel_grate.png",
+        "128": "/textures/battlefield-v2/128/steel_grate.png"
+      },
+      "source": "public/textures/battlefield-v1/source/industrial-atlas-v1.png#9",
+      "masterSha256": "cb266236b5d5d762632eb375be12c1e37c3fb30e0f0a04d05c50c6290e2a5943"
+    },
+    {
+      "name": "hazard_stripe",
+      "family": "industrial",
+      "sourceCell": 10,
+      "average": [
+        122,
+        100,
+        57
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/hazard_stripe.png",
+        "64": "/textures/battlefield-v2/64/hazard_stripe.png",
+        "128": "/textures/battlefield-v2/128/hazard_stripe.png"
+      },
+      "source": "public/textures/battlefield-v1/source/industrial-atlas-v1.png#10",
+      "masterSha256": "bcc149e2a27cdef8e85f8352e1f578960ac8f52d72f6358a00729342359ece86"
+    },
+    {
+      "name": "steel_corroded",
+      "family": "industrial",
+      "sourceCell": 11,
+      "average": [
+        119,
+        75,
+        52
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/steel_corroded.png",
+        "64": "/textures/battlefield-v2/64/steel_corroded.png",
+        "128": "/textures/battlefield-v2/128/steel_corroded.png"
+      },
+      "source": "public/textures/battlefield-v1/source/industrial-atlas-v1.png#11",
+      "masterSha256": "ada1a5938ecff2190fbf6b4d46e279de53233c294d9fc053de30df4aec5c303b"
+    },
+    {
+      "name": "bark_dark",
+      "family": "industrial",
+      "sourceCell": 12,
+      "average": [
+        74,
+        62,
+        50
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/bark_dark.png",
+        "64": "/textures/battlefield-v2/64/bark_dark.png",
+        "128": "/textures/battlefield-v2/128/bark_dark.png"
+      },
+      "source": "public/textures/battlefield-v1/source/industrial-atlas-v1.png#12",
+      "masterSha256": "852168435dad2677e4d1f39265f31334393446db77a912e4c0ad829c231d0cfb"
+    },
+    {
+      "name": "bark_pale",
+      "family": "industrial",
+      "sourceCell": 13,
+      "average": [
+        116,
+        102,
+        87
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/bark_pale.png",
+        "64": "/textures/battlefield-v2/64/bark_pale.png",
+        "128": "/textures/battlefield-v2/128/bark_pale.png"
+      },
+      "source": "public/textures/battlefield-v1/source/industrial-atlas-v1.png#13",
+      "masterSha256": "8d2b1b639c6fab4f9fca5edd216081b3606534412430836b54892b26364ddb90"
+    },
+    {
+      "name": "foliage_olive",
+      "family": "industrial",
+      "sourceCell": 14,
+      "average": [
+        81,
+        106,
+        60
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/foliage_olive.png",
+        "64": "/textures/battlefield-v2/64/foliage_olive.png",
+        "128": "/textures/battlefield-v2/128/foliage_olive.png"
+      },
+      "source": "art/materials-v2/foliage.png",
+      "masterSha256": "343386fe5eddb0504f44eaf144c168ab17d4d88eff68232c8d03230b5eb47e26"
+    },
+    {
+      "name": "foliage_dry",
+      "family": "industrial",
+      "sourceCell": 15,
+      "average": [
+        92,
+        111,
+        65
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/foliage_dry.png",
+        "64": "/textures/battlefield-v2/64/foliage_dry.png",
+        "128": "/textures/battlefield-v2/128/foliage_dry.png"
+      },
+      "source": "art/materials-v2/foliage.png",
+      "masterSha256": "1eb9ef50256f6f20dc15a4c0fc61c8b0c287ae50f14c0e19cc76dee754e83529"
+    },
+    {
+      "name": "water_fresh",
+      "family": "water",
+      "sourceCell": 0,
+      "average": [
+        83,
+        95,
+        102
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/water_fresh.png",
+        "64": "/textures/battlefield-v2/64/water_fresh.png",
+        "128": "/textures/battlefield-v2/128/water_fresh.png"
+      },
+      "source": "public/textures/battlefield-v1/source/water-atlas-v1.png#0",
+      "masterSha256": "298de095235e1da2177c3ee85425a3163f7865f2d515c64181ae330a5c00a405"
+    },
+    {
+      "name": "water_harbour",
+      "family": "water",
+      "sourceCell": 1,
+      "average": [
+        52,
+        65,
+        58
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/water_harbour.png",
+        "64": "/textures/battlefield-v2/64/water_harbour.png",
+        "128": "/textures/battlefield-v2/128/water_harbour.png"
+      },
+      "source": "public/textures/battlefield-v1/source/water-atlas-v1.png#1",
+      "masterSha256": "7d6d4029261144ff7909c35e3d43d89e94be5d9a04629d49dd5d5033762834f6"
+    },
+    {
+      "name": "water_river",
+      "family": "water",
+      "sourceCell": 2,
+      "average": [
+        93,
+        93,
+        78
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/water_river.png",
+        "64": "/textures/battlefield-v2/64/water_river.png",
+        "128": "/textures/battlefield-v2/128/water_river.png"
+      },
+      "source": "public/textures/battlefield-v1/source/water-atlas-v1.png#2",
+      "masterSha256": "18c80d2fb776f2e83b3e9e0413fcaa037adfd1b4af5530adcf5856ace19e2fa3"
+    },
+    {
+      "name": "water_drain",
+      "family": "water",
+      "sourceCell": 3,
+      "average": [
+        69,
+        65,
+        56
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/water_drain.png",
+        "64": "/textures/battlefield-v2/64/water_drain.png",
+        "128": "/textures/battlefield-v2/128/water_drain.png"
+      },
+      "source": "public/textures/battlefield-v1/source/water-atlas-v1.png#3",
+      "masterSha256": "082c315f51e001eb4d368ae66e3fc84e008be5c25284dec6d69bc32e0986a382"
+    },
+    {
+      "name": "ladder_galvanized",
+      "family": "ladder",
+      "sourceCell": 0,
+      "average": [
+        42,
+        43,
+        43
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/ladder_galvanized.png",
+        "64": "/textures/battlefield-v2/64/ladder_galvanized.png",
+        "128": "/textures/battlefield-v2/128/ladder_galvanized.png"
+      },
+      "source": "public/textures/battlefield-v1/source/ladder-atlas-v1.png#0",
+      "masterSha256": "d0fc287e2e6cde298d413d010950b5d7e50cc6c4452b8b4dc486ea3dfc11f5a0"
+    },
+    {
+      "name": "ladder_olive",
+      "family": "ladder",
+      "sourceCell": 1,
+      "average": [
+        32,
+        32,
+        21
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/ladder_olive.png",
+        "64": "/textures/battlefield-v2/64/ladder_olive.png",
+        "128": "/textures/battlefield-v2/128/ladder_olive.png"
+      },
+      "source": "public/textures/battlefield-v1/source/ladder-atlas-v1.png#1",
+      "masterSha256": "a5772d5feae301b5e922f95f948295c87c8e88dce944fc1dda49556f8562ace7"
+    },
+    {
+      "name": "ladder_rusted",
+      "family": "ladder",
+      "sourceCell": 2,
+      "average": [
+        36,
+        24,
+        18
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/ladder_rusted.png",
+        "64": "/textures/battlefield-v2/64/ladder_rusted.png",
+        "128": "/textures/battlefield-v2/128/ladder_rusted.png"
+      },
+      "source": "public/textures/battlefield-v1/source/ladder-atlas-v1.png#2",
+      "masterSha256": "42a497b93b4702ac531bf136e6679ef9a45523e313507066ef3808ba3f75a396"
+    },
+    {
+      "name": "ladder_dark",
+      "family": "ladder",
+      "sourceCell": 3,
+      "average": [
+        28,
+        27,
+        27
+      ],
+      "files": {
+        "32": "/textures/battlefield-v2/32/ladder_dark.png",
+        "64": "/textures/battlefield-v2/64/ladder_dark.png",
+        "128": "/textures/battlefield-v2/128/ladder_dark.png"
+      },
+      "source": "public/textures/battlefield-v1/source/ladder-atlas-v1.png#3",
+      "masterSha256": "8a9670640e86f82fda947a693e1afacfdc3fc11e0a1f75cac0d7fc31169f8f14"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+[Unit]
+Description=CRAZYSHOOT signaling (WebRTC rooms only)
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+WorkingDirectory=/home/haokee/apps/crazyshoot-signal
+Environment=HOST=127.0.0.1
+Environment=PORT=18789
+ExecStart=/home/haokee/.nvm/versions/node/v22.22.2/bin/node /home/haokee/apps/crazyshoot-signal/server.cjs
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+MemoryMax=256M
+TasksMax=64
+LimitNOFILE=4096
+
+[Install]
+WantedBy=default.target

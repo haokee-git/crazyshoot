@@ -1,0 +1,11 @@
+import { chromium } from 'playwright';
+import fs from 'node:fs';
+const exe = ['/Users/haokee/Library/Caches/ms-playwright/chromium-1234/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing'].find(fs.existsSync)!;
+const b = await chromium.launch({ headless: true, executablePath: exe });
+const p = await b.newPage({ viewport: { width: 720, height: 540 } });
+await p.goto('http://127.0.0.1:5174/preview/viewmodel.html?capture=1');
+await p.waitForFunction('window.__vmReady === true');
+await p.evaluate(() => (window as any).__vmSetFrame('hip', 0));
+await p.waitForTimeout(100);
+await p.screenshot({ path: 'previews/weapons/viewmodel-ads2.png' });
+await b.close();

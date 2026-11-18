@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRAZYSHOOT // 3D MAP GRAYBOX</title>
+    <style>
+      :root { color-scheme: dark; }
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #080d0f; }
+      body { font-family: "Rajdhani", "DIN Alternate", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif; color: #e6efec; }
+      #map-stage { position: fixed; inset: 0; }
+      #map-stage canvas { display: block; width: 100%; height: 100%; }
+      .ui { position: fixed; z-index: 3; pointer-events: none; }
+      .top-left { top: 30px; left: 34px; }
+      .kicker { font-family: "SFMono-Regular", monospace; font-size: 9px; letter-spacing: .24em; color: #35e0d0; }
+      .name { margin-top: 8px; font-size: 44px; font-weight: 700; letter-spacing: .06em; line-height: .92; }
+      .sub { margin-top: 8px; color: #819095; font-size: 11px; letter-spacing: .12em; }
+      .top-right { top: 30px; right: 34px; text-align: right; font-family: "SFMono-Regular", monospace; font-size: 8px; letter-spacing: .14em; color: #64747a; line-height: 1.9; }
+      .top-right b { color: #ffb454; font-weight: 500; }
+      .legend { position: fixed; z-index: 3; left: 34px; bottom: 52px; display: flex; gap: 14px; flex-wrap: wrap; font-family: "SFMono-Regular", monospace; font-size: 8px; letter-spacing: .1em; color: #8d9c9f; pointer-events: none; }
+      .legend span { display: flex; align-items: center; gap: 6px; }
+      .legend i { display: block; width: 9px; height: 9px; }
+      .rack { position: fixed; z-index: 4; left: 34px; bottom: 18px; display: flex; gap: 6px; }
+      .rack button { pointer-events: auto; border: 1px solid rgba(218,235,230,.16); background: rgba(9,14,17,.82); color: #8b9a9e; font-family: inherit; font-size: 10px; letter-spacing: .08em; padding: 7px 11px; cursor: pointer; }
+      .rack button.on { border-color: #ffb454; color: #ffe3bd; background: rgba(255,180,84,.1); }
+      .bottom { position: fixed; right: 34px; bottom: 22px; z-index: 3; font-family: "SFMono-Regular", monospace; font-size: 8px; letter-spacing: .12em; color: #435054; }
+      body.capture .ui, body.capture .legend, body.capture .rack, body.capture .bottom, body.capture .north, body.capture .scale { display: none !important; }
+      .north { position: fixed; z-index:3; right: 40px; top: 110px; font-family: monospace; font-size: 11px; color:#9fb4ad; letter-spacing:.12em; }
+      .scale { position: fixed; z-index:3; right: 40px; bottom: 52px; font-family: monospace; font-size:8px; color:#8d9c9f; letter-spacing:.1em; }
+      .scale i { display:inline-block; width:60px; height:6px; border:1px solid #8d9c9f; margin-right:6px; }
+    </style>
+  </head>
+  <body>
+    <div id="map-stage"></div>
+    <div class="ui top-left">
+      <div class="kicker">CRAZYSHOOT // 3D GRAYBOX</div>
+      <div class="name">船坞 / DRYDOCK</div>
+      <div class="sub">300 × 300m · 集装箱码头 · 中央干船坞 · 东侧水岸</div>
+    </div>
+    <div class="ui top-right">GRAYBOX <b>V1</b><br />NO TEXTURES / MASSING ONLY<br />CAPTURE + SPAWN + VEHICLE PADS</div>
+    <div class="legend">
+      <span><i style="background:#4aa8ff"></i>BLUE SPAWN</span>
+      <span><i style="background:#ff7a3d"></i>ORANGE SPAWN</span>
+      <span><i style="background:#ffb454"></i>CAPTURE A/B/C</span>
+      <span><i style="background:#8b8e85"></i>COVER / CONTAINER</span>
+      <span><i style="background:#244956"></i>WATER</span>
+    </div>
+    <div class="rack" id="rack"></div>
+    <div class="north">N ↑</div>
+    <div class="scale"><i></i>50m</div>
+    <div class="bottom">DRAG ORBIT · WHEEL ZOOM · GRAYBOX V1</div>
+    <script type="module" src="/src/preview/map3d-page.ts"></script>
+  </body>
+</html>

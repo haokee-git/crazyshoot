@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "pack": "interiors",
+  "res": 64,
+  "generator": "dsh image-gen (chatgpt-sub/gpt-image-2.5-flare) + Pillow 12.3: area/lanczos downscale, median-cut 20 colors (no dither)",
+  "textures": [
+    {
+      "name": "plaster",
+      "kind": "wall",
+      "width": 64,
+      "height": 64,
+      "tileable": true,
+      "files": {
+        "64": "/textures/interiors/64/plaster.png"
+      },
+      "average": [
+        237,
+        221,
+        198
+      ],
+      "paletteColors": 20
+    },
+    {
+      "name": "concrete-floor",
+      "kind": "floor",
+      "width": 64,
+      "height": 64,
+      "tileable": true,
+      "files": {
+        "64": "/textures/interiors/64/concrete-floor.png"
+      },
+      "average": [
+        142,
+        130,
+        115
+      ],
+      "paletteColors": 20
+    },
+    {
+      "name": "wood-planks",
+      "kind": "floor",
+      "width": 64,
+      "height": 64,
+      "tileable": true,
+      "files": {
+        "64": "/textures/interiors/64/wood-planks.png"
+      },
+      "average": [
+        110,
+        90,
+        77
+      ],
+      "paletteColors": 20
+    },
+    {
+      "name": "rug",
+      "kind": "rug",
+      "width": 64,
+      "height": 32,
+      "tileable": false,
+      "files": {
+        "64": "/textures/interiors/64/rug.png"
+      },
+      "average": [
+        155,
+        99,
+        77
+      ],
+      "paletteColors": 20
+    },
+    {
+      "name": "wall-art",
+      "kind": "art",
+      "width": 64,
+      "height": 64,
+      "tileable": false,
+      "files": {
+        "64": "/textures/interiors/64/wall-art.png"
+      },
+      "average": [
+        172,
+        154,
+        100
+      ],
+      "paletteColors": 20
+    },
+    {
+      "name": "industrial-sign",
+      "kind": "sign",
+      "width": 64,
+      "height": 64,
+      "tileable": false,
+      "files": {
+        "64": "/textures/interiors/64/industrial-sign.png"
+      },
+      "average": [
+        188,
+        148,
+        62
+      ],
+      "paletteColors": 20
+    },
+    {
+      "name": "wall-map",
+      "kind": "map",
+      "width": 64,
+      "height": 64,
+      "tileable": false,
+      "files": {
+        "64": "/textures/interiors/64/wall-map.png"
+      },
+      "average": [
+        209,
+        180,
+        128
+      ],
+      "paletteColors": 20
+    }
+  ]
+}

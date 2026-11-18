@@ -1,0 +1,14 @@
+import { chromium } from 'playwright';
+import fs from 'node:fs';
+const exe = ['/Users/haokee/Library/Caches/ms-playwright/chromium-1234/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing'].find(fs.existsSync)!;
+const b=await chromium.launch({headless:true,executablePath:exe});
+const host=await b.newPage({viewport:{width:1280,height:720}}); const guest=await b.newPage({viewport:{width:960,height:600}});
+const url='http://127.0.0.1:5174/game.html?prep=2&turn=1&res=32&bots=0&sky=noon&map=docks';
+await host.goto(url); await guest.goto(url); await host.waitForTimeout(800); await host.locator('.lobby-primary').first().click(); await host.waitForTimeout(2400);
+const code=(await host.locator('.lobby-code').first().textContent())!.trim(); await guest.locator('.lobby-input.code').fill(code); await guest.locator('.lobby-secondary').click();
+await host.waitForFunction(()=>{const e=document.querySelector('.lobby-primary.start') as HTMLButtonElement;return !!e&&!e.disabled;},null,{timeout:20000}).catch(()=>{}); await host.locator('.lobby-primary.start').click().catch(()=>{});
+for(const p of [host,guest]){await p.waitForTimeout(900); await p.locator('.prep-close').click().catch(()=>{});} await host.waitForFunction(()=>(window as any).__game?.phase==='live',null,{timeout:15000}).catch(()=>{});
+const info=await host.evaluate(()=>{const g=(window as any).__game; const v=g.vehicles.find((x:any)=>x.kind==='light_tank')??g.vehicles[4]; g.controller.teleport(new (g.controller.position.constructor)(v.x+2,0,v.z+2),0); return {kind:v.kind,x:v.x,z:v.z};});
+console.log('tank',info); await host.waitForTimeout(300); await host.keyboard.press('KeyE'); await host.waitForTimeout(600); await host.keyboard.down('KeyW'); await host.waitForTimeout(1000); await host.keyboard.up('KeyW'); await host.waitForTimeout(300);
+console.log('drive',await host.evaluate(()=>{const g=(window as any).__game;const v=g.vehicles.find((x:any)=>x.id===g.drivingId);return v?{x:v.x,z:v.z}:null;}));
+await host.mouse.down({button:'left'}); await host.waitForTimeout(150); await host.mouse.up({button:'left'}); await host.waitForTimeout(80); await host.screenshot({path:'previews/game/00-tank-fire.png'}); await b.close();

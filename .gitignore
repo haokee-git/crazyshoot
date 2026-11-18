@@ -1,0 +1,25 @@
+# 依赖（npm install 可重建）
+node_modules/
+
+# 系统垃圾
+.DS_Store
+.DS_Store?
+._*
+
+# 临时/滚动审计输出（tools 默认写 tmp/ 下时间戳目录）
+tmp/
+
+# 日志
+*.log
+
+# 大体积过程产物（预览图/GIF、贴图源图、生成中间件、旧备份）
+previews/
+art/
+dsh-image-gen/
+backup/
+
+# docs 只保留说明文档（.md/.txt），二进制与审计数据（tar/zip/webm/png/json）不入库
+docs/**
+!docs/**/
+!docs/**/*.md
+!docs/**/*.txt

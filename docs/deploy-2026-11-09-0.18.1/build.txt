@@ -1,0 +1,15 @@
+identity: 0.18.1 / 419c5e1b9fc7813c
+mapRevision: voxel-halfgrid-v5
+materialRevision: 4
+builtAt: 2026-11-09T17:30+08:00
+node: $(node --version)
+npm: $(npm --version)
+test: npm test -> 18 files / 130 tests passed
+build: npm run build -> success
+mainJs: assets/game-CttWBfkA.js
+mainJsSha256: beed20013df3da9184685548378146bb408370db66547ab5c2f73ba711308df2
+archive: 0.18.1-419c5e1b9fc7813c.tar.gz
+archiveBytes: 34048159
+archiveSha256: 33573ccc6c22c354c59ca6874f499fb52fb24cc42b8a390dac2e9a03debe3b31
+fileCount: 1221 (tar members; 1220 manifest files + release-manifest.json)
+features: infantry balance (M16A4, Uzi/UMP45/MP5/M249, standard ammo), flamethrower cone/face-blind update

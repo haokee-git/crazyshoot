@@ -1,0 +1,12 @@
+import { chromium } from 'playwright';
+import fs from 'node:fs';
+const exe = ['/Users/haokee/Library/Caches/ms-playwright/chromium-1234/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing'].find(fs.existsSync)!;
+const b=await chromium.launch({headless:true,executablePath:exe});
+const p=await b.newPage({viewport:{width:1280,height:720}});
+const errors:string[]=[]; p.on('pageerror',e=>errors.push(String(e)));
+await p.goto('http://127.0.0.1:5174/game.html?prep=2&turn=1&res=32&bots=1&size=4&sky=noon',{waitUntil:'load'});
+await p.waitForTimeout(700); await p.locator('.lobby-primary').first().click(); await p.waitForTimeout(2200);
+console.log('startDisabled',await p.evaluate(()=>{const b=document.querySelector('.lobby-primary.start') as HTMLButtonElement;return b?.disabled;}));
+await p.locator('.lobby-primary.start').click(); await p.waitForTimeout(900); await p.locator('.prep-close').click().catch(()=>{}); await p.waitForFunction(()=>(window as any).__game?.phase==='live',null,{timeout:15000}).catch(()=>{});
+console.log('state',await p.evaluate(()=>{const g=(window as any).__game; const all=[{t:g.myTeam,me:true},...[...g.hosted.values()].map((h:any)=>({t:h.team,bot:h.bot}))]; return {phase:g.phase,myTeam:g.myTeam,teams:all.reduce((a:any,x:any)=>{a[x.t]=(a[x.t]||0)+1;return a;},{}),bots:[...g.hosted.values()].filter((h:any)=>h.bot).length};}));
+console.log('errors',errors.slice(0,3)); await p.screenshot({path:'previews/game/00-solo-start.png'}); await b.close();

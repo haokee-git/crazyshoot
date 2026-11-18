@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRAZYSHOOT // ANIMATION PREVIEW</title>
+    <style>
+      :root { color-scheme: dark; }
+      html, body { margin: 0; height: 100%; background: #070a0c; overflow: hidden; }
+      body { display: grid; place-items: center; font-family: "Rajdhani", "DIN Alternate", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif; }
+      #stage {
+        position: relative; width: 640px; height: 640px; overflow: hidden;
+        background: radial-gradient(ellipse at 50% 38%, #121b1f 0%, #0a0e11 62%, #06090b 100%);
+        border: 1px solid rgba(214, 231, 227, 0.13);
+      }
+      #stage::after {
+        content: ""; position: absolute; inset: 0; pointer-events: none;
+        background:
+          radial-gradient(ellipse at 50% 45%, transparent 45%, rgba(0, 0, 0, 0.45) 100%),
+          repeating-linear-gradient(0deg, transparent 0 2px, rgba(255, 255, 255, 0.015) 2px 3px);
+      }
+      canvas { display: block; width: 100%; height: 100%; }
+      .hud { position: absolute; z-index: 2; pointer-events: none; }
+      .top-left { top: 20px; left: 22px; }
+      .kicker { font-family: "SFMono-Regular", "Cascadia Mono", monospace; font-size: 9px; letter-spacing: 0.24em; color: #35e0d0; }
+      .action { margin-top: 7px; font-size: 26px; font-weight: 700; letter-spacing: 0.06em; color: #e6efec; }
+      .sub { margin-top: 2px; font-family: "SFMono-Regular", monospace; font-size: 8px; letter-spacing: 0.2em; color: #7f8d91; }
+      .top-right { top: 22px; right: 22px; text-align: right; font-family: "SFMono-Regular", monospace; font-size: 8px; letter-spacing: 0.16em; color: #7f8d91; line-height: 1.7; }
+      .top-right b { color: #ffb454; font-weight: 500; }
+      .bottom-left { left: 22px; bottom: 20px; font-family: "SFMono-Regular", monospace; font-size: 8px; letter-spacing: 0.16em; color: #5d6c70; }
+      .bottom-right { right: 22px; bottom: 20px; font-family: "SFMono-Regular", monospace; font-size: 8px; letter-spacing: 0.16em; color: #5d6c70; }
+      .bracket { position: absolute; width: 18px; height: 18px; border-color: rgba(53, 224, 208, 0.55); border-style: solid; z-index: 2; }
+      .b1 { top: 12px; left: 12px; border-width: 1px 0 0 1px; }
+      .b2 { top: 12px; right: 12px; border-width: 1px 1px 0 0; }
+      .b3 { bottom: 12px; left: 12px; border-width: 0 0 1px 1px; }
+      .b4 { bottom: 12px; right: 12px; border-width: 0 1px 1px 0; }
+    </style>
+  </head>
+  <body>
+    <div id="stage">
+      <div class="hud top-left">
+        <div class="kicker">CRAZYSHOOT // MOTION LAB</div>
+        <div class="action" id="action-label">WALK</div>
+        <div class="sub" id="action-sub">LOCOMOTION / LOOP</div>
+      </div>
+      <div class="hud top-right">
+        <div><b id="team-label">BLUE</b> TEAM</div>
+        <div id="fps-label">30 FPS / LOOP</div>
+      </div>
+      <div class="hud bottom-left" id="frame-label">FRAME 000</div>
+      <div class="hud bottom-right">LOW-POLY BLOCK RIG / 16 BONES</div>
+      <div class="bracket b1"></div><div class="bracket b2"></div><div class="bracket b3"></div><div class="bracket b4"></div>
+    </div>
+    <script type="module" src="/src/preview/anim.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+import { chromium } from 'playwright';
+import fs from 'node:fs';
+const exe = ['/Users/haokee/Library/Caches/ms-playwright/chromium-1234/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing'].find(fs.existsSync)!;
+const b=await chromium.launch({headless:true,executablePath:exe}); const p=await b.newPage({viewport:{width:1280,height:720}});
+await p.goto('http://127.0.0.1:5174/game.html?prep=2&turn=1&res=32&bots=1&size=4&sky=noon',{waitUntil:'load'});
+await p.waitForTimeout(700); await p.waitForTimeout(700);await p.locator('.lobby-solo').click(); await p.waitForTimeout(900); await p.locator('.prep-close').click().catch(()=>{}); await p.waitForFunction(()=>(window as any).__game?.phase==='live',null,{timeout:15000}).catch(()=>{});
+const info=await p.evaluate(()=>{const g=(window as any).__game; const bot=[...g.hosted.values()].find((h:any)=>h.bot); const r=g.remotes.get(bot.id); r.dead=true; r.deathAt=performance.now(); g.controller.teleport(bot.controller.position.clone().add(new (bot.controller.position.constructor)(-5,0,-5)),0); return {id:bot.id};});
+await p.waitForTimeout(500);
+console.log('corpse',await p.evaluate((id)=>{const g=(window as any).__game; const r=g.remotes.get(id); return {has:!!r.corpse,y:r.corpse?r.corpse.root.position.y:null,visible:r.rig.root.visible};},info.id));
+await p.screenshot({path:'previews/game/00-corpse.png'});
+await p.evaluate((id)=>{const g=(window as any).__game; const r=g.remotes.get(id); r.dead=false;},info.id); await p.waitForTimeout(800);
+console.log('faded',await p.evaluate((id)=>{const g=(window as any).__game; const r=g.remotes.get(id); return {has:!!r.corpse,visible:r.rig.root.visible};},info.id));
+await b.close();
