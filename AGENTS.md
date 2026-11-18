@@ -7,7 +7,7 @@ CRAZYSHOOT 是一个浏览器步兵/装甲占点 FPS：4v4–12v12，单人 AI �
 
 ## 0. 铁律（先读这 8 条）
 
-1. **本目录是本地 Git 仓库**（分支 `main`，初始提交为 0.20.6 现状快照，约 1.5 GB）。用 `git diff/log/status` 看改动；`node_modules/`、`tmp/`、`.DS_Store` 由 `.gitignore` 排除。`dist/`、`docs/`、`previews/` 是构建产物/验收证据（合计 >1 GB），已在库中，不要删除或"整理"。
+1. **本目录是 Git 仓库**（分支 `main`，单条干净提交，入库约 87 MB，远端 `origin` 已同步）。用 `git diff/log/status` 看改动；`.gitignore` 排除 `node_modules/`、`tmp/`、`.DS_Store`、`previews/`、`art/`、`dsh-image-gen/`、`backup/`，以及 `docs/` 下的二进制与审计数据（只留 `.md`/`.txt` 说明文档）；`dist/`、`dist-signal/` 入库。被排除的验收证据仍完整留在工作区，不要删除或"整理"。
 2. **内容数据驱动**：武器/载具/地图/特殊武器从 `src/content/`、`src/maps/` 目录读取。新增内容不要改 UI 硬编码数组；ID 一经发布保持稳定。
 3. **房主权威**：联机时只有 host 跑 AI、载具物理、伤害、占点、复活。客机只本地预测移动、发输入/射击意图。客机别加会与快照打架的本地权威逻辑。
 4. **世界同源**：渲染、碰撞、支撑、导航、子弹 DDA 共用同一份体素数据；不要再造第二套碰撞清单。
